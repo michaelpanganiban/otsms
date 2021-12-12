@@ -176,7 +176,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li {{Auth::user()->user_type === 0 ? 'hidden' : '' }}>
-                            <a href="/dashboard" class="nav-link {{ (request()->is('dashboard')) ? 'active' : '' }}">
+                            <a href="/dashboard" class="nav-link {{ (request()->is('dashboard') || request()->is('home')) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -193,7 +193,7 @@
                                 <p>Customization</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ (request()->is('sales') || request()->is('rent')) ? 'menu-open' : '' }}">
+                        <li class="nav-item {{ (request()->is('sales') || request()->is('rent')) ? 'menu-open' : '' }}" {{Auth::user()->user_type === 0 ? 'hidden' : '' }}>
                             <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tshirt"></i>
                             <p>
