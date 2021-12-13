@@ -117,6 +117,9 @@
                                         <div class="col-md-6">
                                             <p id="type"></p>
                                         </div>
+                                        <div class="col-md-6">
+                                            <a href="/view-payment-methods" class="btn btn-sm btn-success" target="_blank">View Payment Methods</a>
+                                        </div>
                                     </div>
                                     <hr>
                                     <div class="card card-primary" style="background-color: #00adad;">

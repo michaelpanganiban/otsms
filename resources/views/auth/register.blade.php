@@ -53,7 +53,7 @@
                             </div>
                             <label for="email" class="col-md-1 col-form-label text-md-right">{{ __('Contact Number') }}</label>
                             <div class="col-md-3">
-                                <input id="contact_no" type="text" class="form-control @error('contact_no') is-invalid @enderror" name="contact_no" value="{{ old('contact_no') }}" required autocomplete="contact_no">
+                                <input id="contact_no" type="text" class="form-control @error('contact_no') is-invalid @enderror" maxlength="11" name="contact_no" value="{{ old('contact_no') }}" required autocomplete="contact_no">
                                 @error('contact_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

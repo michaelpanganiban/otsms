@@ -67,3 +67,10 @@ Route::get('/customization', [App\Http\Controllers\Customization::class, 'index'
 Route::post('/customize/add', [App\Http\Controllers\Customization::class, 'add'])->name('add');
 Route::post('/customize/edit', [App\Http\Controllers\Customization::class, 'edit'])->name('edit');
 Route::post('/customize/delete', [App\Http\Controllers\Customization::class, 'delete'])->name('delete');
+
+//payment method
+Route::get('/paymentMethods', [App\Http\Controllers\PaymentMethod::class, 'index'])->name('index');
+Route::post('/paymentMethods/add', [App\Http\Controllers\PaymentMethod::class, 'add'])->name('add');
+Route::post('/paymentMethods/edit', [App\Http\Controllers\PaymentMethod::class, 'edit'])->name('edit');
+Route::post('/paymentMethods/delete', [App\Http\Controllers\PaymentMethod::class, 'delete'])->name('delete');
+Route::get('/view-payment-methods', [App\Http\Controllers\PaymentMethod::class, 'viewPaymentMethods'])->name('viewPaymentMethods');

@@ -240,6 +240,12 @@
                                 </p>
                             </a>
                         </li>
+                        <li {{Auth::user()->user_type === 0 ? 'hidden' : '' }}>
+                            <a href="/paymentMethods" class="nav-link {{ (request()->is('paymentMethods')) ? 'active' : '' }}">
+                                <i class="nav-icon fab fa-cc-mastercard"></i>
+                                <p>Payment Methods</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -468,5 +474,6 @@
 <script src="{{ asset('assets/custom/measurement.js') }}"></script>
 <script src="{{ asset('assets/custom/orders.js') }}"></script>
 <script src="{{ asset('assets/custom/customization.js') }}"></script>
+<script src="{{ asset('assets/custom/payment-method.js') }}"></script>
 </body>
 </html>
