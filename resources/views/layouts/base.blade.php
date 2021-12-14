@@ -175,6 +175,12 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li {{Auth::user()->user_type === 0 ? '' : 'hidden' }}>
+                            <a href="/" class="nav-link">
+                                <i class="nav-icon fab fa-shopify"></i>
+                                <p>Shop Now!</p>
+                            </a>
+                        </li>
                         <li {{Auth::user()->user_type === 0 ? 'hidden' : '' }}>
                             <a href="/dashboard" class="nav-link {{ (request()->is('dashboard') || request()->is('home')) ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>

@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    DB::statement("SET SQL_MODE=''");
+    $data = DB::select("SELECT p.*, COUNT(o.order_id) as ordered_count FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Pending', 'Disapproved') GROUP BY p.product_id");
+    return view('welcome', compact('data'));
 });
 
 Auth::routes();
@@ -67,6 +70,7 @@ Route::get('/customization', [App\Http\Controllers\Customization::class, 'index'
 Route::post('/customize/add', [App\Http\Controllers\Customization::class, 'add'])->name('add');
 Route::post('/customize/edit', [App\Http\Controllers\Customization::class, 'edit'])->name('edit');
 Route::post('/customize/delete', [App\Http\Controllers\Customization::class, 'delete'])->name('delete');
+Route::get('/view-measurement-guide', [App\Http\Controllers\Customization::class, 'guide'])->name('guide');
 
 //payment method
 Route::get('/paymentMethods', [App\Http\Controllers\PaymentMethod::class, 'index'])->name('index');

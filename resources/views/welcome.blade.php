@@ -14,7 +14,7 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-right">
-                    @foreach(\App\Models\ProductSale::all() as $row)
+                    @foreach($data as $row)
                         <div class="col mb-5">
                             <div class="card h-100">
                                 <img class="card-img-top" src="../storage/{{$row->image}}" alt="..." style="min-height: 50%; max-height: 50%;"/>
@@ -23,10 +23,22 @@
                                         <h5 class="fw-bolder">{{$row->product_name}}</h5>
                                         For: <label class="badge {{$row->type == 'Sale' ? 'bg-primary' : 'bg-success'}}">{{$row->type}}</label><br>
                                         ₱ &nbsp; {{number_format($row->amount, 2)}}
+                                        <br>
+                                        @if (($row->quantity - $row->ordered_count) <= 0)
+                                            Stocks: <label class="badge bg-danger">Not Available</label>
+                                        @else
+                                            Stocks: <b>{{($row->quantity - $row->ordered_count)}}</b>
+                                        @endif
                                     </div>
                                 </div><hr>
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto view-product" data-details="{{$row}}" >View Details</a></div>
+                                    <div class="text-center">
+                                        @if (($row->quantity - $row->ordered_count) <= 0)
+                                            <button type="button" disabled class="btn-danger btn btn-outline-dark mt-auto ">Not Available</button>
+                                        @else
+                                            <button type="button" class="btn btn-outline-dark mt-auto view-product" data-details="{{json_encode($row)}}">View Details</button>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>

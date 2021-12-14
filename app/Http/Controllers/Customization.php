@@ -75,4 +75,8 @@ class Customization extends Controller
             return response()->json(['message' => $e], 500);
         }
     }
+
+    public function guide(){
+        return view('view-measurement-guide');
+    }
 }

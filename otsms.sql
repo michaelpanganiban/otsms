@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 09:45 AM
+-- Generation Time: Dec 14, 2021 at 04:40 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -37,6 +37,7 @@ CREATE TABLE `customization` (
   `pickup_date` date NOT NULL,
   `downpayment` double NOT NULL,
   `fullpayment` double DEFAULT NULL,
+  `price` double DEFAULT NULL,
   `proof_of_payment` text NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -45,8 +46,9 @@ CREATE TABLE `customization` (
 -- Dumping data for table `customization`
 --
 
-INSERT INTO `customization` (`custom_id`, `reference_id`, `garment_type`, `details`, `user_id`, `status`, `pickup_date`, `downpayment`, `fullpayment`, `proof_of_payment`, `created_at`) VALUES
-(1, 'C-202112102020', 'Jersey', '<table class=\"table table-bordered\">\n                                            <thead>\n                                                <tr>\n                                                    <td><b>Quantity per Size: sample</b></td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Color:&nbsp;</b><span style=\"font-weight: bolder;\">sample</span></td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Measurement:&nbsp;</b><span style=\"font-weight: bolder;\">sample</span></td>\n                                                </tr>\n                                            </thead>\n                                        </table>', 7, 'Active', '2021-12-29', 500, 8000, 'uploads/customization/4yD2sCev0gr1uHMLF6GRceKtgVUUQFnCOMyzbCLT.webp', '2021-12-10 15:49:20');
+INSERT INTO `customization` (`custom_id`, `reference_id`, `garment_type`, `details`, `user_id`, `status`, `pickup_date`, `downpayment`, `fullpayment`, `price`, `proof_of_payment`, `created_at`) VALUES
+(1, 'C-202112102020', 'Jersey', '<table class=\"table table-bordered\">\n                                            <thead>\n                                                <tr>\n                                                    <td><b>Quantity per Size: sample</b></td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Color:&nbsp;</b><span style=\"font-weight: bolder;\">sample</span></td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Measurement:&nbsp;</b><span style=\"font-weight: bolder;\">sample</span></td>\n                                                </tr>\n                                            </thead>\n                                        </table>', 7, 'Active', '2021-12-29', 500, 8000, NULL, 'uploads/customization/4yD2sCev0gr1uHMLF6GRceKtgVUUQFnCOMyzbCLT.webp', '2021-12-10 15:49:20'),
+(3, 'C-202112141919', 'Jersey', '<table class=\"table table-bordered\">\n                                            <thead>\n                                                <tr>\n                                                    <td><b>Quantity per Size:</b> </td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Color:</b> </td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Measurement:</b> </td>\n                                                </tr>\n                                            </thead>\n                                        </table>', 6, 'Pending', '2021-12-30', 0, 0, 5000, 'uploads/customization/bk85hF8SNVwBVlguCALr4jN8gwjQn8SQfALmIXK5.png', '2021-12-14 18:58:19');
 
 -- --------------------------------------------------------
 
@@ -256,8 +258,9 @@ INSERT INTO `orders` (`order_id`, `product_id`, `reference_id`, `user_id`, `pick
 (9, 5, 'ITM-20211210414141', 2, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-10 10:47:41', NULL, NULL),
 (10, 2, 'ITM-20211210565656', 7, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-10 11:34:56', NULL, NULL),
 (11, 8, 'ITM-20211210353535', 7, '2021-12-16', 500, 'uploads/orders/ziF0nNEqS9INuapZh9Atf5bwrK1srA1Qvn8fTe5a.jpg', '2021-12-16', 0, 'Approved', 7, '2021-12-10 11:51:35', NULL, '2021-12-10 13:54:16'),
-(12, 8, 'ITM-20211212373737', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 6, '2021-12-12 23:57:37', NULL, NULL),
-(13, 5, 'ITM-20211212575757', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-13 00:04:57', NULL, NULL);
+(12, 8, 'ITM-20211212373737', 6, NULL, NULL, NULL, NULL, NULL, 'Approved', 6, '2021-12-12 23:57:37', NULL, '2021-12-14 23:05:51'),
+(13, 5, 'ITM-20211212575757', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-13 00:04:57', NULL, NULL),
+(14, 2, 'ITM-20211214353535', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 6, '2021-12-14 23:37:35', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -504,7 +507,7 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `customization`
 --
 ALTER TABLE `customization`
-  MODIFY `custom_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `custom_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employee_schedule`
@@ -540,7 +543,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `payment_methods`

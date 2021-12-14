@@ -53,7 +53,8 @@ class Customization extends Model
 		'downpayment',
 		'fullpayment',
 		'proof_of_payment',
-		'reference_id'
+		'reference_id',
+		'price'
 	];
 
 	public function user()

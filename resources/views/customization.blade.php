@@ -77,10 +77,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <label for="amount">Downpayment Amount</label>
-                                        <input type="number" required class="form-control" id="custom-downpayment" placeholder="Downpayment Amount">
-                                    </div>
+                                        <input type="number" class="form-control" id="custom-downpayment" placeholder="Downpayment Amount">
+                                    </div> --}}
                                     <div class="col-md-6">
                                         <label for="image">Upload Design</label>
                                     <input type="file" required class="form-control" id="design">
@@ -185,8 +185,14 @@
                                                         <input type="text" class="form-control" id="fullpayment-edit" {{Auth::user()->user_type === 0 ? 'disabled' : '' }}>
                                                     </div>
                                                 </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <label for="amount">Price</label>
+                                                        <input type="number" required class="form-control" id="custom-price-edit" placeholder="Price" {{Auth::user()->user_type === 0 ? 'disabled' : '' }}>
+                                                    </div>
+                                                </div>
                                                 <div class="form-group">
-                                                    <label for="description">Description:</label>
+                                                    <label for="description">Description: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/view-measurement-guide" target="_blank" class="btn btn-sm btn-primary">View Measurement Guide</a> </label>
                                                     <textarea class="form-control summernote desc-edit" rows="5">
                                                     </textarea>
                                                 </div>

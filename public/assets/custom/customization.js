@@ -4,7 +4,7 @@ $("#submit-custom").submit(function(e){
     const data = {
         garment_type : $("#garment-type").val(),
         pickup_date : $("#custom-pickup-date").val(),
-        downpayment: $("#custom-downpayment").val(),
+        downpayment: 0,
         details: $(".summernote").val().trim()
     }
 
@@ -45,8 +45,9 @@ $(".view-custom").click(function(e){
     $("#garment-type-edit").data('pk', details.custom_id)
     $("#custom-pickup-date-edit").val(details.pickup_date)
     $("#custom-downpayment-edit").val(details.downpayment)
+    $("#custom-price-edit").val(details.price)
     $(".desc-edit").summernote('code',details.details)
-    $("#fullpayment-edit").val(details.fullpayment)
+    $("#fullpayment-edit").val(details.fullpayment ? details.fullpayment : 0)
     $("#status-edit").val(details.status)
     if(user_type != 0)
         $('.desc-edit').next().find(".note-editable").attr("contenteditable", false);
@@ -73,6 +74,7 @@ $("#submit-custom-edit").submit(function(e){
         data = {
             status : $("#status-edit").val(),
             fullpayment : $("#fullpayment-edit").val(),
+            price: $("#custom-price-edit").val()
         }
     }
     formData.append("data", JSON.stringify(data))
