@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2021 at 03:48 PM
+-- Generation Time: Dec 14, 2021 at 09:45 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -215,7 +215,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (37, '2021_12_09_043928_add_foreign_keys_to_orders_table', 0),
 (38, '2021_12_10_070809_create_customization_table', 0),
 (39, '2021_12_10_074022_create_customization_table', 0),
-(40, '2021_12_10_074023_add_foreign_keys_to_customization_table', 0);
+(40, '2021_12_10_074023_add_foreign_keys_to_customization_table', 0),
+(41, '2021_12_13_130428_create_payment_methods_table', 0);
 
 -- --------------------------------------------------------
 
@@ -254,7 +255,9 @@ INSERT INTO `orders` (`order_id`, `product_id`, `reference_id`, `user_id`, `pick
 (8, 2, 'ITM-20211210353535', 2, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-10 10:47:35', NULL, NULL),
 (9, 5, 'ITM-20211210414141', 2, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-10 10:47:41', NULL, NULL),
 (10, 2, 'ITM-20211210565656', 7, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-10 11:34:56', NULL, NULL),
-(11, 8, 'ITM-20211210353535', 7, '2021-12-16', 500, 'uploads/orders/ziF0nNEqS9INuapZh9Atf5bwrK1srA1Qvn8fTe5a.jpg', '2021-12-16', 0, 'Approved', 7, '2021-12-10 11:51:35', NULL, '2021-12-10 13:54:16');
+(11, 8, 'ITM-20211210353535', 7, '2021-12-16', 500, 'uploads/orders/ziF0nNEqS9INuapZh9Atf5bwrK1srA1Qvn8fTe5a.jpg', '2021-12-16', 0, 'Approved', 7, '2021-12-10 11:51:35', NULL, '2021-12-10 13:54:16'),
+(12, 8, 'ITM-20211212373737', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 6, '2021-12-12 23:57:37', NULL, NULL),
+(13, 5, 'ITM-20211212575757', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-13 00:04:57', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -267,6 +270,28 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_methods`
+--
+
+CREATE TABLE `payment_methods` (
+  `method_id` bigint(20) NOT NULL,
+  `method_name` varchar(150) NOT NULL,
+  `bank_name` varchar(250) NOT NULL,
+  `account_no` varchar(50) NOT NULL,
+  `account_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payment_methods`
+--
+
+INSERT INTO `payment_methods` (`method_id`, `method_name`, `bank_name`, `account_no`, `account_name`) VALUES
+(4, 'GCASH Payment', 'GCash', '0901256884', 'Gcash sample'),
+(5, 'BPI', 'BPI', '1234567899', 'BPI Account Name');
 
 -- --------------------------------------------------------
 
@@ -436,6 +461,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `payment_methods`
+--
+ALTER TABLE `payment_methods`
+  ADD PRIMARY KEY (`method_id`);
+
+--
 -- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
@@ -503,13 +534,19 @@ ALTER TABLE `measurement`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `payment_methods`
+--
+ALTER TABLE `payment_methods`
+  MODIFY `method_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
