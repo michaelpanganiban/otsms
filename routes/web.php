@@ -16,11 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     DB::statement("SET SQL_MODE=''");
-    // $data = DB::table('product_sales')
-    //         ->leftJoin('orders', 'product_sales.product_id', '=', 'orders.product_id')
-    //         ->whereNotIn('orders.status', ['Pending', 'Disapproved'])
-    //         ->groupBy('product_sales.product_id')
-    //         ->get();
     $data = DB::select("SELECT p.*, COUNT(o.order_id) as ordered_count FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id WHERE o.status NOT IN ('Pending', 'Disapproved') GROUP BY p.product_id");
     return view('welcome', compact('data'));
 });
@@ -50,6 +45,7 @@ Route::post('/profile/changePassword', [App\Http\Controllers\Main::class, 'chang
 // Main
 Route::get('/about', [App\Http\Controllers\Main::class, 'about'])->name('about');
 Route::get('/dashboard', [App\Http\Controllers\Main::class, 'dashboard'])->name('dashboard');
+Route::post('/fetchDashboard', [App\Http\Controllers\Main::class, 'fetchDashboard'])->name('fetchDashboard');
 
 // Employee
 Route::get('/employeeList', [App\Http\Controllers\Employee::class, 'index'])->name('index');

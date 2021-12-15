@@ -47,4 +47,12 @@ class Main extends Controller
         
         return view('home', compact('data'));
     }
+
+    public function fetchDashboard(){
+        //sales per month this year
+        $this_year = DB::select("SELECT SUM(p.amount) as amount, MONTH(o.created_at) as month_date FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Pending', 'Disapproved') WHERE MONTH(o.created_at) IS NOT NULL and YEAR(o.created_at) = YEAR(CURRENT_DATE()) GROUP BY MONTH(o.created_at)");
+        $last_year = DB::select("SELECT SUM(p.amount) as amount, MONTH(o.created_at) as month_date FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Pending', 'Disapproved') WHERE MONTH(o.created_at) IS NOT NULL and YEAR(o.created_at) = (YEAR(CURRENT_DATE()) -1) GROUP BY MONTH(o.created_at)");
+        
+        return response()->json(['this_year' => $this_year, 'last_year' => $last_year]);
+    }
 }

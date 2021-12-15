@@ -445,7 +445,7 @@
 <script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
-<script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script>
+{{-- <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script> --}}
 <script src="{{ asset('assets/dist/js/pages/dashboard3.js') }}"></script>
 <script>
   $(function () {

@@ -71,8 +71,8 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <p class="d-flex flex-column">
-                            <span class="text-bold text-lg">$18,230.00</span>
-                            <span>Sales Over Time</span>
+                            <span class="text-bold text-lg total"></span>
+                            <span>Total Sales This Year</span>
                             </p>
                             {{-- <p class="ml-auto d-flex flex-column text-right">
                             <span class="text-success">
