@@ -49,7 +49,7 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>₱{{ number_format($data[0]->amount) }}</h3>
                             <p>Sales of the Month</p>
                         </div>
                         <div class="icon">

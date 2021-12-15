@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     DB::statement("SET SQL_MODE=''");
-    $data = DB::select("SELECT p.*, COUNT(o.order_id) as ordered_count FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Pending', 'Disapproved') GROUP BY p.product_id");
+    // $data = DB::table('product_sales')
+    //         ->leftJoin('orders', 'product_sales.product_id', '=', 'orders.product_id')
+    //         ->whereNotIn('orders.status', ['Pending', 'Disapproved'])
+    //         ->groupBy('product_sales.product_id')
+    //         ->get();
+    $data = DB::select("SELECT p.*, COUNT(o.order_id) as ordered_count FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id WHERE o.status NOT IN ('Pending', 'Disapproved') GROUP BY p.product_id");
     return view('welcome', compact('data'));
 });
 

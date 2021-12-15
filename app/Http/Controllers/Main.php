@@ -42,9 +42,9 @@ class Main extends Controller
     }
 
     public function dashboard(){
-        // $temp = new Order();
-        // $data = $temp->product_sale()->sum('amount');
-        // dd($data);
-        return view('home');
+        DB::statement("SET SQL_MODE=''");
+        $data = DB::select("SELECT SUM(p.amount) as amount FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Pending', 'Disapproved') WHERE MONTH(o.created_at) = MONTH(CURRENT_DATE())");
+        
+        return view('home', compact('data'));
     }
 }
