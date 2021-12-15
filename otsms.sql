@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 04:40 PM
+-- Generation Time: Dec 15, 2021 at 01:54 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -248,19 +248,11 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `product_id`, `reference_id`, `user_id`, `pickup_date`, `downpayment_amount`, `receipt`, `return_date`, `addtional_fee`, `status`, `created_by`, `created_at`, `modified_by`, `modified_at`) VALUES
-(1, 5, 'ITM-20211209101010', 6, '2021-12-15', 500, 'uploads/orders/vc0cOKuYaDyrXTTXTewVz0LEvWuEZlFvgMlTWRJV.jpg', '2021-12-16', 250, 'Approved', 6, '2021-12-09 12:56:11', NULL, '2021-12-09 22:46:25'),
-(2, 2, 'ITM-20211209242424', 6, '2021-12-11', 800, 'uploads/orders/YcaEknZE1E5UHmLpaXurbiP0h2BUpr2EGsH9bXYL.jpg', NULL, NULL, 'Pending', 6, '2021-12-09 12:56:24', NULL, '2021-12-09 22:05:12'),
-(4, 8, 'ITM-20211209070707', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 6, '2021-12-09 22:06:07', NULL, NULL),
-(5, 5, 'ITM-20211209333333', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 6, '2021-12-09 22:56:33', NULL, NULL),
-(6, 6, 'ITM-20211209383838', 6, '2021-12-22', 800, 'uploads/orders/qUm4hHA6DoxAkB25bE80Nu5cOZJ9i6jGqjaraSkw.jpg', NULL, NULL, 'Picked Up', 6, '2021-12-09 22:56:38', NULL, '2021-12-09 23:14:14'),
-(7, 7, 'ITM-20211209474747', 6, '2021-12-16', 600, 'uploads/orders/IGkdY3igjW8XDfugyPHBkryJVAoKjSoP45Q5yVps.jpg', NULL, NULL, 'Pending', 6, '2021-12-09 22:56:47', NULL, '2021-12-09 22:57:14'),
-(8, 2, 'ITM-20211210353535', 2, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-10 10:47:35', NULL, NULL),
-(9, 5, 'ITM-20211210414141', 2, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-10 10:47:41', NULL, NULL),
-(10, 2, 'ITM-20211210565656', 7, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-10 11:34:56', NULL, NULL),
-(11, 8, 'ITM-20211210353535', 7, '2021-12-16', 500, 'uploads/orders/ziF0nNEqS9INuapZh9Atf5bwrK1srA1Qvn8fTe5a.jpg', '2021-12-16', 0, 'Approved', 7, '2021-12-10 11:51:35', NULL, '2021-12-10 13:54:16'),
-(12, 8, 'ITM-20211212373737', 6, NULL, NULL, NULL, NULL, NULL, 'Approved', 6, '2021-12-12 23:57:37', NULL, '2021-12-14 23:05:51'),
-(13, 5, 'ITM-20211212575757', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 2, '2021-12-13 00:04:57', NULL, NULL),
-(14, 2, 'ITM-20211214353535', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 6, '2021-12-14 23:37:35', NULL, NULL);
+(1, 5, 'ITM-20211215565656', 6, '2021-12-23', 400, 'uploads/orders/3LExJddGxgtMEup98NWdtFNKAsoRTDjcsUAyoTKk.webp', NULL, NULL, 'Approved', 6, '2020-12-15 20:14:56', NULL, '2021-12-15 20:36:09'),
+(2, 6, 'ITM-20211215040404', 6, '2021-12-23', 1000, 'uploads/orders/kAIwwjLxq6spqp2JzWoU164cERF0uv2k8AcAhWhd.webp', NULL, NULL, 'Approved', 6, '2020-12-15 20:15:04', NULL, '2021-12-15 20:36:16'),
+(3, 2, 'ITM-20211215111111', 6, '2021-12-29', 800, 'uploads/orders/7JRpcbQhRvvH0NSzFkprwgQghnux5IhqvFpzN9Jj.webp', '2021-12-29', 0, 'Approved', 6, '2021-12-15 20:15:11', NULL, '2021-12-15 20:24:56'),
+(4, 1, 'ITM-20211215151515', 6, '2021-12-24', 500, 'uploads/orders/jj4zaLHBataOGbg1B5fR9xuVbBe5x4R9lh0PaK2v.jpg', '2021-12-23', 0, 'Approved', 6, '2021-12-15 20:15:15', NULL, '2021-12-15 20:25:09'),
+(5, 7, 'ITM-20211215191919', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 6, '2021-12-15 20:15:19', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -342,7 +334,7 @@ CREATE TABLE `product_sales` (
 
 INSERT INTO `product_sales` (`product_id`, `product_code`, `product_name`, `description`, `amount`, `quantity`, `image`, `status`, `type`, `create_by`, `created_at`, `modified_by`, `modified_at`) VALUES
 (1, 'asd', 'asdasd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1000', '12', 'uploads/products/LON7sfUBUFCx5V4LtM3B7Sdhwd5HuNFX5pEkEZSQ.jpg', 'Active', 'Rent', 2, '2021-12-03 17:29:52', NULL, '2021-12-10 22:07:16'),
-(2, 'test', 'test', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1500', '1', 'uploads/products/LTNxJpiBeXeKtUnxPGlMPyOZOdetkaQZXv6vZKDW.jpg', 'Active', 'Rent', 2, '2021-12-03 17:50:54', NULL, '2021-12-10 22:07:18'),
+(2, 'test', 'test', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1500', '1', 'uploads/products/LTNxJpiBeXeKtUnxPGlMPyOZOdetkaQZXv6vZKDW.jpg', 'Active', 'Rent', 2, '2021-11-03 17:50:54', NULL, '2021-12-15 13:06:57'),
 (5, 'sample', 'sample', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '800', '1', 'uploads/products/DySeNVhVu2ik43qSEhw8lZ7vM8TTiBB4pu7GGkDm.jpg', 'Active', 'Sale', 2, '2021-12-03 23:02:14', NULL, '2021-12-10 22:07:23'),
 (6, 'new', 'new', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1120', '121', 'uploads/products/gbJ7nQaQBoi8ko4y4MHxZQju96zo0P2yx8JIgove.jpg', 'Active', 'Sale', 2, '2021-12-04 00:23:19', NULL, '2021-12-10 22:07:26'),
 (7, 'asdasda', 'asdasd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '3200', '32', 'uploads/products/1BLaoZm680KHL4GTLeqMWSVXIOpDkbJFVM0IXrrk.jpg', 'Active', 'Sale', 2, '2021-12-04 00:25:19', NULL, '2021-12-10 22:07:28'),
@@ -543,7 +535,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `payment_methods`
