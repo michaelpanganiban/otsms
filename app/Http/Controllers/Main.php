@@ -44,15 +44,18 @@ class Main extends Controller
     public function dashboard(){
         DB::statement("SET SQL_MODE=''");
         $data = DB::select("SELECT SUM(p.amount) as amount FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Pending', 'Disapproved') WHERE MONTH(o.created_at) = MONTH(CURRENT_DATE())");
-        
-        return view('home', compact('data'));
+        $custom = DB::select("SELECT (SUM(p.downpayment) + SUM(p.fullpayment)) as amount FROM customization p WHERE p.status NOT IN('Pending', 'Disapproved') AND MONTH(p.created_at) = MONTH(CURRENT_DATE())");
+        return view('home', compact('data', 'custom'));
     }
 
     public function fetchDashboard(){
         //sales per month this year
         $this_year = DB::select("SELECT SUM(p.amount) as amount, MONTH(o.created_at) as month_date FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Pending', 'Disapproved') WHERE MONTH(o.created_at) IS NOT NULL and YEAR(o.created_at) = YEAR(CURRENT_DATE()) GROUP BY MONTH(o.created_at)");
+        //last year
         $last_year = DB::select("SELECT SUM(p.amount) as amount, MONTH(o.created_at) as month_date FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Pending', 'Disapproved') WHERE MONTH(o.created_at) IS NOT NULL and YEAR(o.created_at) = (YEAR(CURRENT_DATE()) -1) GROUP BY MONTH(o.created_at)");
         
-        return response()->json(['this_year' => $this_year, 'last_year' => $last_year]);
+        $type = DB::SELECT("SELECT COUNT(o.order_id) as order_count, p.type FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Disapproved') WHERE MONTH(o.created_at) IS NOT NULL and YEAR(o.created_at) = (YEAR(CURRENT_DATE())) GROUP BY p.type");
+        $custom = DB::SELECT("SELECT COUNT(custom_id) as custom_count FROM customization WHERE status <> 'Pending'");
+        return response()->json(['this_year' => $this_year, 'last_year' => $last_year, 'type' => $type, 'custom' => $custom]);
     }
 }

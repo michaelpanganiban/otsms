@@ -27,7 +27,7 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
-                                <h3>{{\App\Models\Order::where('status', 'Approved')->count()}}</h3>
+                                <h3>{{\App\Models\Order::where('status', 'Approved')->count() + \App\Models\Customization::where('status', 'Active')->count()}}</h3>
                             <p>Active Orders</p>
                         </div>
                         <div class="icon">
@@ -38,7 +38,7 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{\App\Models\Order::where('status', 'Pending')->count()}}</h3>
+                            <h3>{{\App\Models\Order::where('status', 'Pending')->count()  + \App\Models\Customization::where('status', 'Pending')->count()}}</h3>
                             <p>Pending Orders</p>
                         </div>
                         <div class="icon">
@@ -49,7 +49,7 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>₱{{ number_format($data[0]->amount) }}</h3>
+                            <h3>₱{{ number_format($data[0]->amount + $custom[0]->amount) }}</h3>
                             <p>Sales of the Month</p>
                         </div>
                         <div class="icon">
@@ -71,15 +71,13 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <p class="d-flex flex-column">
-                            <span class="text-bold text-lg total"></span>
-                            <span>Total Sales This Year</span>
+                                <span class="text-bold text-lg total"></span>
+                                <span class="text-muted">Total Sales This Year</span>
                             </p>
-                            {{-- <p class="ml-auto d-flex flex-column text-right">
-                            <span class="text-success">
-                                <i class="fas fa-arrow-up"></i> 33.1%
-                            </span>
-                            <span class="text-muted">Since last month</span>
-                            </p> --}}
+                            <p class="ml-auto d-flex flex-column text-right">
+                                <span class="text-bold text-lg total-last"></span>
+                                <span class="text-muted">Total Sales Last Year</span>
+                            </p>
                         </div>
                         <div class="position-relative mb-4">
                             <canvas id="sales-chart" height="200"></canvas>
@@ -96,35 +94,26 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header border-0">
-                        <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Sales</h3>
+            <div class="col-md-6">
+                <div class="card card-danger">
+                    <div class="card-header">
+                        <h3 class="card-title">Order Chart</h3>
+        
+                        <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="d-flex">
-                            <p class="d-flex flex-column">
-                            <span class="text-bold text-lg">$18,230.00</span>
-                            <span>Sales Over Time</span>
-                            </p>
-                        </div>
-                        <div class="position-relative mb-4">
-                            <canvas id="sales-chart" height="200"></canvas>
-                        </div>
-                        <div class="d-flex flex-row justify-content-end">
-                            <span class="mr-2">
-                            <i class="fas fa-square text-primary"></i> This year
-                            </span>
-        
-                            <span>
-                            <i class="fas fa-square text-gray"></i> Last year
-                            </span>
-                        </div>
+                        <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                     </div>
+                    <!-- /.card-body -->
                 </div>
-            </div> --}}
+            </div>
            
         </div>
     </section>

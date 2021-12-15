@@ -17,6 +17,7 @@ $(function () {
   // eslint-disable-next-line no-unused-vars
   $.post('/fetchDashboard', function(r){
     let total_this_year = 0
+    let total_last_year = 0
     r.this_year.map(x => {
       this_year[x.month_date-1] = x.amount
       total_this_year = parseFloat(total_this_year) + parseFloat(x.amount)
@@ -24,7 +25,9 @@ $(function () {
     $(".total").html(total_this_year.toFixed(2))
     r.last_year.map(x => {
       last_year[x.month_date-1] = x.amount
+      total_last_year = parseFloat(total_last_year) + parseFloat(x.amount)
     })
+    $(".total-last").html(total_last_year.toFixed(2))
     var salesChart = new Chart($salesChart, {
       type: 'bar',
       data: {
@@ -88,72 +91,40 @@ $(function () {
         }
       }
     })
-  })
-  var $visitorsChart = $('#visitors-chart')
-  // eslint-disable-next-line no-unused-vars
-  var visitorsChart = new Chart($visitorsChart, {
-    data: {
-      labels: ['18th', '20th', '22nd', '24th', '26th', '28th', '30th'],
-      datasets: [{
-        type: 'line',
-        data: [100, 120, 170, 167, 180, 177, 160],
-        backgroundColor: 'transparent',
-        borderColor: '#007bff',
-        pointBorderColor: '#007bff',
-        pointBackgroundColor: '#007bff',
-        fill: false
-        // pointHoverBackgroundColor: '#007bff',
-        // pointHoverBorderColor    : '#007bff'
-      },
-      {
-        type: 'line',
-        data: [60, 80, 70, 67, 80, 77, 100],
-        backgroundColor: 'tansparent',
-        borderColor: '#ced4da',
-        pointBorderColor: '#ced4da',
-        pointBackgroundColor: '#ced4da',
-        fill: false
-        // pointHoverBackgroundColor: '#ced4da',
-        // pointHoverBorderColor    : '#ced4da'
-      }]
-    },
-    options: {
-      maintainAspectRatio: false,
-      tooltips: {
-        mode: mode,
-        intersect: intersect
-      },
-      hover: {
-        mode: mode,
-        intersect: intersect
-      },
-      legend: {
-        display: false
-      },
-      scales: {
-        yAxes: [{
-          // display: false,
-          gridLines: {
-            display: true,
-            lineWidth: '4px',
-            color: 'rgba(0, 0, 0, .2)',
-            zeroLineColor: 'transparent'
-          },
-          ticks: $.extend({
-            beginAtZero: true,
-            suggestedMax: 200
-          }, ticksStyle)
-        }],
-        xAxes: [{
-          display: true,
-          gridLines: {
-            display: false
-          },
-          ticks: ticksStyle
-        }]
-      }
+    const type = [0, 0, 0]
+    r.type.map(x => {
+      if(x.type == 'Sale')
+        type[1] = x.order_count
+      else
+        type[2] = x.order_count
+    })
+    r.custom.map(x => {
+      type[0] = x.custom_count
+    })
+    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+    var donutData        = {
+      labels: [
+          'Customized',
+          'Sales',
+          'Rent',
+      ],
+      datasets: [
+        {
+          data: type,
+          backgroundColor : ['#f56954', '#00a65a', '#f39c12'],
+        }
+      ]
     }
+    var donutOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    new Chart(donutChartCanvas, {
+      type: 'doughnut',
+      data: donutData,
+      options: donutOptions
+    })
   })
 })
-
-// lgtm [js/unused-local-variable]

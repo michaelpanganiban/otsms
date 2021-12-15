@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         DB::statement("SET SQL_MODE=''");
-        $data = DB::select("SELECT p.*, COUNT(o.order_id) as ordered_count FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id WHERE o.status NOT IN ('Pending', 'Disapproved') GROUP BY p.product_id");  
+        $data = DB::select("SELECT p.*, COUNT(o.order_id) as ordered_count FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN ('Pending', 'Disapproved') GROUP BY p.product_id");  
         if(Auth::user()->user_type === 0)
             return view('welcome', compact('data'));
         else{
