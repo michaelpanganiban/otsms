@@ -90,7 +90,7 @@
                                     
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Description:</label>
+                                    <label for="description">Description:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/view-measurement-guide" target="_blank" class="btn btn-sm btn-primary">View Measurement Guide</a> </label>
                                     <textarea class="form-control summernote" rows="5">
                                         <table class="table table-bordered">
                                             <thead>

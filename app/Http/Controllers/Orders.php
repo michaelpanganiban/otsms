@@ -6,6 +6,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File; 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class Orders extends Controller
 {
@@ -50,6 +51,10 @@ class Orders extends Controller
         try {
             $data = json_decode(\request()->data, true);
             $id = \request()->id;
+            $email = request()->email;
+            $product = request()->product;
+            $ref = request()->ref;
+            $customer = request()->first_name;
             if(Auth::user()->user_type === 0){
                 if (\request()->hasFile('payment')) {
                     $path = request()->file('payment')->store('uploads/orders', 'public');
@@ -58,6 +63,12 @@ class Orders extends Controller
             }
             $data += ['modified_by', Auth::id()];
             Order::find($id)->update($data);
+            $details = [
+                'customer' => $customer,
+                'title' => 'Mail from D&J Tailoring Shop',
+                'body' => 'This is to inform you that your order '.$product.' with reference # '.$ref.' has been '.$data['status'],
+            ];
+            Mail::to($email)->send(new \App\Mail\Mailing($details));
             DB::commit();
             return response()->json(['message' => 'Successfully updated the order.'], 200);
         } catch (\Exception $e){

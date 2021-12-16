@@ -36,7 +36,7 @@
                         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ml-auto">
+                {{-- <ul class="navbar-nav ml-auto">
                     <!-- Messages Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -154,7 +154,7 @@
                             </form>
                         </div>
                     </li>
-                </ul>
+                </ul> --}}
             </nav>
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="/" class="brand-link">

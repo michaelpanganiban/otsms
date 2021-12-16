@@ -46,6 +46,7 @@ Route::post('/profile/changePassword', [App\Http\Controllers\Main::class, 'chang
 Route::get('/about', [App\Http\Controllers\Main::class, 'about'])->name('about');
 Route::get('/dashboard', [App\Http\Controllers\Main::class, 'dashboard'])->name('dashboard');
 Route::post('/fetchDashboard', [App\Http\Controllers\Main::class, 'fetchDashboard'])->name('fetchDashboard');
+Route::post('/sendSMS', [App\Http\Controllers\Main::class, 'sendSMS'])->name('sendSMS');
 
 // Employee
 Route::get('/employeeList', [App\Http\Controllers\Employee::class, 'index'])->name('index');

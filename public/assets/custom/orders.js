@@ -14,6 +14,10 @@ $(".view-order").click(function(e){
     $("#product-name-desc").html(`<b>Product Name: </b>${details.product_sale.product_name}`)
     $("#type").html(`<b>For </b> <label style="color: blue;">${details.product_sale.type}</label>`)
     $("#submit-order").data('pk', details.order_id)
+    $("#submit-order").data('ref', details.reference_id)
+    $("#submit-order").data('email', details.user.email)
+    $("#submit-order").data('first_name', details.user.first_name)
+    $("#submit-order").data('product', details.product_sale.product_name)
     $("#submit-order").data('product-type', details.product_sale.type)
     if(details.receipt != '' && details.receipt != null)
         $("#download-file").html(`<a href='../storage/${details.receipt}' download style='color: white;' ><u>Download Receipt</u></a>`)
@@ -40,10 +44,15 @@ $(".view-order").click(function(e){
 })
 
 $("#submit-order").submit(function(e){
+    $(this).attr('disabled', true)
     e.preventDefault()
     const type = $(this).data('type')
     const product_type = $(this).data('product-type')
     const id = $(this).data('pk')
+    const email = $(this).data('email')
+    const first_name = $(this).data('first_name')
+    const product = $(this).data('product')
+    const ref = $(this).data('ref')
     var formData = new FormData();
     let data = {}
     if(type == 0){
@@ -69,6 +78,12 @@ $("#submit-order").submit(function(e){
     }
     formData.append("data", JSON.stringify(data))
     formData.append("id", id)
+    formData.append("ref", ref)
+    formData.append("email", email)
+    formData.append("first_name", first_name)
+    formData.append("product", product)
+    // $("#show-form").attr('hidden', true)
+    // $("#show-loading").removeAttr('hidden')
     $.ajax({
         url: 'orders/edit',
         data: formData,
@@ -77,6 +92,9 @@ $("#submit-order").submit(function(e){
         method: "POST",
         async: false,
         success: function (response) {
+            $("#submit-order").removeAttr('disabled')
+            // $("#show-form").removeAttr('hidden')
+            // $("#show-loading").attr('hidden', true)
             console.log(response)
             Toast.fire({
                 icon: 'success',
@@ -87,6 +105,9 @@ $("#submit-order").submit(function(e){
             }, 1500)
         },
         error: function(e){
+            $("#submit-order").removeAttr('disabled')
+            // $("#show-form").removeAttr('hidden')
+            // $("#show-loading").attr('hidden', true)
             Toast.fire({
                 icon: 'error',
                 title: e.message.errorInfo[3]

@@ -96,3 +96,9 @@ $(".add-to-order").click(function(e){
         })
     });
 })
+
+// $("#sms").click(function(e){
+//     $.post('/orders/edit', function(r){
+//         alert(r)
+//     })
+// })

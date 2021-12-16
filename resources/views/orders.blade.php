@@ -96,7 +96,15 @@
                         </div>
                         <div class="container">
                             <br>
-                            <div class="row justify-content-left">
+                            {{-- <center id="show-loading" hidden>
+                                <div class="spinner-border" style="width: 3rem; height: 3rem; text-align: center;" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <br>
+                                Please wait while we're processing your request..
+                                <br><br>
+                            </center> --}}
+                            <div class="row justify-content-left" id="show-form">
                                 <div class="col-md-4">
                                     <img class="card-img-top" id="product-image" alt="..." />
                                     <hr>
@@ -149,7 +157,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row"  {{Auth::user()->user_type === 0 ? 'hidden' : '' }}>
+                                                <div class="form-group row hideUs"  {{Auth::user()->user_type === 0 ? 'hidden' : '' }}>
                                                     <div class="col-md-6">
                                                         <label for="amount">Return Date</label>
                                                         <input type="date"  class="form-control" id="return-date">
