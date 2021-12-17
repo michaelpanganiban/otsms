@@ -61,14 +61,17 @@ class Orders extends Controller
                     $data += ['receipt' => $path];
                 }
             }
+            else{
+                $details = [
+                    'customer' => $customer,
+                    'title' => 'Mail from D&J Tailoring Shop',
+                    'body' => 'This is to inform you that your order '.$product.' with reference # '.$ref.' has been '.$data['status'],
+                ];
+                Mail::to($email)->send(new \App\Mail\Mailing($details));
+            }
             $data += ['modified_by', Auth::id()];
             Order::find($id)->update($data);
-            $details = [
-                'customer' => $customer,
-                'title' => 'Mail from D&J Tailoring Shop',
-                'body' => 'This is to inform you that your order '.$product.' with reference # '.$ref.' has been '.$data['status'],
-            ];
-            Mail::to($email)->send(new \App\Mail\Mailing($details));
+           
             DB::commit();
             return response()->json(['message' => 'Successfully updated the order.'], 200);
         } catch (\Exception $e){
