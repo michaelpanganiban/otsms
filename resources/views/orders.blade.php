@@ -160,11 +160,11 @@
                                                 <div class="form-group row hideUs"  {{Auth::user()->user_type === 0 ? 'hidden' : '' }}>
                                                     <div class="col-md-6">
                                                         <label for="amount">Return Date</label>
-                                                        <input type="date"  class="form-control" id="return-date">
+                                                        <input type="date" {{Auth::user()->user_type === 0 ? 'disabled' : '' }}  class="form-control" id="return-date">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="quantity">Penalty Amount</label>
-                                                        <input type="number" class="form-control" id="additional_fee" placeholder="Penalty Fee">
+                                                        <input type="number" {{Auth::user()->user_type === 0 ? 'disabled' : '' }} class="form-control" id="additional_fee" placeholder="Penalty Fee">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
