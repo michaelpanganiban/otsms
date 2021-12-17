@@ -38,14 +38,15 @@ $(".view-order").click(function(e){
     else{
         $(".hideUs").removeAttr('hidden')
     }
-
+    
     $(".view-measurement").attr('href', `/measurement?id=${details.user_id}`)
     $("#view-order").modal('show')
 })
 
 $("#submit-order").submit(function(e){
-    $(this).attr('disabled', true)
     e.preventDefault()
+    waitingDialog.show('Processing data...', {dialogSize: 'md', progressType: 'info'});
+    $(this).attr('disabled', true)
     const type = $(this).data('type')
     const product_type = $(this).data('product-type')
     const id = $(this).data('pk')
@@ -54,8 +55,10 @@ $("#submit-order").submit(function(e){
     const product = $(this).data('product')
     const ref = $(this).data('ref')
     var formData = new FormData();
+    let async_type = true;
     let data = {}
     if(type == 0){
+        async_type = false;
         data = {
             "pickup_date" : $("#pickup-date").val(),
             "downpayment_amount" : $("#downpayment").val()
@@ -63,6 +66,7 @@ $("#submit-order").submit(function(e){
         formData.append('payment', document.getElementById('payment').files[0])
     }
     else{
+        async_type = true;
         if(product_type == 'Rent'){
             data = {
                 "status" : $("#order-status").val(),
@@ -82,19 +86,16 @@ $("#submit-order").submit(function(e){
     formData.append("email", email)
     formData.append("first_name", first_name)
     formData.append("product", product)
-    // $("#show-form").attr('hidden', true)
-    // $("#show-loading").removeAttr('hidden')
     $.ajax({
         url: 'orders/edit',
         data: formData,
         processData: false,
         contentType: false,
         method: "POST",
-        async: false,
+        async: async_type,
         success: function (response) {
+            waitingDialog.hide();
             $("#submit-order").removeAttr('disabled')
-            // $("#show-form").removeAttr('hidden')
-            // $("#show-loading").attr('hidden', true)
             console.log(response)
             Toast.fire({
                 icon: 'success',
@@ -106,14 +107,15 @@ $("#submit-order").submit(function(e){
         },
         error: function(e){
             $("#submit-order").removeAttr('disabled')
-            // $("#show-form").removeAttr('hidden')
-            // $("#show-loading").attr('hidden', true)
+            waitingDialog.hide();
             Toast.fire({
                 icon: 'error',
                 title: e.message.errorInfo[3]
             })
         }
     })
+    waitingDialog.hide();
+
 })
 
 $(".delete-order").click(function(e){
