@@ -169,7 +169,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="image">Proof of Payment &nbsp;&nbsp; | &nbsp;&nbsp; <i id="download-file"></i></label>
-                                                    <input type="file" required class="form-control" id="payment" {{Auth::user()->user_type === 1 || Auth::user()->user_type === 2 ? 'hidden' : '' }}>
+                                                    <input type="file" class="form-control" id="payment" {{Auth::user()->user_type === 1 || Auth::user()->user_type === 2 ? 'hidden' : 'required' }}>
                                                 </div>
                                             </div>
                                             <hr>
