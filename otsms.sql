@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2021 at 01:54 PM
+-- Generation Time: Jan 27, 2022 at 03:12 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -218,7 +218,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (38, '2021_12_10_070809_create_customization_table', 0),
 (39, '2021_12_10_074022_create_customization_table', 0),
 (40, '2021_12_10_074023_add_foreign_keys_to_customization_table', 0),
-(41, '2021_12_13_130428_create_payment_methods_table', 0);
+(41, '2021_12_13_130428_create_payment_methods_table', 0),
+(42, '2022_01_01_125307_create_ratings_table', 0),
+(43, '2022_01_01_125308_add_foreign_keys_to_ratings_table', 0),
+(44, '2022_01_14_173339_create_review_table', 0),
+(45, '2022_01_14_173340_add_foreign_keys_to_review_table', 0);
 
 -- --------------------------------------------------------
 
@@ -237,6 +241,7 @@ CREATE TABLE `orders` (
   `return_date` date DEFAULT NULL,
   `addtional_fee` int(11) DEFAULT NULL,
   `status` varchar(50) DEFAULT 'Pending',
+  `size` varchar(2) NOT NULL,
   `created_by` bigint(20) UNSIGNED NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `modified_by` bigint(20) UNSIGNED DEFAULT NULL,
@@ -247,12 +252,18 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `product_id`, `reference_id`, `user_id`, `pickup_date`, `downpayment_amount`, `receipt`, `return_date`, `addtional_fee`, `status`, `created_by`, `created_at`, `modified_by`, `modified_at`) VALUES
-(1, 5, 'ITM-20211215565656', 6, '2021-12-23', 400, 'uploads/orders/3LExJddGxgtMEup98NWdtFNKAsoRTDjcsUAyoTKk.webp', NULL, NULL, 'Approved', 6, '2020-12-15 20:14:56', NULL, '2021-12-15 20:36:09'),
-(2, 6, 'ITM-20211215040404', 6, '2021-12-23', 1000, 'uploads/orders/kAIwwjLxq6spqp2JzWoU164cERF0uv2k8AcAhWhd.webp', NULL, NULL, 'Approved', 6, '2020-12-15 20:15:04', NULL, '2021-12-15 20:36:16'),
-(3, 2, 'ITM-20211215111111', 6, '2021-12-29', 800, 'uploads/orders/7JRpcbQhRvvH0NSzFkprwgQghnux5IhqvFpzN9Jj.webp', '2021-12-29', 0, 'Approved', 6, '2021-12-15 20:15:11', NULL, '2021-12-15 20:24:56'),
-(4, 1, 'ITM-20211215151515', 6, '2021-12-24', 500, 'uploads/orders/jj4zaLHBataOGbg1B5fR9xuVbBe5x4R9lh0PaK2v.jpg', '2021-12-23', 0, 'Approved', 6, '2021-12-15 20:15:15', NULL, '2021-12-15 20:25:09'),
-(5, 7, 'ITM-20211215191919', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 6, '2021-12-15 20:15:19', NULL, NULL);
+INSERT INTO `orders` (`order_id`, `product_id`, `reference_id`, `user_id`, `pickup_date`, `downpayment_amount`, `receipt`, `return_date`, `addtional_fee`, `status`, `size`, `created_by`, `created_at`, `modified_by`, `modified_at`) VALUES
+(1, 5, 'ITM-20211215565656', 6, '2021-12-23', 400, 'uploads/orders/3LExJddGxgtMEup98NWdtFNKAsoRTDjcsUAyoTKk.webp', NULL, NULL, 'Approved', '', 6, '2020-12-15 20:14:56', NULL, '2021-12-15 20:36:09'),
+(2, 6, 'ITM-20211215040404', 6, '2021-12-23', 1000, 'uploads/orders/kAIwwjLxq6spqp2JzWoU164cERF0uv2k8AcAhWhd.webp', NULL, NULL, 'Approved', '', 6, '2020-12-15 20:15:04', NULL, '2021-12-16 23:23:20'),
+(3, 2, 'ITM-20211215111111', 6, '2021-12-29', 800, 'uploads/orders/7JRpcbQhRvvH0NSzFkprwgQghnux5IhqvFpzN9Jj.webp', '2021-12-29', 0, 'Closed', '', 6, '2021-12-15 20:15:11', NULL, '2022-01-15 23:29:34'),
+(4, 1, 'ITM-20211215151515', 6, '2021-12-24', 500, 'uploads/orders/jj4zaLHBataOGbg1B5fR9xuVbBe5x4R9lh0PaK2v.jpg', '2021-12-23', 0, 'Picked Up', '', 6, '2021-12-15 20:15:15', NULL, '2022-01-15 23:28:17'),
+(5, 7, 'ITM-20211215191919', 6, '2021-12-23', 5000, 'uploads/orders/wZCEHicQPRegmDY4hmhvRC81iPlEh5dzLXK7B2QQ.jpg', NULL, NULL, 'Pending', '', 6, '2021-12-15 20:15:19', NULL, '2021-12-18 01:39:45'),
+(6, 8, 'ITM-20220123212121', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'M', 6, '2022-01-23 23:38:21', NULL, NULL),
+(7, 8, 'ITM-20220123515151', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'S', 6, '2022-01-23 23:39:51', NULL, NULL),
+(8, 6, 'ITM-20220123121212', 2, NULL, NULL, NULL, NULL, NULL, 'Pending', 'XL', 2, '2022-01-23 23:57:12', NULL, NULL),
+(9, 6, 'ITM-20220123262626', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'M', 2, '2022-01-23 23:59:26', NULL, NULL),
+(10, 8, 'ITM-20220123484848', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'XL', 2, '2022-01-23 23:59:48', NULL, NULL),
+(11, 6, 'ITM-20220123303030', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'S', 6, '2022-01-24 00:02:30', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -336,9 +347,61 @@ INSERT INTO `product_sales` (`product_id`, `product_code`, `product_name`, `desc
 (1, 'asd', 'asdasd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1000', '12', 'uploads/products/LON7sfUBUFCx5V4LtM3B7Sdhwd5HuNFX5pEkEZSQ.jpg', 'Active', 'Rent', 2, '2021-12-03 17:29:52', NULL, '2021-12-10 22:07:16'),
 (2, 'test', 'test', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1500', '1', 'uploads/products/LTNxJpiBeXeKtUnxPGlMPyOZOdetkaQZXv6vZKDW.jpg', 'Active', 'Rent', 2, '2021-11-03 17:50:54', NULL, '2021-12-15 13:06:57'),
 (5, 'sample', 'sample', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '800', '1', 'uploads/products/DySeNVhVu2ik43qSEhw8lZ7vM8TTiBB4pu7GGkDm.jpg', 'Active', 'Sale', 2, '2021-12-03 23:02:14', NULL, '2021-12-10 22:07:23'),
-(6, 'new', 'new', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1120', '121', 'uploads/products/gbJ7nQaQBoi8ko4y4MHxZQju96zo0P2yx8JIgove.jpg', 'Active', 'Sale', 2, '2021-12-04 00:23:19', NULL, '2021-12-10 22:07:26'),
+(6, 'new', 'Random product generator ', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1120', '121', 'uploads/products/gbJ7nQaQBoi8ko4y4MHxZQju96zo0P2yx8JIgove.jpg', 'Active', 'Sale', 2, '2021-12-04 00:23:19', NULL, '2021-12-22 22:33:39'),
 (7, 'asdasda', 'asdasd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '3200', '32', 'uploads/products/1BLaoZm680KHL4GTLeqMWSVXIOpDkbJFVM0IXrrk.jpg', 'Active', 'Sale', 2, '2021-12-04 00:25:19', NULL, '2021-12-10 22:07:28'),
 (8, 'rent', 'rent', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1500', '1', 'uploads/products/s5KMGA4LPACIulowXcSUDHzm26vY6mZa9R3jMESd.jpg', 'Active', 'Rent', 2, '2021-12-04 00:37:04', NULL, '2021-12-10 22:07:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ratings`
+--
+
+CREATE TABLE `ratings` (
+  `rating_id` int(11) NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ratings`
+--
+
+INSERT INTO `ratings` (`rating_id`, `user_id`, `product_id`, `rating`, `created_at`) VALUES
+(1, 6, 8, 4, '2022-01-01 21:12:08'),
+(2, 6, 8, 3, '2022-01-01 21:14:00'),
+(3, 6, 8, 2, '2022-01-01 21:18:10'),
+(4, 6, 8, 5, '2022-01-15 01:53:30'),
+(5, 6, 8, 3, '2022-01-15 02:10:07'),
+(6, 6, 8, 1, '2022-01-15 02:48:02'),
+(7, 6, 8, 5, '2022-01-15 02:48:10'),
+(8, 6, 6, 3, '2022-01-22 15:03:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `review_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `review` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`review_id`, `user_id`, `product_id`, `review`, `created_at`) VALUES
+(1, 6, 8, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2022-01-15 02:12:21'),
+(2, 6, 8, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2022-01-15 02:12:53'),
+(3, 6, 8, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2022-01-15 02:13:42'),
+(4, 6, 8, 'ok naman sya', '2022-01-15 02:29:39');
 
 -- --------------------------------------------------------
 
@@ -372,8 +435,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `status`, `first_name`, `middle_name`, `last_name`, `user_type`, `contact_no`, `birthday`, `email`, `salary`, `email_verified_at`, `password`, `password_changed`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Active', 'John Michael', 'Espina', 'Panganiban', 1, '09123457', '2021-01-01', 'admin@gmail.com', NULL, NULL, '$2y$10$setuzxK8n3bN.INosfsM.uTZ/V14wMf5PnCeE66NLtISsGtmejyFu', 1, NULL, '2021-12-02 00:18:07', '2021-12-02 00:18:07'),
 (2, 'Active', 'John Michael', 'Espina', 'Panganiban', 2, '0912345671', '2021-03-03', 'admin2@gmail.com', NULL, NULL, '$2y$10$pDsd1obpihRMd3Nc/BJ/p.ogJKVqHnMwvclrhRX9/u2IWqP/Ii3bq', 1, NULL, '2021-12-02 07:20:36', '2021-12-03 11:11:01'),
-(6, 'Active', 'customer', NULL, 'customer', 0, '12345678', '2021-01-01', 'test@gmail.com', NULL, NULL, '$2y$10$E.EL6Sfb1AG/RHJLc6W5deoRdkifqUhKr4N/ZUGh4JFHUPDYiBNfy', 1, NULL, '2021-12-08 17:48:35', '2021-12-08 17:48:35'),
-(7, 'Active', 'John', 'E', 'Doe', 0, '12345678', '2021-01-01', 'arya@gmail.com', NULL, NULL, '$2y$10$nqz2B34bhxuh3TA5Rdq0PeNVa9CKxKPHzb2RWnHQ4cR4WyA1SQr8u', 1, NULL, '2021-12-09 18:47:16', '2021-12-09 18:47:16');
+(6, 'Active', 'customer', NULL, 'customer', 0, '09071181516', '2021-01-01', 'johnmichaelpanganiban.its@gmail.com', NULL, NULL, '$2y$10$E.EL6Sfb1AG/RHJLc6W5deoRdkifqUhKr4N/ZUGh4JFHUPDYiBNfy', 1, NULL, '2021-12-08 17:48:35', '2021-12-08 17:48:35'),
+(7, 'Active', 'John', 'E', 'Doe', 0, '12345678', '2021-01-01', 'johnmichaelpanganiban.its1@gmail.com', NULL, NULL, '$2y$10$nqz2B34bhxuh3TA5Rdq0PeNVa9CKxKPHzb2RWnHQ4cR4WyA1SQr8u', 1, NULL, '2021-12-09 18:47:16', '2021-12-09 18:47:16');
 
 -- --------------------------------------------------------
 
@@ -478,6 +541,22 @@ ALTER TABLE `product_sales`
   ADD KEY `fk_user_modified_by` (`modified_by`);
 
 --
+-- Indexes for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`rating_id`),
+  ADD KEY `fk_rating_user_id` (`user_id`),
+  ADD KEY `fk_rating_product_id` (`product_id`);
+
+--
+-- Indexes for table `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`review_id`),
+  ADD KEY `fk_review_user_id` (`user_id`),
+  ADD KEY `fk_review_product_id` (`product_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -529,13 +608,13 @@ ALTER TABLE `measurement`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `payment_methods`
@@ -554,6 +633,18 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `product_sales`
   MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+  MODIFY `review_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -593,6 +684,20 @@ ALTER TABLE `orders`
 ALTER TABLE `product_sales`
   ADD CONSTRAINT `fk_user_created_by` FOREIGN KEY (`create_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user_modified_by` FOREIGN KEY (`modified_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD CONSTRAINT `fk_rating_product_id` FOREIGN KEY (`product_id`) REFERENCES `product_sales` (`product_id`),
+  ADD CONSTRAINT `fk_rating_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `review`
+--
+ALTER TABLE `review`
+  ADD CONSTRAINT `fk_review_product_id` FOREIGN KEY (`product_id`) REFERENCES `product_sales` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_review_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`
