@@ -17,6 +17,7 @@ $(".view-order").click(function(e){
     $("#submit-order").data('ref', details.reference_id)
     $("#submit-order").data('email', details.user.email)
     $("#submit-order").data('first_name', details.user.first_name)
+    $("#submit-order").data('contact_no', details.user.contact_no)
     $("#submit-order").data('product', details.product_sale.product_name)
     $("#submit-order").data('product-type', details.product_sale.type)
     if(details.receipt != '' && details.receipt != null)
@@ -46,12 +47,13 @@ $(".view-order").click(function(e){
 $("#submit-order").submit(function(e){
     e.preventDefault()
     waitingDialog.show('Processing data...', {dialogSize: 'md', progressType: 'info'});
-    $(this).attr('disabled', true)
+    $("#submit-order").attr('disabled', 'disabled')
     const type = $(this).data('type')
     const product_type = $(this).data('product-type')
     const id = $(this).data('pk')
     const email = $(this).data('email')
     const first_name = $(this).data('first_name')
+    const contact_no = $(this).data('contact_no')
     const product = $(this).data('product')
     const ref = $(this).data('ref')
     var formData = new FormData();
@@ -85,6 +87,7 @@ $("#submit-order").submit(function(e){
     formData.append("ref", ref)
     formData.append("email", email)
     formData.append("first_name", first_name)
+    formData.append("contact_no", contact_no)
     formData.append("product", product)
     $.ajax({
         url: 'orders/edit',

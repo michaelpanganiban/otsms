@@ -23,7 +23,7 @@ class Sales extends Controller
             $data = json_decode(\request()->data, true);
             $data += ["image" => $path];
             $data += ['create_by' => Auth::id()];
-            ProductSale::create($data);
+            ProductSale::create($data); //add data to database
             DB::commit();
             return response()->json(['message' => 'Successfully created new product.'], 200);
         } catch (\Exception $e){

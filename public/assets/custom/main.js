@@ -75,6 +75,43 @@ $(".view-product").click(function(e){
     $("#view-product").modal('show')
 })
 
+$("#submit-order").click(function(e){
+    const size = $('input[name="size"]:checked').val();
+    const product_id = $(this).data('productid')
+    let user_id = $(this).data('pk')
+    if(size === undefined){
+        Toast.fire({
+            icon: 'error',
+            title: "Please choose the size of the product."
+        })
+    }
+    else{
+        if(user_id !== undefined)
+            user_id = atob(user_id)
+        const data = {
+            size,
+            product_id,
+            user_id
+        }
+        $.post('/orders/add', {data})
+        .done( function(msg) { 
+            console.log(msg)
+            Toast.fire({
+                icon: 'success',
+                title: msg.message
+            })
+            $("#view-product").modal('hide')
+        })
+        .fail( function(xhr, textStatus, errorThrown) {
+            Toast.fire({
+                icon: 'error',
+                title: xhr.responseText
+            })
+        });
+        $("#view-sizes").modal('hide')
+    }
+})
+
 $(".add-to-order").click(function(e){
     const data = {
         product_id : $(this).data('pk'),

@@ -18,17 +18,17 @@ $("#submit-product").submit(function(e){
     formData.append('image', document.getElementById('image').files[0])
     formData.append("data", JSON.stringify(data))
     $.ajax({
-        url: 'sales/add',
-        data: formData,
+        url: 'sales/add', //web.php
+        data: formData, // values
         processData: false,
         contentType: false,
-        method: "POST",
+        method: "POST", //post
         async: false,
         success: function (response) {
             Toast.fire({
                 icon: 'success',
                 title: response.message
-            })
+            }) //alert
             setTimeout(() => {
                 location.reload()
             }, 1500)

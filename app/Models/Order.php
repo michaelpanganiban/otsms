@@ -65,6 +65,7 @@ class Order extends Model
 		'return_date',
 		'addtional_fee',
 		'status',
+		'size',
 		'created_by',
 		'modified_by',
 		'modified_at'

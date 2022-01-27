@@ -36,7 +36,7 @@
                                         @if (($row->quantity - $row->ordered_count) <= 0)
                                             <button type="button" disabled class="btn-danger btn btn-outline-dark mt-auto ">Not Available</button>
                                         @else
-                                            <button type="button" class="btn btn-outline-dark mt-auto view-product" data-details="{{json_encode($row)}}">View Details</button>
+                                            <a href="/view-product-details/{{$row->product_id}}?id={{request()->query('id')}}" class="btn btn-outline-dark mt-auto" target="_blank">View Details</a>
                                         @endif
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </section>
-        <div class="modal fade" id="view-product">
+        {{-- <div class="modal fade" id="view-product">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content" style="background-color: transparent; border-color: transparent; box-shadow: none !important;">
                     <div class="col-md-12">
@@ -87,5 +87,5 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 @endsection

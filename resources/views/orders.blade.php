@@ -23,6 +23,7 @@
                             <th>Reference ID</th>
                             <th>Product Name</th>
                             <th>Order Type</th>
+                            <th>Size</th>
                             <th>Status</th>
                             <th>Pickup Date</th>
                             <th>Ordered By</th>
@@ -35,6 +36,7 @@
                                 <td>{{$row->reference_id}}</td>
                                 <td>{{$row->product_sale->product_name}}</td>
                                 <td><label style="color: {{$row->product_sale->type == 'Rent' ? 'blue' : 'green'}}">{{$row->product_sale->type}}</label></td>
+                                <td>{{$row->size}}</td>
                                 <td><label style="color: {{$row->status == 'Pending' ? 'orange' : 'blue'}};">{{$row->status}}</label></td>
                                 <td>{{ $row->pickup_date ? date_format(date_create($row->pickup_date), 'M d, Y') : 'Not Indicated' }}</td>
                                 <td>{{$row->user->last_name}}, {{$row->user->first_name}}</td>

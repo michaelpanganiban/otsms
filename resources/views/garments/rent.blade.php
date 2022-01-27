@@ -62,7 +62,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-6">
                                         <label for="product-code">Product Code</label>
-                                        <input type="text" required class="form-control" id="product-code" placeholder="Product Code">
+                                        <input type="text" readonly required class="form-control" value="R-{{date('mdhis')}}" id="product-code" placeholder="Product Code">
                                         <input type="hidden" class="form-control" id="product-type" value="Rent" placeholder="Product Code">
                                     </div>
                                     <div class="col-md-6">
@@ -115,7 +115,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-6">
                                         <label for="product-code">Product Code</label>
-                                        <input type="text" required class="form-control" id="edit-product-code" placeholder="Product Code">
+                                        <input type="text" readonly required class="form-control" id="edit-product-code" placeholder="Product Code">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="product-name">Product Name</label>

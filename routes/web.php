@@ -80,3 +80,8 @@ Route::post('/paymentMethods/add', [App\Http\Controllers\PaymentMethod::class, '
 Route::post('/paymentMethods/edit', [App\Http\Controllers\PaymentMethod::class, 'edit'])->name('edit');
 Route::post('/paymentMethods/delete', [App\Http\Controllers\PaymentMethod::class, 'delete'])->name('delete');
 Route::get('/view-payment-methods', [App\Http\Controllers\PaymentMethod::class, 'viewPaymentMethods'])->name('viewPaymentMethods');
+
+//product details
+Route::get('/view-product-details/{id}', [App\Http\Controllers\ProductDetails::class, 'index'])->name('index');
+Route::post('/product-details/rate', [App\Http\Controllers\ProductDetails::class, 'rate'])->name('rate');
+Route::post('/product-details/add-review', [App\Http\Controllers\ProductDetails::class, 'addReview'])->name('addReview');

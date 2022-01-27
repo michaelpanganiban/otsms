@@ -55,6 +55,7 @@ class Orders extends Controller
             $product = request()->product;
             $ref = request()->ref;
             $customer = request()->first_name;
+            $contact_no = request()->contact_no;
             if(Auth::user()->user_type === 0){
                 if (\request()->hasFile('payment')) {
                     $path = request()->file('payment')->store('uploads/orders', 'public');
@@ -68,10 +69,22 @@ class Orders extends Controller
                     'body' => 'This is to inform you that your order '.$product.' with reference # '.$ref.' has been '.$data['status'],
                 ];
                 Mail::to($email)->send(new \App\Mail\Mailing($details));
+                $ch = curl_init();
+                $itexmo = array(
+                                    '1' => $contact_no, 
+                                    '2' => 'This is to inform you that your order '.$product.' with reference # '.$ref.' has been '.$data['status'], 
+                                    '3' => 'TR-ONLIN229525_VY7U1', 
+                                    'passwd' => '689j275y6v'
+                                );
+                curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($itexmo));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_exec ($ch);
+                curl_close ($ch);   
             }
             $data += ['modified_by', Auth::id()];
             Order::find($id)->update($data);
-           
             DB::commit();
             return response()->json(['message' => 'Successfully updated the order.'], 200);
         } catch (\Exception $e){
