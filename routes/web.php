@@ -66,6 +66,7 @@ Route::get('/orders', [App\Http\Controllers\Orders::class, 'index'])->name('inde
 Route::post('/orders/add', [App\Http\Controllers\Orders::class, 'add'])->name('add');
 Route::post('/orders/edit', [App\Http\Controllers\Orders::class, 'edit'])->name('edit');
 Route::post('/orders/delete', [App\Http\Controllers\Orders::class, 'delete'])->name('delete');
+Route::post('/orders/cancel', [App\Http\Controllers\Orders::class, 'cancel'])->name('cancel');
 
 //customization
 Route::get('/customization', [App\Http\Controllers\Customization::class, 'index'])->name('index');

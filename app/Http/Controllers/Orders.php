@@ -49,6 +49,7 @@ class Orders extends Controller
     public function edit(){
         DB::beginTransaction();
         try {
+            $pickup_date = '';
             $data = json_decode(\request()->data, true);
             $id = \request()->id;
             $email = request()->email;
@@ -56,6 +57,7 @@ class Orders extends Controller
             $ref = request()->ref;
             $customer = request()->first_name;
             $contact_no = request()->contact_no;
+            $pick_date = request()->pick_date;
             if(Auth::user()->user_type === 0){
                 if (\request()->hasFile('payment')) {
                     $path = request()->file('payment')->store('uploads/orders', 'public');
@@ -63,18 +65,20 @@ class Orders extends Controller
                 }
             }
             else{
+                if(trim($data['status']) == 'Approved')
+                    $pickup_date = '. Pickup date: '. date_format(date_create($pick_date), 'M d, Y');
                 $details = [
                     'customer' => $customer,
                     'title' => 'Mail from D&J Tailoring Shop',
-                    'body' => 'This is to inform you that your order '.$product.' with reference # '.$ref.' has been '.$data['status'],
+                    'body' => 'This is to inform you that your order '.$product.' with reference # '.$ref.' has been '.$data['status'].''.$pickup_date,
                 ];
                 Mail::to($email)->send(new \App\Mail\Mailing($details));
                 $ch = curl_init();
                 $itexmo = array(
                                     '1' => $contact_no, 
-                                    '2' => 'This is to inform you that your order '.$product.' with reference # '.$ref.' has been '.$data['status'], 
-                                    '3' => 'TR-ONLIN229525_VY7U1', 
-                                    'passwd' => '689j275y6v'
+                                    '2' => 'Your order w/ ref # '.$ref.' has been '.$data['status'].''.$pickup_date, 
+                                    '3' => 'TR-JOHNM991670_A4J2Z', 
+                                    'passwd' => 'rfa}3tr{8&'
                                 );
                 curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
                 curl_setopt($ch, CURLOPT_POST, 1);
@@ -100,6 +104,19 @@ class Orders extends Controller
             Order::find($id)->delete();
             DB::commit();
             return response()->json(['message' => 'Successfully deleted the order.'], 200);
+        } catch (\Exception $e){
+            DB::rollBack();
+            return response()->json(['message' => $e], 500);
+        }
+    }
+
+    public function cancel(){
+        DB::beginTransaction();
+        try {
+            $id = \request()->order_id;
+            Order::find($id)->update(['status' => 'Cancelled']);
+            DB::commit();
+            return response()->json(['message' => 'Successfully cancelled the order.'], 200);
         } catch (\Exception $e){
             DB::rollBack();
             return response()->json(['message' => $e], 500);

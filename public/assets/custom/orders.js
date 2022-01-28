@@ -1,6 +1,6 @@
 $(".view-order").click(function(e){
     const details = $(this).data('details')
-    const type = $("#submit-order").data('type')
+    const type = $("#submit-order-edit").data('type')
     $("#ref-no").html(details.reference_id)
     $("#order-status").val(details.status)
     $("#pickup-date").val(details.pickup_date)
@@ -13,25 +13,36 @@ $(".view-order").click(function(e){
     $("#price").html(`<b>Price: </b>${parseFloat(details.product_sale.amount).toFixed(2)}`)
     $("#product-name-desc").html(`<b>Product Name: </b>${details.product_sale.product_name}`)
     $("#type").html(`<b>For </b> <label style="color: blue;">${details.product_sale.type}</label>`)
-    $("#submit-order").data('pk', details.order_id)
-    $("#submit-order").data('ref', details.reference_id)
-    $("#submit-order").data('email', details.user.email)
-    $("#submit-order").data('first_name', details.user.first_name)
-    $("#submit-order").data('contact_no', details.user.contact_no)
-    $("#submit-order").data('product', details.product_sale.product_name)
-    $("#submit-order").data('product-type', details.product_sale.type)
+    $("#submit-order-edit").data('pk', details.order_id)
+    $("#submit-order-edit").data('ref', details.reference_id)
+    $("#submit-order-edit").data('email', details.user.email)
+    $("#submit-order-edit").data('first_name', details.user.first_name)
+    $("#submit-order-edit").data('contact_no', details.user.contact_no)
+    $("#submit-order-edit").data('product', details.product_sale.product_name)
+    $("#submit-order-edit").data('product-type', details.product_sale.type)
     if(details.receipt != '' && details.receipt != null)
         $("#download-file").html(`<a href='../storage/${details.receipt}' download style='color: white;' ><u>Download Receipt</u></a>`)
     else
         $("#download-file").html('')
-
-    if(details.status !== 'Pending' && type == 0){
+    if(details.status === 'Cancelled'){
+        $(".processing").hide()
+        $(".cancel-order-btn").hide()
+        $(".submit-order-btn").hide()
+    }
+    else if(details.status !== 'Pending' && type == 0){
         $(".submit-order-btn").hide()
         $(".processing").show()
+        $(".cancel-order-btn").hide()
+    }
+    else if(details.status === 'Pending' && type == 0){
+        $(".cancel-order-btn").show()
+        $(".processing").hide()
+        $(".cancel-order-btn").data('pk', details.order_id)
     }
     else{
         $(".submit-order-btn").show()
         $(".processing").hide()
+        $(".cancel-order-btn").hide()
     }
     if(details.product_sale.type !== 'Rent'){
         $(".hideUs").attr('hidden', true)
@@ -44,10 +55,10 @@ $(".view-order").click(function(e){
     $("#view-order").modal('show')
 })
 
-$("#submit-order").submit(function(e){
+$("#submit-order-edit").submit(function(e){
     e.preventDefault()
     waitingDialog.show('Processing data...', {dialogSize: 'md', progressType: 'info'});
-    $("#submit-order").attr('disabled', 'disabled')
+    $("#submit-order-edit").attr('disabled', 'disabled')
     const type = $(this).data('type')
     const product_type = $(this).data('product-type')
     const id = $(this).data('pk')
@@ -89,6 +100,7 @@ $("#submit-order").submit(function(e){
     formData.append("first_name", first_name)
     formData.append("contact_no", contact_no)
     formData.append("product", product)
+    formData.append("pick_date", $("#pickup-date").val())
     $.ajax({
         url: 'orders/edit',
         data: formData,
@@ -98,7 +110,7 @@ $("#submit-order").submit(function(e){
         async: async_type,
         success: function (response) {
             waitingDialog.hide();
-            $("#submit-order").removeAttr('disabled')
+            $("#submit-order-edit").removeAttr('disabled')
             console.log(response)
             Toast.fire({
                 icon: 'success',
@@ -109,7 +121,7 @@ $("#submit-order").submit(function(e){
             }, 1500)
         },
         error: function(e){
-            $("#submit-order").removeAttr('disabled')
+            $("#submit-order-edit").removeAttr('disabled')
             waitingDialog.hide();
             Toast.fire({
                 icon: 'error',
@@ -150,4 +162,31 @@ $("#proceed-delete-order").click(function(e){
 $("#order-btn").click(function(e){
     const id = $("#customer").val()
     window.location = `/?id=${btoa(id)}`
+})
+
+$(".cancel-order-btn").click(function(e){
+    const order_id = $(this).data('pk');
+    $("#proceed-cancel-order").data('pk', order_id)
+    $("#cancel-order-modal").modal('show')
+})
+
+$("#proceed-cancel-order").click(function(e){
+    const order_id = $(this).data('pk');
+    $.post('/orders/cancel', {order_id})
+    .done( function(msg) { 
+        Toast.fire({
+            icon: 'success',
+            title: msg.message
+        })
+        setTimeout(() => {
+            location.reload()
+        }, 1500)
+     })
+    .fail( function(xhr, textStatus, errorThrown) {
+        console.log(xhr);
+        Toast.fire({
+            icon: 'error',
+            title: xhr.statusText
+        })
+    });
 })

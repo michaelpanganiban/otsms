@@ -32,19 +32,23 @@
                     </thead>
                     <tbody>
                         @foreach($data as $row)
-                            <tr>
-                                <td>{{$row->reference_id}}</td>
-                                <td>{{$row->product_sale->product_name}}</td>
-                                <td><label style="color: {{$row->product_sale->type == 'Rent' ? 'blue' : 'green'}}">{{$row->product_sale->type}}</label></td>
-                                <td>{{$row->size}}</td>
-                                <td><label style="color: {{$row->status == 'Pending' ? 'orange' : 'blue'}};">{{$row->status}}</label></td>
-                                <td>{{ $row->pickup_date ? date_format(date_create($row->pickup_date), 'M d, Y') : 'Not Indicated' }}</td>
-                                <td>{{$row->user->last_name}}, {{$row->user->first_name}}</td>
-                                <td class="text-center">
-                                    <button class="btn btn-sm btn-primary view-order" data-details='<?php echo $row; ?>'><i class="fa fa-eye"></i>&nbsp;&nbsp;View</button>
-                                    <button class="btn btn-sm btn-danger delete-order" data-id='<?php echo $row->order_id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
-                                </td>
-                            </tr>
+                            @if(Auth::user()->user_type !== 0 && $row->status === 'Cancelled')
+
+                            @else
+                                <tr>
+                                    <td>{{$row->reference_id}}</td>
+                                    <td>{{$row->product_sale->product_name}}</td>
+                                    <td><label style="color: {{$row->product_sale->type == 'Rent' ? 'blue' : 'green'}}">{{$row->product_sale->type}}</label></td>
+                                    <td>{{$row->size}}</td>
+                                    <td><label style="color: {{$row->status == 'Pending' || $row->status == 'Cancelled' ? 'orange' : 'blue'}};">{{$row->status}}</label></td>
+                                    <td>{{ $row->pickup_date ? date_format(date_create($row->pickup_date), 'M d, Y') : 'Not Indicated' }}</td>
+                                    <td>{{$row->user->last_name}}, {{$row->user->first_name}}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-primary view-order" data-details='<?php echo $row; ?>'><i class="fa fa-eye"></i>&nbsp;&nbsp;View</button>
+                                        <button class="btn btn-sm btn-danger delete-order" data-id='<?php echo $row->order_id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -133,7 +137,7 @@
                                     </div>
                                     <hr>
                                     <div class="card card-primary" style="background-color: #00adad;">
-                                        <form method="post" id="submit-order" data-type="{{Auth::user()->user_type}}">
+                                        <form method="post" id="submit-order-edit" data-type="{{Auth::user()->user_type}}">
                                             <div class="card-body">
                                                 <div class="form-group row">
                                                     <div class="col-md-6">
@@ -145,7 +149,7 @@
                                                         <input type="number" required class="form-control" id="downpayment" placeholder="Downpayment" {{Auth::user()->user_type === 1 || Auth::user()->user_type === 2 ? 'disabled' : '' }}>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
+                                                <div class="form-group row" {{Auth::user()->user_type === 0 ? 'hidden' : '' }}>
                                                     <div class="col-md-6">
                                                         <label for="product-name-desc" >Status</label>
                                                         <select  id="order-status" class="form-control" {{Auth::user()->user_type === 0 ? 'disabled' : '' }}>
@@ -177,6 +181,7 @@
                                             <hr>
                                             <div class="card-footer" id="order-footer">
                                                 <button type="submit" class="btn btn-primary pull-right submit-order-btn">Submit</button>
+                                                <button type="button" class="btn btn-danger pull-right cancel-order-btn">Cancel</button>
                                                 <button disabled class="btn btn-default pull-right processing">Processing</button>
                                                 <a {{Auth::user()->user_type === 0 ? 'hidden' : ''}} class="btn btn-default pull-right view-measurement" target="_blank" >View Measurement</a>
                                             </div>
@@ -208,6 +213,27 @@
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-outline-light" id="proceed-delete-order">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- CANCEL modal--}}
+    <div class="modal fade" id="cancel-order-modal">
+        <div class="modal-dialog">
+            <div class="modal-content bg-danger">
+                <div class="modal-header">
+                    <h4 class="modal-title">Cancel Order</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to cancel this order?</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-light" id="proceed-cancel-order">Proceed</button>
                 </div>
             </div>
         </div>
