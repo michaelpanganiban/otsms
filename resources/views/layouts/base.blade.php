@@ -238,14 +238,14 @@
                                 </p>
                             </a>
                         </li>
-                        <li {{Auth::user()->user_type === 0 ? '' : 'hidden' }}>
+                        <!-- <li {{Auth::user()->user_type === 0 ? '' : 'hidden' }}>
                             <a href="/measurement" class="nav-link {{ (request()->is('measurement')) ? 'active' : '' }}"" >
                                 <i class="nav-icon fas fa-ruler"></i>
                                 <p>
                                     Measurement
                                 </p>
                             </a>
-                        </li>
+                        </li> -->
                         <li {{Auth::user()->user_type === 0 ? 'hidden' : '' }}>
                             <a href="/paymentMethods" class="nav-link {{ (request()->is('paymentMethods')) ? 'active' : '' }}">
                                 <i class="nav-icon fab fa-cc-mastercard"></i>

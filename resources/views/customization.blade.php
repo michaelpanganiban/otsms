@@ -35,11 +35,11 @@
                                 <td>{{$row->reference_id}}</td>
                                 <td>{{$row->garment_type}}</td>
                                 <td>{{ $row->pickup_date ? date_format(date_create($row->pickup_date), 'M d, Y') : 'Not Indicated' }}</td>
-                                <td><label style="color: {{$row->status == 'Pending' ? 'orange' : 'blue'}};">{{$row->status}}</label></td>
+                                <td><label style="color: {{$row->c_status == 'Pending' ? 'orange' : 'blue'}};">{{$row->c_status}}</label></td>
                                 <td><label>{{number_format($row->downpayment, 2)}}</label></td>
-                                <td>{{$row->user->last_name}}, {{$row->user->first_name}}</td>
+                                <td>{{$row->last_name}}, {{$row->first_name}}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-primary view-custom" data-details='<?php echo $row; ?>'  data-usertype="{{Auth::user()->user_type}}"><i class="fa fa-eye"></i>&nbsp;&nbsp;View</button>
+                                    <button class="btn btn-sm btn-primary view-custom" data-details='<?php echo json_encode($row); ?>'  data-usertype="{{Auth::user()->user_type}}"><i class="fa fa-eye"></i>&nbsp;&nbsp;View</button>
                                     <button class="btn btn-sm btn-danger delete-custom" data-id='<?php echo $row->custom_id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
                                 </td>
                             </tr>
@@ -63,7 +63,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-6">
                                         <label for="product-code">Garment Type</label>
-                                        <select required id="garment-type" class="form-control">
+                                        <select required id="garment-type" class="form-control garment-type-cls">
                                             <option value="">Select Garment Type</option>
                                             <option value="Jersey">Jersey</option>
                                             <option value="School Uniform">School Uniform</option>
@@ -90,27 +90,72 @@
                                     
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Description:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/view-measurement-guide" target="_blank" class="btn btn-sm btn-primary">View Measurement Guide</a> </label>
-                                    <textarea class="form-control summernote" rows="5">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <td><b>Quantity per Size:</b> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Color:</b> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>Measurement:</b> </td>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                        {{-- <b>Quantity per Size (S/M/L/XL): </b>
-                                        <br>
-                                        <b>Color:</b><br>
-                                        <b>Measurement: </b><br>
-                                        <b>Jersey numbers and names: </b> --}}
-                                    </textarea>
+                                    <div class="for-jersey" hidden>
+                                        <label for="description">Description:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/view-measurement-guide" target="_blank" class="btn btn-sm btn-primary">View Measurement Guide</a> </label>
+                                        <textarea class="form-control summernote" rows="5">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <td><b>Quantity per Size:</b> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Color:</b> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Measurement:</b> </td>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </textarea>
+                                    </div>
+                                    <div class="not-jersey" hidden>
+                                        <h3>Size Description:</h3>
+                                        <hr>
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <label for="item-name">Shoulder Length</label>
+                                                <input type="number"  class="form-control" id="shoulder" placeholder="Shoulder Length">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="item-name">Sleeve Length</label>
+                                                <input type="number" class="form-control" id="sleeve" placeholder="Sleeve Length">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="item-name">Bust/Chest</label>
+                                                <input type="number" class="form-control" id="bust-chest" placeholder="Bust/Chest">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="item-name">Waist</label>
+                                                <input type="number" class="form-control" id="waist" placeholder="Waist">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label for="amount">Skirt Length</label>
+                                                <input type="number"  class="form-control" id="skirt" placeholder="Skirt Length">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group row">
+                                            <div class="col-md-3">
+                                                <label for="amount">Slacks Length</label>
+                                                <input type="number"  class="form-control" id="slacks-length" placeholder="Slacks Length">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="amount">Slacks Front Rise</label>
+                                                <input type="number"  class="form-control" id="slacks-front-rise" placeholder="Slacks Front Rise">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="amount">Fit (Seat)</label>
+                                                <input type="number" class="form-control"  id="fit-seat" placeholder="Fit (Seat)">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="amount">Fit (Thigh)</label>
+                                                <input type="number" class="form-control"  id="fit-thigh" placeholder="Fit (Thigh)">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <hr>
@@ -146,7 +191,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-md-6">
                                                         <label for="product-code">Garment Type</label>
-                                                        <select required id="garment-type-edit" class="form-control" {{Auth::user()->user_type === 0 ? '' : 'disabled' }}>
+                                                        <select required id="garment-type-edit" class="form-control garment-type-cls" {{Auth::user()->user_type === 0 ? '' : 'disabled' }}>
                                                             <option value="">Select Garment Type</option>
                                                             <option value="Jersey">Jersey</option>
                                                             <option value="School Uniform">School Uniform</option>
@@ -191,10 +236,60 @@
                                                         <input type="number" required class="form-control" id="custom-price-edit" placeholder="Price" {{Auth::user()->user_type === 0 ? 'disabled' : '' }}>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="description">Description: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/view-measurement-guide" target="_blank" class="btn btn-sm btn-primary">View Measurement Guide</a> </label>
-                                                    <textarea class="form-control summernote desc-edit" rows="5">
-                                                    </textarea>
+                                                <div class="for-jersey" hidden>
+                                                    <div class="form-group">
+                                                        <label for="description">Description: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/view-measurement-guide" target="_blank" class="btn btn-sm btn-primary">View Measurement Guide</a> </label>
+                                                        <textarea class="form-control summernote desc-edit" rows="5">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="not-jersey" hidden>
+                                                    <h3>Size Description:</h3>
+                                                    <hr>
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="item-name">Shoulder Length</label>
+                                                            <input type="number"  class="form-control" id="edit-shoulder" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Shoulder Length">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="item-name">Sleeve Length</label>
+                                                            <input type="number" class="form-control" id="edit-sleeve" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Sleeve Length">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="item-name">Bust/Chest</label>
+                                                            <input type="number" class="form-control" id="edit-bust-chest" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Bust/Chest">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="item-name">Waist</label>
+                                                            <input type="number" class="form-control" id="edit-waist" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Waist">
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="form-group row">
+                                                        <div class="col-md-6">
+                                                            <label for="amount">Skirt Length</label>
+                                                            <input type="number"  class="form-control" id="edit-skirt" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Skirt Length">
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="amount">Slacks Length</label>
+                                                            <input type="number"  class="form-control" id="edit-slacks-length" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Slacks Length">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="amount">Slacks Front Rise</label>
+                                                            <input type="number"  class="form-control" id="edit-slacks-front-rise" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Slacks Front Rise">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="amount">Fit (Seat)</label>
+                                                            <input type="number" class="form-control"  id="edit-fit-seat" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Fit (Seat)">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label for="amount">Fit (Thigh)</label>
+                                                            <input type="number" class="form-control"  id="edit-fit-thigh" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Fit (Thigh)">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <hr>

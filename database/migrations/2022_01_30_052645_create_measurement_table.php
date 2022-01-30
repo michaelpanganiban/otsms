@@ -16,6 +16,7 @@ class CreateMeasurementTable extends Migration
         Schema::create('measurement', function (Blueprint $table) {
             $table->bigInteger('measurement_id', true);
             $table->unsignedBigInteger('user_id');
+            $table->bigInteger('custom_id')->index('pk_custom_measurement');
             $table->double('shoulder_length')->nullable();
             $table->double('sleeve_length')->nullable();
             $table->double('bust_chest')->nullable();

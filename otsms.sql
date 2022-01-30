@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2022 at 03:12 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.9
+-- Generation Time: Jan 30, 2022 at 11:54 AM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,7 +48,10 @@ CREATE TABLE `customization` (
 
 INSERT INTO `customization` (`custom_id`, `reference_id`, `garment_type`, `details`, `user_id`, `status`, `pickup_date`, `downpayment`, `fullpayment`, `price`, `proof_of_payment`, `created_at`) VALUES
 (1, 'C-202112102020', 'Jersey', '<table class=\"table table-bordered\">\n                                            <thead>\n                                                <tr>\n                                                    <td><b>Quantity per Size: sample</b></td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Color:&nbsp;</b><span style=\"font-weight: bolder;\">sample</span></td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Measurement:&nbsp;</b><span style=\"font-weight: bolder;\">sample</span></td>\n                                                </tr>\n                                            </thead>\n                                        </table>', 7, 'Active', '2021-12-29', 500, 8000, NULL, 'uploads/customization/4yD2sCev0gr1uHMLF6GRceKtgVUUQFnCOMyzbCLT.webp', '2021-12-10 15:49:20'),
-(3, 'C-202112141919', 'Jersey', '<table class=\"table table-bordered\">\n                                            <thead>\n                                                <tr>\n                                                    <td><b>Quantity per Size:</b> </td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Color:</b> </td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Measurement:</b> </td>\n                                                </tr>\n                                            </thead>\n                                        </table>', 6, 'Pending', '2021-12-30', 0, 0, 5000, 'uploads/customization/bk85hF8SNVwBVlguCALr4jN8gwjQn8SQfALmIXK5.png', '2021-12-14 18:58:19');
+(3, 'C-202112141919', 'Jersey', '<table class=\"table table-bordered\">\n                                            <thead>\n                                                <tr>\n                                                    <td><b>Quantity per Size:</b> </td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Color:</b> </td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Measurement:</b> </td>\n                                                </tr>\n                                            </thead>\n                                        </table>', 6, 'Active', '2021-12-30', 0, 0, 5000, 'uploads/customization/bk85hF8SNVwBVlguCALr4jN8gwjQn8SQfALmIXK5.png', '2021-12-14 18:58:19'),
+(13, 'C-202201305858', 'PE Uniform', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement:</b> </td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Pending', '2022-01-25', 0, 0, 8000, 'uploads/customization/XNaJ9Wl8HzNNSLSHGqc0Ehpfblngxg8kYlA4Mj4z.png', '2022-01-30 10:26:58'),
+(15, 'C-202201305656', 'School Uniform', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size: 3 M 4 L</b></td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color: SAMPLE</b></td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement: SAMPLE</b></td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Picked Up', '2022-02-04', 0, 0, 5000, 'uploads/customization/Wsm0kiRqKOh7FEOaZGXEXRVPB8SswwmW7XSsTYom.png', '2022-01-30 10:30:56'),
+(16, 'C-202201305151', 'School Uniform', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement:</b> </td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Active', '2022-02-01', 0, 0, 5000, 'uploads/customization/ySSnbnn7L5AACRXDRaah47EIMkNi5IZ1yZJyTkwU.png', '2022-01-30 13:33:51');
 
 -- --------------------------------------------------------
 
@@ -140,6 +143,7 @@ INSERT INTO `inventory` (`item_id`, `item_name`, `description`, `price`, `quanti
 CREATE TABLE `measurement` (
   `measurement_id` bigint(20) NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
+  `custom_id` bigint(20) NOT NULL,
   `shoulder_length` double DEFAULT NULL,
   `sleeve_length` double DEFAULT NULL,
   `bust_chest` double DEFAULT NULL,
@@ -150,16 +154,17 @@ CREATE TABLE `measurement` (
   `slack_fit_seat` double DEFAULT NULL,
   `slack_fit_thigh` double DEFAULT NULL,
   `created_by` bigint(20) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `measurement`
 --
 
-INSERT INTO `measurement` (`measurement_id`, `user_id`, `shoulder_length`, `sleeve_length`, `bust_chest`, `waist`, `skirt_length`, `slack_length`, `slack_front_rise`, `slack_fit_seat`, `slack_fit_thigh`, `created_by`, `created_at`) VALUES
-(3, 2, 1, 2, 3, 4, 55, 6, 7, 8, 9, 2, '2021-12-05 17:29:55'),
-(4, 6, 3, 2, 4, 6, NULL, NULL, NULL, NULL, NULL, 6, '2021-12-10 09:16:31');
+INSERT INTO `measurement` (`measurement_id`, `user_id`, `custom_id`, `shoulder_length`, `sleeve_length`, `bust_chest`, `waist`, `skirt_length`, `slack_length`, `slack_front_rise`, `slack_fit_seat`, `slack_fit_thigh`, `created_by`, `created_at`) VALUES
+(6, 6, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, '2022-01-30 13:33:51'),
+(7, 6, 13, 85, 5, 5, 5, 5, 8, 8, 8, 8, 6, '2022-01-30 14:39:51'),
+(11, 6, 15, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, '2022-01-30 14:47:07');
 
 -- --------------------------------------------------------
 
@@ -222,7 +227,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (42, '2022_01_01_125307_create_ratings_table', 0),
 (43, '2022_01_01_125308_add_foreign_keys_to_ratings_table', 0),
 (44, '2022_01_14_173339_create_review_table', 0),
-(45, '2022_01_14_173340_add_foreign_keys_to_review_table', 0);
+(45, '2022_01_14_173340_add_foreign_keys_to_review_table', 0),
+(46, '2022_01_30_052645_create_measurement_table', 0),
+(47, '2022_01_30_052646_add_foreign_keys_to_measurement_table', 0),
+(48, '2022_01_30_053638_create_customization_table', 0),
+(49, '2022_01_30_053639_add_foreign_keys_to_customization_table', 0);
 
 -- --------------------------------------------------------
 
@@ -259,11 +268,12 @@ INSERT INTO `orders` (`order_id`, `product_id`, `reference_id`, `user_id`, `pick
 (4, 1, 'ITM-20211215151515', 6, '2021-12-24', 500, 'uploads/orders/jj4zaLHBataOGbg1B5fR9xuVbBe5x4R9lh0PaK2v.jpg', '2021-12-23', 0, 'Picked Up', '', 6, '2021-12-15 20:15:15', NULL, '2022-01-15 23:28:17'),
 (5, 7, 'ITM-20211215191919', 6, '2021-12-23', 5000, 'uploads/orders/wZCEHicQPRegmDY4hmhvRC81iPlEh5dzLXK7B2QQ.jpg', NULL, NULL, 'Pending', '', 6, '2021-12-15 20:15:19', NULL, '2021-12-18 01:39:45'),
 (6, 8, 'ITM-20220123212121', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'M', 6, '2022-01-23 23:38:21', NULL, NULL),
-(7, 8, 'ITM-20220123515151', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'S', 6, '2022-01-23 23:39:51', NULL, NULL),
+(7, 8, 'ITM-20220123515151', 6, NULL, NULL, NULL, NULL, NULL, 'Cancelled', 'S', 6, '2022-01-23 23:39:51', NULL, '2022-01-29 01:58:44'),
 (8, 6, 'ITM-20220123121212', 2, NULL, NULL, NULL, NULL, NULL, 'Pending', 'XL', 2, '2022-01-23 23:57:12', NULL, NULL),
-(9, 6, 'ITM-20220123262626', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'M', 2, '2022-01-23 23:59:26', NULL, NULL),
+(9, 6, 'ITM-20220123262626', 6, NULL, NULL, NULL, NULL, NULL, 'Cancelled', 'M', 2, '2022-01-23 23:59:26', NULL, '2022-01-29 02:01:24'),
 (10, 8, 'ITM-20220123484848', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'XL', 2, '2022-01-23 23:59:48', NULL, NULL),
-(11, 6, 'ITM-20220123303030', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'S', 6, '2022-01-24 00:02:30', NULL, NULL);
+(11, 6, 'ITM-20220123303030', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'S', 6, '2022-01-24 00:02:30', NULL, NULL),
+(12, 8, 'ITM-20220128000000', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'XL', 6, '2022-01-29 00:14:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -494,7 +504,8 @@ ALTER TABLE `inventory`
 -- Indexes for table `measurement`
 --
 ALTER TABLE `measurement`
-  ADD PRIMARY KEY (`measurement_id`);
+  ADD PRIMARY KEY (`measurement_id`),
+  ADD KEY `pk_custom_measurement` (`custom_id`);
 
 --
 -- Indexes for table `migrations`
@@ -578,7 +589,7 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `customization`
 --
 ALTER TABLE `customization`
-  MODIFY `custom_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `custom_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `employee_schedule`
@@ -602,19 +613,19 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `measurement`
 --
 ALTER TABLE `measurement`
-  MODIFY `measurement_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `measurement_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `payment_methods`
@@ -668,6 +679,12 @@ ALTER TABLE `customization`
 ALTER TABLE `employee_schedule`
   ADD CONSTRAINT `fk_schedule_created_by` FOREIGN KEY (`create_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_schedule_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `measurement`
+--
+ALTER TABLE `measurement`
+  ADD CONSTRAINT `pk_custom_measurement` FOREIGN KEY (`custom_id`) REFERENCES `customization` (`custom_id`);
 
 --
 -- Constraints for table `orders`

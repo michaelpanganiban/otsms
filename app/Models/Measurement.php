@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $measurement_id
  * @property int $user_id
+ * @property int $custom_id
  * @property float|null $shoulder_length
  * @property float|null $sleeve_length
  * @property float|null $bust_chest
@@ -25,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property float|null $slack_fit_thigh
  * @property int $created_by
  * @property Carbon $created_at
+ * 
+ * @property Customization $customization
  *
  * @package App\Models
  */
@@ -36,6 +39,7 @@ class Measurement extends Model
 
 	protected $casts = [
 		'user_id' => 'int',
+		'custom_id' => 'int',
 		'shoulder_length' => 'float',
 		'sleeve_length' => 'float',
 		'bust_chest' => 'float',
@@ -50,6 +54,7 @@ class Measurement extends Model
 
 	protected $fillable = [
 		'user_id',
+		'custom_id',
 		'shoulder_length',
 		'sleeve_length',
 		'bust_chest',
@@ -61,4 +66,9 @@ class Measurement extends Model
 		'slack_fit_thigh',
 		'created_by'
 	];
+
+	public function customization()
+	{
+		return $this->belongsTo(Customization::class, 'custom_id');
+	}
 }

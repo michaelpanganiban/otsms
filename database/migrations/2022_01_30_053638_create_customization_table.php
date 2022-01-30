@@ -15,6 +15,7 @@ class CreateCustomizationTable extends Migration
     {
         Schema::create('customization', function (Blueprint $table) {
             $table->bigInteger('custom_id', true);
+            $table->string('reference_id', 50);
             $table->string('garment_type', 50);
             $table->text('details');
             $table->unsignedBigInteger('user_id')->index('fk_custom_user_id');
@@ -22,6 +23,7 @@ class CreateCustomizationTable extends Migration
             $table->date('pickup_date');
             $table->double('downpayment');
             $table->double('fullpayment')->nullable();
+            $table->double('price')->nullable();
             $table->text('proof_of_payment');
             $table->dateTime('created_at')->useCurrent();
         });
