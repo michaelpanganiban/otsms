@@ -87,6 +87,7 @@ $(".view-custom").click(function(e){
 
     $("#submit-custom-edit").data('ref', details.reference_id)
     $("#submit-custom-edit").data('email', details.email)
+    $("#submit-custom-edit").data('customer_id', details.user_id)
     $("#submit-custom-edit").data('first_name', details.first_name)
     $("#submit-custom-edit").data('contact_no', details.contact_no)
 
@@ -150,6 +151,7 @@ $("#submit-custom-edit").submit(function(e){
     formData.append("email", $("#submit-custom-edit").data('email'))
     formData.append("first_name", $("#submit-custom-edit").data('first_name'))
     formData.append("contact_no", $("#submit-custom-edit").data('contact_no'))
+    formData.append("customer_id", $("#submit-custom-edit").data('customer_id'))
 
     $.ajax({
         url: 'customize/edit',

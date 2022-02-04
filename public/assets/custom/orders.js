@@ -16,6 +16,7 @@ $(".view-order").click(function(e){
     $("#submit-order-edit").data('pk', details.order_id)
     $("#submit-order-edit").data('ref', details.reference_id)
     $("#submit-order-edit").data('email', details.user.email)
+    $("#submit-order-edit").data('customer_id', details.user.id)
     $("#submit-order-edit").data('first_name', details.user.first_name)
     $("#submit-order-edit").data('contact_no', details.user.contact_no)
     $("#submit-order-edit").data('product', details.product_sale.product_name)
@@ -36,8 +37,10 @@ $(".view-order").click(function(e){
     }
     else if(details.status === 'Pending' && type == 0){
         $(".cancel-order-btn").show()
+        $(".submit-order-btn").show()
         $(".processing").hide()
         $(".cancel-order-btn").data('pk', details.order_id)
+        $(".cancel-order-btn").data('ref', details.reference_id)
     }
     else{
         $(".submit-order-btn").show()
@@ -64,6 +67,7 @@ $("#submit-order-edit").submit(function(e){
     const id = $(this).data('pk')
     const email = $(this).data('email')
     const first_name = $(this).data('first_name')
+    const customer_id = $(this).data('customer_id')
     const contact_no = $(this).data('contact_no')
     const product = $(this).data('product')
     const ref = $(this).data('ref')
@@ -95,6 +99,7 @@ $("#submit-order-edit").submit(function(e){
     }
     formData.append("data", JSON.stringify(data))
     formData.append("id", id)
+    formData.append("customer_id", customer_id)
     formData.append("ref", ref)
     formData.append("email", email)
     formData.append("first_name", first_name)
@@ -166,13 +171,16 @@ $("#order-btn").click(function(e){
 
 $(".cancel-order-btn").click(function(e){
     const order_id = $(this).data('pk');
+    const ref = $(this).data('ref')
     $("#proceed-cancel-order").data('pk', order_id)
+    $("#proceed-cancel-order").data('ref', ref)
     $("#cancel-order-modal").modal('show')
 })
 
 $("#proceed-cancel-order").click(function(e){
     const order_id = $(this).data('pk');
-    $.post('/orders/cancel', {order_id})
+    const ref = $(this).data('ref');
+    $.post('/orders/cancel', {order_id, ref})
     .done( function(msg) { 
         Toast.fire({
             icon: 'success',

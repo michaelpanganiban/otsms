@@ -1,3 +1,9 @@
+@php
+    $helper = new \App\Helper\Helper();
+    $notifs = $helper->getNotification();
+    $unread = $helper->getUnreadNotification();
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -26,6 +32,33 @@
                 background-color: #e59292 !important;
                 color: white !important;
             }
+            .dropdown-item2{
+                margin: 20px !important;
+                color: black !important;
+                overflow: auto !important;
+            }
+
+            /* width */
+            .dropdown-menu-right::-webkit-scrollbar {
+                width: 2px !important;
+            }
+
+            /* Track */
+            .dropdown-menu-right::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey; 
+            /* border-radius: 10px; */
+            }
+            
+            /* Handle */
+            .dropdown-menu-right::-webkit-scrollbar-thumb {
+            background: teal; 
+            /* border-radius: 10px; */
+            }
+
+            /* Handle on hover */
+            .dropdown-menu-right::-webkit-scrollbar-thumb:hover {
+            background: rgb(2, 241, 241); 
+            }
         </style>
     </head>
     <body class="hold-transition sidebar-mini layout-fixed" data-panel-auto-height-mode="height">
@@ -38,8 +71,8 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <!-- Messages Dropdown Menu -->
-                    <li class="nav-item dropdown">
-                        {{-- <a class="nav-link" data-toggle="dropdown" href="#">
+                    {{-- <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="far fa-comments"></i>
                             <span class="badge badge-danger navbar-badge">3</span>
                         </a>
@@ -94,34 +127,25 @@
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                         </div>
-                    </li>
+                    </li> --}}
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">15</span>
+                            <span class="badge badge-warning navbar-badge">{{$unread}}</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-item dropdown-header">15 Notifications</span>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" >
+                            <span class="dropdown-item dropdown-header">{{$unread}} unread notifications</span>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-envelope mr-2"></i> 4 new messages
-                                <span class="float-right text-muted text-sm">3 mins</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-users mr-2"></i> 8 friend requests
-                                <span class="float-right text-muted text-sm">12 hours</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-file mr-2"></i> 3 new reports
-                                <span class="float-right text-muted text-sm">2 days</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                            @foreach($notifs as $row)
+                                <a href="{{$row->link}}" class="dropdown-item2" data-pk="{{$row->notification_id}}">
+                                    <i class="fas fa-bell mr-2 text-primary"></i> {{$row->details}}
+                                    <span class="float-right text-muted text-sm">{{date_format(date_create($row->created_at), 'M d, Y')}}</span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                            @endforeach
                         </div>
-                    </li>--}}
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -483,6 +507,13 @@
       showConfirmButton: false,
       timer: 3000
     });
+
+    $(".dropdown-item2").click(function(e){
+        const notif_id = $(this).data('pk')
+        $.post("setAsRead", {notif_id}, function(r){
+            console.log(r)
+        })
+    })
 </script>
 
 </body>

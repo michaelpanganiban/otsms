@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File; 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Helper\Helper;
 
 class Orders extends Controller
 {
@@ -38,6 +39,14 @@ class Orders extends Controller
             if(empty($data['user_id']) || $data['user_id'] == null)
                 $data['user_id'] = Auth::id();
             Order::create($data);
+            // Notification ----------------------------------------------------------
+            $details = 'An order was successfully created with reference # '.$data['reference_id'];
+            $type='Both';
+            $link='/orders';
+            $user_id= $data['user_id'];
+            $helper = new Helper();
+            $helper->addNotification($details, $type, $notif_read=0, $link, $user_id);
+            // Notification ----------------------------------------------------------
             DB::commit();
             return response()->json(['message' => 'Successfully created new order.'], 200);
         } catch (\Exception $e){
@@ -56,6 +65,7 @@ class Orders extends Controller
             $product = request()->product;
             $ref = request()->ref;
             $customer = request()->first_name;
+            $customer_id = request()->customer_id;
             $contact_no = request()->contact_no;
             $pick_date = request()->pick_date;
             if(Auth::user()->user_type === 0){
@@ -63,6 +73,14 @@ class Orders extends Controller
                     $path = request()->file('payment')->store('uploads/orders', 'public');
                     $data += ['receipt' => $path];
                 }
+                // Notification ----------------------------------------------------------
+                $details = 'An order has been updated with reference # '. $ref;
+                $type='Admin';
+                $link='/orders';
+                $user_id= Auth::id();
+                $helper = new Helper();
+                $helper->addNotification($details, $type, $notif_read=0, $link, $user_id);
+                // Notification ----------------------------------------------------------
             }
             else{
                 if(trim($data['status']) == 'Approved')
@@ -86,6 +104,14 @@ class Orders extends Controller
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_exec ($ch);
                 curl_close ($ch);   
+                // Notification ----------------------------------------------------------
+                    $details = 'Your order w/ ref # '.$ref.' has been '.$data['status'].''.$pickup_date;
+                    $type='Customer';
+                    $link='/orders';
+                    $user_id= $customer_id;
+                    $helper = new Helper();
+                    $helper->addNotification($details, $type, $notif_read=0, $link, $user_id);
+                // Notification ----------------------------------------------------------
             }
             $data += ['modified_by', Auth::id()];
             Order::find($id)->update($data);
@@ -114,7 +140,16 @@ class Orders extends Controller
         DB::beginTransaction();
         try {
             $id = \request()->order_id;
+            $ref = \request()->ref;
             Order::find($id)->update(['status' => 'Cancelled']);
+            // Notification ----------------------------------------------------------
+                $details = 'An order w/ ref # '.$ref.' has been cancelled.';
+                $type='Admin';
+                $link='/orders';
+                $user_id= Auth::id();
+                $helper = new Helper();
+                $helper->addNotification($details, $type, $notif_read=0, $link, $user_id);
+            // Notification ----------------------------------------------------------
             DB::commit();
             return response()->json(['message' => 'Successfully cancelled the order.'], 200);
         } catch (\Exception $e){

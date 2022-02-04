@@ -86,3 +86,5 @@ Route::get('/view-payment-methods', [App\Http\Controllers\PaymentMethod::class, 
 Route::get('/view-product-details/{id}', [App\Http\Controllers\ProductDetails::class, 'index'])->name('index');
 Route::post('/product-details/rate', [App\Http\Controllers\ProductDetails::class, 'rate'])->name('rate');
 Route::post('/product-details/add-review', [App\Http\Controllers\ProductDetails::class, 'addReview'])->name('addReview');
+
+Route::post('/setAsRead', [App\Helper\Helper::class, 'setAsRead'])->name('setAsRead');

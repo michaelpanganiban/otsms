@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Helper\Helper;
 
 class Customization extends Controller
 {
@@ -42,6 +43,14 @@ class Customization extends Controller
                 $measerment += ['created_by' => Auth::id()];
                 ModelsMeasurement::create($measerment);
             }
+            // Notification ----------------------------------------------------------
+                $details = 'An order was successfully created with reference # '.$data['reference_id'];
+                $type='Both';
+                $link='/customization';
+                $user_id= Auth::id();
+                $helper = new Helper();
+                $helper->addNotification($details, $type, $notif_read=0, $link, $user_id);
+            // Notification ----------------------------------------------------------
             DB::commit();
             return response()->json(['message' => 'Successfully created the order.'], 200);
         } catch (\Exception $e){
@@ -56,6 +65,13 @@ class Customization extends Controller
             $data = json_decode(\request()->data, true);
             $id = \request()->id;
             $measurement_id = request()->measurement_id;
+            $pickup_date = '';
+            $pick_date = request()->pick_date;
+            $ref = request()->reference_id;
+            $customer = request()->first_name;
+            $contact_no = request()->contact_no;
+            $email = request()->email;
+            $customer_id = request()->customer_id;
             if(Auth::user()->user_type === 0){
                 if (\request()->hasFile('design')) {
                     $path = request()->file('design')->store('uploads/customization', 'public');
@@ -70,14 +86,16 @@ class Customization extends Controller
                         'measurement_id' => $measurement_id
                     ],$measurement);;
                 }
+                // Notification ----------------------------------------------------------
+                    $details = 'An order has been updated with reference # '. $ref;
+                    $type='Admin';
+                    $link='/customization';
+                    $user_id= Auth::id();
+                    $helper = new Helper();
+                    $helper->addNotification($details, $type, $notif_read=0, $link, $user_id);
+                // Notification ----------------------------------------------------------
             }
             else {
-                $pickup_date = '';
-                $pick_date = request()->pick_date;
-                $ref = request()->reference_id;
-                $customer = request()->first_name;
-                $contact_no = request()->contact_no;
-                $email = request()->email;
                 if(trim($data['status']) == 'Active')
                     $pickup_date = 'Pickup date: '. date_format(date_create($pick_date), 'M d, Y');
                 $details = [
@@ -99,6 +117,14 @@ class Customization extends Controller
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_exec ($ch);
                 curl_close ($ch); 
+                // Notification ----------------------------------------------------------
+                    $details = 'Your order w/ ref # '.$ref.' has been '.$data['status'].' '.$pickup_date;
+                    $type='Customer';
+                    $link='/customization';
+                    $user_id= $customer_id;
+                    $helper = new Helper();
+                    $helper->addNotification($details, $type, $notif_read=0, $link, $user_id);
+                // Notification ----------------------------------------------------------
             }
             ModelsCustomization::find($id)->update($data);
             DB::commit();
