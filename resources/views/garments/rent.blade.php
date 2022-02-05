@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(\App\Models\ProductSale::where('type', 'Rent')->get() as $row)
+                        @foreach(\App\Models\ProductSale::where('type', 'Rent')->where('status', 'Active')->get() as $row)
                             <tr>
                                 <td>{{$row->product_code}}</td>
                                 <td>{{$row->product_name}}</td>
@@ -37,7 +37,7 @@
                                 <td>{{$row->quantity}}</td>
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-primary edit-product" data-details='<?php echo $row; ?>'><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
-                                    <button class="btn btn-sm btn-danger delete-product" data-id='<?php echo $row->product_id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                                    <button class="btn btn-sm btn-danger delete-product" data-id='<?php echo $row->product_id; ?>'><i class="fa fa-times"></i>&nbsp;&nbsp;Deactivate</button>
                                 </td>
                             </tr>
                         @endforeach

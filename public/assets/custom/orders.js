@@ -140,13 +140,16 @@ $("#submit-order-edit").submit(function(e){
 
 $(".delete-order").click(function(e){
     const id = $(this).data('id')
+    const ref = $(this).data('ref')
     $("#proceed-delete-order").data('pk', id)
+    $("#proceed-delete-order").data('ref', ref)
     $("#delete-order").modal('show')
 })
 
 $("#proceed-delete-order").click(function(e){
-    const id = $(this).data('pk')
-    $.post('/orders/delete', {id})
+    const order_id = $(this).data('pk')
+    const ref = $(this).data('ref')
+    $.post('/orders/cancel', {order_id, ref})
     .done( function(msg) { 
         Toast.fire({
             icon: 'success',
@@ -157,11 +160,28 @@ $("#proceed-delete-order").click(function(e){
         }, 1500)
      })
     .fail( function(xhr, textStatus, errorThrown) {
+        console.log(xhr);
         Toast.fire({
             icon: 'error',
-            title: xhr.responseText.message
+            title: xhr.statusText
         })
     });
+    // $.post('/orders/delete', {id})
+    // .done( function(msg) { 
+    //     Toast.fire({
+    //         icon: 'success',
+    //         title: msg.message
+    //     })
+    //     setTimeout(() => {
+    //         location.reload()
+    //     }, 1500)
+    //  })
+    // .fail( function(xhr, textStatus, errorThrown) {
+    //     Toast.fire({
+    //         icon: 'error',
+    //         title: xhr.responseText.message
+    //     })
+    // });
 })
 
 $("#order-btn").click(function(e){

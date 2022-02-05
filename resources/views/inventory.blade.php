@@ -39,7 +39,7 @@
                                 <td><label>{{$row->status}}</label></td>
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-primary edit-item" data-details='<?php echo $row; ?>'><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
-                                    <button class="btn btn-sm btn-danger delete-item" data-id='<?php echo $row->item_id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                                    <button class="btn btn-sm btn-danger delete-item" data-id='<?php echo $row->item_id; ?>'><i class="fa fa-times"></i>&nbsp;&nbsp;Deactivate</button>
                                     <button class="btn btn-sm btn-warning stock-in" data-quantity="<?php echo $row->quantity; ?>" data-id='<?php echo $row->item_id; ?>'><i class="fa fa-arrow-alt-circle-left"></i>&nbsp;&nbsp;Stock In</button>
                                     <button class="btn btn-sm btn-info stock-out" data-quantity="<?php echo $row->quantity; ?>" data-id='<?php echo $row->item_id; ?>'><i class="fa fa-arrow-alt-circle-right"></i>&nbsp;&nbsp;Stock Out</button>
                                 </td>
@@ -150,13 +150,13 @@
         <div class="modal-dialog">
             <div class="modal-content bg-danger">
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete item</h4>
+                    <h4 class="modal-title">Deactivate item</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete this item?</p>
+                    <p>Are you sure you want to deactivate this item?</p>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>

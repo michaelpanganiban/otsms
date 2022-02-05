@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(\App\Models\ProductSale::where('type', 'Sale')->get() as $row)
+                        @foreach(\App\Models\ProductSale::where('type', 'Sale')->where('status', 'Active')->get() as $row)
                             <tr>
                                 <td>{{$row->product_code}}</td>
                                 <td>{{$row->product_name}}</td>
@@ -37,7 +37,7 @@
                                 <td>{{$row->quantity}}</td>
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-primary edit-product" data-details='<?php echo $row; ?>'><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
-                                    <button class="btn btn-sm btn-danger delete-product" data-id='<?php echo $row->product_id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                                    <button class="btn btn-sm btn-danger delete-product" data-id='<?php echo $row->product_id; ?>'><i class="fa fa-times"></i>&nbsp;&nbsp;Deactivate</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -157,13 +157,13 @@
         <div class="modal-dialog">
             <div class="modal-content bg-danger">
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete Product</h4>
+                    <h4 class="modal-title">Deactivate Product</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete this product?</p>
+                    <p>Are you sure you want to deactivate this product?</p>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>

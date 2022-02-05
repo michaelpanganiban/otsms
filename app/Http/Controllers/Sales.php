@@ -56,9 +56,9 @@ class Sales extends Controller
         DB::beginTransaction();
         try {
             $id = \request()->id;
-            ProductSale::find($id)->delete();
+            ProductSale::find($id)->update(['status' => 'Inactive']);
             DB::commit();
-            return response()->json(['message' => 'Successfully deleted the product.'], 200);
+            return response()->json(['message' => 'Successfully deactivated the product.'], 200);
         } catch (\Exception $e){
             DB::rollBack();
             return response()->json(['message' => $e], 500);

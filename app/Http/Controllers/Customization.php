@@ -151,4 +151,26 @@ class Customization extends Controller
     public function guide(){
         return view('view-measurement-guide');
     }
+
+    public function cancel(){
+        DB::beginTransaction();
+        try {
+            $id = \request()->id;
+            $ref = \request()->ref;
+            ModelsCustomization::find($id)->update(['status' => 'Cancelled']);
+            // Notification ----------------------------------------------------------
+                $details = 'An Customized order w/ ref # '.$ref.' has been cancelled.';
+                $type='Admin';
+                $link='/customization';
+                $user_id= Auth::id();
+                $helper = new Helper();
+                $helper->addNotification($details, $type, $notif_read=0, $link, $user_id);
+            // Notification ----------------------------------------------------------
+            DB::commit();
+            return response()->json(['message' => 'Successfully cancelled the order.'], 200);
+        } catch (\Exception $e){
+            DB::rollBack();
+            return response()->json(['message' => $e], 500);
+        }
+    }
 }

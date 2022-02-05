@@ -35,12 +35,14 @@
                                 <td>{{$row->reference_id}}</td>
                                 <td>{{$row->garment_type}}</td>
                                 <td>{{ $row->pickup_date ? date_format(date_create($row->pickup_date), 'M d, Y') : 'Not Indicated' }}</td>
-                                <td><label style="color: {{$row->c_status == 'Pending' ? 'orange' : 'blue'}};">{{$row->c_status}}</label></td>
+                                <td><label style="color: {{$row->c_status == 'Pending' || $row->c_status == 'Cancelled' ? 'orange' : 'blue'}};">{{$row->c_status}}</label></td>
                                 <td><label>{{number_format($row->downpayment, 2)}}</label></td>
                                 <td>{{$row->last_name}}, {{$row->first_name}}</td>
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-primary view-custom" data-details='<?php echo json_encode($row); ?>'  data-usertype="{{Auth::user()->user_type}}"><i class="fa fa-eye"></i>&nbsp;&nbsp;View</button>
-                                    <button class="btn btn-sm btn-danger delete-custom" data-id='<?php echo $row->custom_id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                                    @if($row->c_status === 'Pending')
+                                        <button class="btn btn-sm btn-danger delete-custom" data-ref='<?php echo $row->reference_id; ?>' data-id='<?php echo $row->custom_id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Cancel</button>
+                                    @endif    
                                 </td>
                             </tr>
                         @endforeach
@@ -313,13 +315,13 @@
         <div class="modal-dialog">
             <div class="modal-content bg-danger">
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete Order</h4>
+                    <h4 class="modal-title">Cancel Order</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete this order?</p>
+                    <p>Are you sure you want to cancel this order?</p>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>

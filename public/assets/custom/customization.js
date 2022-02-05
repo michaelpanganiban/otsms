@@ -182,13 +182,16 @@ $("#submit-custom-edit").submit(function(e){
 
 $(".delete-custom").click(function(e){
     const id = $(this).data('id')
+    const ref = $(this).data('ref')
     $("#proceed-delete-custom").data('pk', id)
+    $("#proceed-delete-custom").data('ref', ref)
     $("#delete-custom").modal('show')
 })
 
 $("#proceed-delete-custom").click(function(e){
-    const id = $(this).data('pk')
-    $.post('/customize/delete', {id})
+    const id = $(this).data('pk');
+    const ref = $(this).data('ref');
+    $.post('/customize/cancel', {id, ref})
     .done( function(msg) { 
         Toast.fire({
             icon: 'success',
@@ -199,9 +202,30 @@ $("#proceed-delete-custom").click(function(e){
         }, 1500)
      })
     .fail( function(xhr, textStatus, errorThrown) {
+        console.log(xhr);
         Toast.fire({
             icon: 'error',
-            title: xhr.responseText.message
+            title: xhr.statusText
         })
     });
 })
+
+// $("#proceed-delete-custom").click(function(e){
+//     const id = $(this).data('pk')
+//     $.post('/customize/delete', {id})
+//     .done( function(msg) { 
+//         Toast.fire({
+//             icon: 'success',
+//             title: msg.message
+//         })
+//         setTimeout(() => {
+//             location.reload()
+//         }, 1500)
+//      })
+//     .fail( function(xhr, textStatus, errorThrown) {
+//         Toast.fire({
+//             icon: 'error',
+//             title: xhr.responseText.message
+//         })
+//     });
+// })

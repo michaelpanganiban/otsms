@@ -41,7 +41,7 @@
                                 <td>{{ $row->user_type == '1' ? 'Admin' : 'Tailor' }}</td>
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-primary edit-employee" data-details='<?php echo $row; ?>'><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
-                                    <button class="btn btn-sm btn-danger delete-employee" data-id='<?php echo $row->id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+                                    <button class="btn btn-sm btn-danger delete-employee" data-id='<?php echo $row->id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Deactivate</button>
                                     <button class="btn btn-sm btn-warning schedule-employee" data-id='<?php echo $row->id; ?>'><i class="fa fa-calendar"></i>&nbsp;&nbsp;Schedule</button>
                                 </td>
                             </tr>
@@ -268,13 +268,13 @@
         <div class="modal-dialog">
             <div class="modal-content bg-danger">
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete Employee</h4>
+                    <h4 class="modal-title">Deactivate Employee</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete this employee?</p>
+                    <p>Are you sure you want to deactivate this employee?</p>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>

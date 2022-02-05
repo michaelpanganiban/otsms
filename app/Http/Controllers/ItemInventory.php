@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemInventory extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         return view('inventory');
     }
@@ -44,9 +48,9 @@ class ItemInventory extends Controller
         DB::beginTransaction();
         try {
             $id = \request()->id;
-            Inventory::find($id)->delete();
+            Inventory::find($id)->update(['status' => 'Inactive']);
             DB::commit();
-            return response()->json(['message' => 'Successfully deleted the item.'], 200);
+            return response()->json(['message' => 'Successfully deactivated the item.'], 200);
         } catch (\Exception $e){
             DB::rollBack();
             return response()->json(['message' => $e], 500);

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     DB::statement("SET SQL_MODE=''");
-    $data = DB::select("SELECT p.*, COUNT(o.order_id) as ordered_count FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN ('Pending', 'Disapproved') GROUP BY p.product_id");
+    $data = DB::select("SELECT p.*, COUNT(o.order_id) as ordered_count FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN ('Pending', 'Disapproved') WHERE p.status = 'Active' GROUP BY p.product_id");
     return view('welcome', compact('data'));
 });
 
@@ -73,6 +73,7 @@ Route::get('/customization', [App\Http\Controllers\Customization::class, 'index'
 Route::post('/customize/add', [App\Http\Controllers\Customization::class, 'add'])->name('add');
 Route::post('/customize/edit', [App\Http\Controllers\Customization::class, 'edit'])->name('edit');
 Route::post('/customize/delete', [App\Http\Controllers\Customization::class, 'delete'])->name('delete');
+Route::post('/customize/cancel', [App\Http\Controllers\Customization::class, 'cancel'])->name('cancel');
 Route::get('/view-measurement-guide', [App\Http\Controllers\Customization::class, 'guide'])->name('guide');
 
 //payment method

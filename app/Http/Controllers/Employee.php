@@ -53,9 +53,9 @@ class Employee extends Controller
         DB::beginTransaction();
         try {
             $id = \request()->id;
-            User::find($id)->delete();
+            User::find($id)->update(['status' => 'Inactive']);
             DB::commit();
-            return response()->json(['message' => 'Successfully deleted the employee data.'], 200);
+            return response()->json(['message' => 'Successfully deactivated the employee.'], 200);
         } catch (\Exception $e){
             DB::rollBack();
             return response()->json(['message' => $e], 500);
