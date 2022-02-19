@@ -129,12 +129,12 @@
                         </div>
                     </li> --}}
                     <!-- Notifications Dropdown Menu -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown"  >
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="far fa-bell"></i>
                             <span class="badge badge-warning navbar-badge">{{$unread}}</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" >
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="max-height: 400px; !important; overflow: auto;" >
                             <span class="dropdown-item dropdown-header">{{$unread}} unread notifications</span>
                             <div class="dropdown-divider"></div>
                             @foreach($notifs as $row)
