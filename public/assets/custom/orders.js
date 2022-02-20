@@ -218,3 +218,81 @@ $("#proceed-cancel-order").click(function(e){
         })
     });
 })
+
+$(".pay-order").click(function(e){
+    $("#paypal-button-container").attr('hidden', 'true')
+    $("#show-error").attr('hidden', 'true')
+    $("#amount-to-pay").val(0)
+    const details = $(this).data('details')
+    $("#item-price").val(details.product_sale.amount)
+    console.log('details: ', details)
+    paypal.Buttons({
+        style: {
+            layout: 'vertical',
+            color:  'gold',
+            shape:  'rect',
+            label:  'paypal',
+        },
+        createOrder: function(data, actions) {
+            // Set up the transaction
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: $("#amount-to-pay").val(),
+                  currency_code: 'PHP',
+                },
+              }],
+              application_context: { shipping_preference: "NO_SHIPPING", }
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(payment_details) {
+                console.log('payment_details: ', payment_details)
+                
+                $("#payer-id").html(payment_details.payer.payer_id)
+                $("#merchant-id").html(payment_details.purchase_units[0].payee.merchant_id)
+                $("#transaction-id").html(payment_details.id)
+                $("#order-id").html(details.order_id)
+                $("#payment-date").html(payment_details.create_time)
+                $("#status").html(payment_details.status)
+
+                $("#product-name").html(details.product_sale.product_name)
+                $("#product-code").html(details.product_sale.product_code)
+                $("#product-desc").html(details.product_sale.description)
+                $(".subtotal").html('PHP ' + $("#amount-to-pay").val())
+                $("#pay-order-modal").modal('hide')
+                $("#pay-receipt-modal").modal({
+                    backdrop: 'static',
+                    keyboard: false,
+                    show: true
+                })
+            })
+        }
+    }).render('#paypal-button-container');
+    $("#pay-order-modal").modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: true
+    })
+    // $("#pay-receipt-modal").modal({
+    //     backdrop: 'static',
+    //     keyboard: false,
+    //     show: true
+    // })
+})
+
+$("#amount-to-pay").keyup(function(e){
+    console.log($(this).val())
+    if(parseFloat($(this).val()) <= 0 || $(this).val() == ""){
+        $("#paypal-button-container").attr('hidden', 'true')
+        $("#show-error").removeAttr('hidden')
+    }
+    else if(parseFloat($("#item-price").val()) < parseFloat($(this).val())){
+        $("#paypal-button-container").attr('hidden', 'true')
+        $("#show-error").removeAttr('hidden')
+    }
+    else {
+        $("#paypal-button-container").removeAttr('hidden')
+        $("#show-error").attr('hidden', 'true')
+    }
+})

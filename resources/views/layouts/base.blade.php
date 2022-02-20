@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/plugins/jqvmap/jqvmap.min.css') }}">
+        <script src="https://www.paypal.com/sdk/js?client-id=AW0n69aVkbKkhiwT9JIAtpykP3uHSXQfUYAitLq0yx0R8y7-jajwxw87hxuUVi9_CMgQ_pVpC5avd8zF&disable-funding=credit,card,paylater&currency=PHP"></script>
         <style>
             .header-color{
                 background-color: teal;

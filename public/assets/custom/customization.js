@@ -229,3 +229,80 @@ $("#proceed-delete-custom").click(function(e){
 //         })
 //     });
 // })
+
+$(".pay-custom").click(function(e){
+    $("#paypal-button-container").attr('hidden', 'true')
+    $("#show-error").attr('hidden', 'true')
+    $("#amount-to-pay-custom").val(0)
+    const details = $(this).data('details')
+    console.log('details: ', details)
+    $("#item-price-custom").val(details.price)
+    paypal.Buttons({
+        style: {
+            layout: 'vertical',
+            color:  'gold',
+            shape:  'rect',
+            label:  'paypal',
+        },
+        createOrder: function(data, actions) {
+            // Set up the transaction
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: $("#amount-to-pay-custom").val(),
+                  currency_code: 'PHP',
+                },
+              }],
+              application_context: { shipping_preference: "NO_SHIPPING", }
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(payment_details) {
+                console.log('payment_details: ', payment_details)
+                
+                $("#payer-id").html(payment_details.payer.payer_id)
+                $("#merchant-id").html(payment_details.purchase_units[0].payee.merchant_id)
+                $("#transaction-id").html(payment_details.id)
+                $("#order-id").html(details.custom_id)
+                $("#payment-date").html(payment_details.create_time)
+                $("#status").html(payment_details.status)
+
+                $("#product-name").html(details.garment_type)
+                $("#product-code").html('')
+                $(".subtotal").html('PHP ' + $("#amount-to-pay-custom").val())
+                $("#pay-order-modal").modal('hide')
+                $("#pay-receipt-modal").modal({
+                    backdrop: 'static',
+                    keyboard: false,
+                    show: true
+                })
+            })
+        }
+    }).render('#paypal-button-container');
+    $("#pay-custom-modal").modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: true
+    })
+    // $("#pay-receipt-modal").modal({
+    //     backdrop: 'static',
+    //     keyboard: false,
+    //     show: true
+    // })
+})
+
+$("#amount-to-pay-custom").keyup(function(e){
+    console.log($(this).val())
+    if(parseFloat($(this).val()) <= 0 || $(this).val() == ""){
+        $("#paypal-button-container").attr('hidden', 'true')
+        $("#show-error").removeAttr('hidden')
+    }
+    else if(parseFloat($("#item-price-custom").val()) < parseFloat($(this).val())){
+        $("#paypal-button-container").attr('hidden', 'true')
+        $("#show-error").removeAttr('hidden')
+    }
+    else {
+        $("#paypal-button-container").removeAttr('hidden')
+        $("#show-error").attr('hidden', 'true')
+    }
+})
