@@ -376,7 +376,7 @@ CREATE TABLE `product_sales` (
   `product_id` bigint(20) NOT NULL,
   `product_code` varchar(50) NOT NULL,
   `product_name` varchar(100) NOT NULL,
-  `description` text DEFAULT 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  `description` text,
   `amount` varchar(50) NOT NULL,
   `quantity` varchar(50) NOT NULL,
   `image` text NOT NULL,
