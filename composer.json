@@ -12,9 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
-        "phpmailer/phpmailer": "^6.5"
-    },
-    "require-dev": {
+        "phpmailer/phpmailer": "^6.5",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "kitloong/laravel-migrations-generator": "^5.1",
