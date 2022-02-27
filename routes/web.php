@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
 Route::get('/', function () {
     DB::statement("SET SQL_MODE=''");
     $data = DB::select("SELECT p.*, COUNT(o.order_id) as ordered_count FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN ('Pending', 'Disapproved') WHERE p.status = 'Active' GROUP BY p.product_id");
