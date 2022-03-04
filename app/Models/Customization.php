@@ -53,6 +53,7 @@ class Customization extends Model
 		'downpayment',
 		'fullpayment',
 		'proof_of_payment',
+		'design',
 		'reference_id',
 		'price'
 	];

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2022 at 04:44 PM
+-- Generation Time: Mar 04, 2022 at 04:53 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -39,6 +39,7 @@ CREATE TABLE `customization` (
   `fullpayment` double DEFAULT NULL,
   `price` double DEFAULT NULL,
   `proof_of_payment` text NOT NULL,
+  `design` text DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -46,13 +47,15 @@ CREATE TABLE `customization` (
 -- Dumping data for table `customization`
 --
 
-INSERT INTO `customization` (`custom_id`, `reference_id`, `garment_type`, `details`, `user_id`, `status`, `pickup_date`, `downpayment`, `fullpayment`, `price`, `proof_of_payment`, `created_at`) VALUES
-(1, 'C-202112102020', 'Jersey', '<table class=\"table table-bordered\">\n                                            <thead>\n                                                <tr>\n                                                    <td><b>Quantity per Size: sample</b></td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Color:&nbsp;</b><span style=\"font-weight: bolder;\">sample</span></td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Measurement:&nbsp;</b><span style=\"font-weight: bolder;\">sample</span></td>\n                                                </tr>\n                                            </thead>\n                                        </table>', 7, 'Active', '2021-12-29', 500, 8000, 5000, 'uploads/customization/4yD2sCev0gr1uHMLF6GRceKtgVUUQFnCOMyzbCLT.webp', '2021-12-10 15:49:20'),
-(3, 'C-202112141919', 'Jersey', '<table class=\"table table-bordered\">\n                                            <thead>\n                                                <tr>\n                                                    <td><b>Quantity per Size:</b> </td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Color:</b> </td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Measurement:</b> </td>\n                                                </tr>\n                                            </thead>\n                                        </table>', 6, 'Active', '2021-12-30', 0, 0, 5000, 'uploads/customization/bk85hF8SNVwBVlguCALr4jN8gwjQn8SQfALmIXK5.png', '2021-12-14 18:58:19'),
-(13, 'C-202201305858', 'PE Uniform', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement:</b> </td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Pending', '2022-01-25', 0, 0, 8000, 'uploads/customization/XNaJ9Wl8HzNNSLSHGqc0Ehpfblngxg8kYlA4Mj4z.png', '2022-01-30 10:26:58'),
-(15, 'C-202201305656', 'School Uniform', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size: 3 M 4 L</b></td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color: SAMPLE</b></td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement: SAMPLE</b></td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Picked Up', '2022-02-04', 0, 0, 5000, 'uploads/customization/Wsm0kiRqKOh7FEOaZGXEXRVPB8SswwmW7XSsTYom.png', '2022-01-30 10:30:56'),
-(16, 'C-202201305151', 'School Uniform', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement:</b> </td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Active', '2022-02-01', 0, 0, 5000, 'uploads/customization/ySSnbnn7L5AACRXDRaah47EIMkNi5IZ1yZJyTkwU.png', '2022-01-30 13:33:51'),
-(17, 'C-202202012020', 'Jersey', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement:</b> </td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Pending', '2022-02-17', 0, NULL, NULL, 'uploads/customization/WddDPbA7fkoNxv8pJSyAgTIy3GAz6cuZPO6uBGtq.png', '2022-02-01 10:47:20');
+INSERT INTO `customization` (`custom_id`, `reference_id`, `garment_type`, `details`, `user_id`, `status`, `pickup_date`, `downpayment`, `fullpayment`, `price`, `proof_of_payment`, `design`, `created_at`) VALUES
+(1, 'C-202112102020', 'Jersey', '<table class=\"table table-bordered\">\n                                            <thead>\n                                                <tr>\n                                                    <td><b>Quantity per Size: sample</b></td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Color:&nbsp;</b><span style=\"font-weight: bolder;\">sample</span></td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Measurement:&nbsp;</b><span style=\"font-weight: bolder;\">sample</span></td>\n                                                </tr>\n                                            </thead>\n                                        </table>', 7, 'Active', '2021-12-29', 500, 8000, 5000, 'uploads/customization/4yD2sCev0gr1uHMLF6GRceKtgVUUQFnCOMyzbCLT.webp', NULL, '2021-12-10 15:49:20'),
+(3, 'C-202112141919', 'Jersey', '<table class=\"table table-bordered\">\n                                            <thead>\n                                                <tr>\n                                                    <td><b>Quantity per Size:</b> </td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Color:</b> </td>\n                                                </tr>\n                                                <tr>\n                                                    <td><b>Measurement:</b> </td>\n                                                </tr>\n                                            </thead>\n                                        </table>', 6, 'Active', '2021-12-30', 0, 0, 5000, 'uploads/customization/bk85hF8SNVwBVlguCALr4jN8gwjQn8SQfALmIXK5.png', NULL, '2021-12-14 18:58:19'),
+(13, 'C-202201305858', 'PE Uniform', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement:</b> </td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Cancelled', '2022-01-25', 0, 0, 8000, 'uploads/customization/XNaJ9Wl8HzNNSLSHGqc0Ehpfblngxg8kYlA4Mj4z.png', NULL, '2022-01-30 10:26:58'),
+(15, 'C-202201305656', 'School Uniform', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size: 3 M 4 L</b></td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color: SAMPLE</b></td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement: SAMPLE</b></td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Picked Up', '2022-02-04', 0, 0, 5000, 'uploads/customization/Wsm0kiRqKOh7FEOaZGXEXRVPB8SswwmW7XSsTYom.png', NULL, '2022-01-30 10:30:56'),
+(16, 'C-202201305151', 'School Uniform', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement:</b> </td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Active', '2022-02-01', 0, 0, 5000, 'uploads/customization/ySSnbnn7L5AACRXDRaah47EIMkNi5IZ1yZJyTkwU.png', NULL, '2022-01-30 13:33:51'),
+(17, 'C-202202012020', 'Jersey', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement:</b> </td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Pending', '2022-02-17', 0, NULL, NULL, 'uploads/customization/WddDPbA7fkoNxv8pJSyAgTIy3GAz6cuZPO6uBGtq.png', NULL, '2022-02-01 10:47:20'),
+(18, 'C-202203035656', 'PE Uniform', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement:</b> </td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Pending', '2022-03-17', 0, NULL, NULL, 'uploads/customization/qXGtS21Ouuxc0J6Q4zVezYdrXa9WzVGeYlkZyYwl.png', NULL, '2022-03-03 10:54:56'),
+(19, 'C-202203041414', 'Jersey', '<table class=\"table table-bordered\">\n                                                <thead>\n                                                    <tr>\n                                                        <td><b>Quantity per Size:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Color:</b> </td>\n                                                    </tr>\n                                                    <tr>\n                                                        <td><b>Measurement:</b> </td>\n                                                    </tr>\n                                                </thead>\n                                            </table>', 6, 'Pending', '2022-03-22', 500, NULL, NULL, 'uploads/customization/proof-of-payment/kAaaytvseyvK8JJS5denguxERdnmLhstIvHHgeOR.png', 'uploads/customization/bZqjIEJUfpHJl9cH4Bh3g8GkS7sH2Qnjlwbsrzgu.jpg', '2022-03-04 23:03:14');
 
 -- --------------------------------------------------------
 
@@ -132,7 +135,7 @@ CREATE TABLE `inventory` (
 
 INSERT INTO `inventory` (`item_id`, `item_name`, `description`, `price`, `quantity`, `status`, `created_by`, `created_at`, `modified_by`, `modified_at`) VALUES
 (1, 'Scissor', 'for cutting', 10, 100, 'Active', 2, '2021-12-04 01:24:41', NULL, '2021-12-09 11:03:04'),
-(3, 'Needles', NULL, 57, 39, 'Active', 2, '2021-12-04 02:23:06', NULL, '2021-12-09 10:57:00'),
+(3, 'Needles', NULL, 57, 39, 'Inactive', 2, '2021-12-04 02:23:06', NULL, '2022-02-05 23:00:28'),
 (4, 'sad', NULL, 2, 32, 'Active', 2, '2021-12-04 13:40:26', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -165,7 +168,8 @@ CREATE TABLE `measurement` (
 INSERT INTO `measurement` (`measurement_id`, `user_id`, `custom_id`, `shoulder_length`, `sleeve_length`, `bust_chest`, `waist`, `skirt_length`, `slack_length`, `slack_front_rise`, `slack_fit_seat`, `slack_fit_thigh`, `created_by`, `created_at`) VALUES
 (6, 6, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, '2022-01-30 13:33:51'),
 (7, 6, 13, 85, 5, 5, 5, 5, 8, 8, 8, 8, 6, '2022-01-30 14:39:51'),
-(11, 6, 15, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, '2022-01-30 14:47:07');
+(11, 6, 15, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, '2022-01-30 14:47:07'),
+(12, 6, 18, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, '2022-03-03 10:54:56');
 
 -- --------------------------------------------------------
 
@@ -262,12 +266,23 @@ INSERT INTO `notification` (`notification_id`, `details`, `type`, `notif_read`, 
 (5, 'An order w/ ref # ITM-20220123303030 has been cancelled.', 'Admin', 0, '/orders', 6, '2022-02-01 10:41:26'),
 (6, 'Your order w/ ref # ITM-20211215040404 has been Approved. Pickup date: Dec 23, 2021', 'Customer', 0, '/orders', 2, '2022-02-01 10:43:21'),
 (7, 'An order was successfully created with reference # C-202202012020', 'Both', 1, '/orders', 6, '2022-02-01 10:47:20'),
-(8, 'An order has been updated with reference # C-202112141919', 'Admin', 0, '/orders', 6, '2022-02-01 10:50:12'),
+(8, 'An order has been updated with reference # C-202112141919', 'Admin', 1, '/orders', 6, '2022-02-01 10:50:12'),
 (9, 'Your order w/ ref # C-202201305151 has been ActivePickup date: Feb 01, 2022', 'Customer', 0, '/orders', 2, '2022-02-01 10:51:47'),
 (10, 'An order was successfully created with reference # ITM-20220201353535', 'Both', 1, '/orders', 6, '2022-02-01 11:10:35'),
 (11, 'Your order w/ ref # ITM-20211215040404 has been Approved. Pickup date: Dec 23, 2021', 'Customer', 0, '/orders', 6, '2022-02-01 11:25:58'),
 (12, 'Your order w/ ref # C-202112102020 has been Active Pickup date: Dec 29, 2021', 'Customer', 0, '/orders', 7, '2022-02-01 11:29:35'),
-(13, 'Your order w/ ref # C-202112141919 has been Active Pickup date: Dec 30, 2021', 'Customer', 1, '/orders', 6, '2022-02-01 11:29:57');
+(13, 'Your order w/ ref # C-202112141919 has been Active Pickup date: Dec 30, 2021', 'Customer', 1, '/orders', 6, '2022-02-01 11:29:57'),
+(14, 'An order w/ ref # ITM-20211215191919 has been cancelled.', 'Admin', 0, '/orders', 6, '2022-02-05 14:30:59'),
+(15, 'An order w/ ref # ITM-20220123212121 has been cancelled.', 'Admin', 0, '/orders', 6, '2022-02-05 14:31:21'),
+(16, 'An Customized order w/ ref # C-202201305858 has been cancelled.', 'Admin', 0, '/customization', 6, '2022-02-05 14:39:34'),
+(17, 'An order w/ ref # ITM-20220128000000 has been cancelled.', 'Admin', 0, '/orders', 6, '2022-02-20 18:00:19'),
+(18, 'An order was successfully created with reference # C-202203035656', 'Both', 0, '/customization', 6, '2022-03-03 10:54:56'),
+(19, 'An order was successfully created with reference # C-202203041414', 'Both', 0, '/customization', 6, '2022-03-04 23:03:14'),
+(20, 'An order has been updated with reference # C-202203041414', 'Admin', 0, '/customization', 6, '2022-03-04 23:03:48'),
+(21, 'An order has been updated with reference # C-202203041414', 'Admin', 0, '/customization', 6, '2022-03-04 23:04:42'),
+(22, 'An order has been updated with reference # C-202203041414', 'Admin', 0, '/customization', 6, '2022-03-04 23:05:04'),
+(23, 'An order has been updated with reference # C-202203041414', 'Admin', 0, '/customization', 6, '2022-03-04 23:50:11'),
+(24, 'An order has been updated with reference # C-202203041414', 'Admin', 0, '/customization', 6, '2022-03-04 23:52:40');
 
 -- --------------------------------------------------------
 
@@ -302,14 +317,14 @@ INSERT INTO `orders` (`order_id`, `product_id`, `reference_id`, `user_id`, `pick
 (2, 6, 'ITM-20211215040404', 6, '2021-12-23', 1000, 'uploads/orders/kAIwwjLxq6spqp2JzWoU164cERF0uv2k8AcAhWhd.webp', NULL, NULL, 'Approved', '', 6, '2020-12-15 20:15:04', NULL, '2021-12-16 23:23:20'),
 (3, 2, 'ITM-20211215111111', 6, '2021-12-29', 800, 'uploads/orders/7JRpcbQhRvvH0NSzFkprwgQghnux5IhqvFpzN9Jj.webp', '2021-12-29', 0, 'Closed', '', 6, '2021-12-15 20:15:11', NULL, '2022-01-15 23:29:34'),
 (4, 1, 'ITM-20211215151515', 6, '2021-12-24', 500, 'uploads/orders/jj4zaLHBataOGbg1B5fR9xuVbBe5x4R9lh0PaK2v.jpg', '2021-12-23', 0, 'Picked Up', '', 6, '2021-12-15 20:15:15', NULL, '2022-01-15 23:28:17'),
-(5, 7, 'ITM-20211215191919', 6, '2021-12-23', 5000, 'uploads/orders/wZCEHicQPRegmDY4hmhvRC81iPlEh5dzLXK7B2QQ.jpg', NULL, NULL, 'Pending', '', 6, '2021-12-15 20:15:19', NULL, '2021-12-18 01:39:45'),
-(6, 8, 'ITM-20220123212121', 6, '2022-02-16', 8000, 'uploads/orders/NQEIoijrYurrmxD5oixsoNQ9QxBnS7MRNVAvc1um.png', NULL, NULL, 'Pending', 'M', 6, '2022-01-23 23:38:21', NULL, '2022-02-01 10:35:51'),
+(5, 7, 'ITM-20211215191919', 6, '2021-12-23', 5000, 'uploads/orders/wZCEHicQPRegmDY4hmhvRC81iPlEh5dzLXK7B2QQ.jpg', NULL, NULL, 'Cancelled', '', 6, '2021-12-15 20:15:19', NULL, '2022-02-05 14:30:59'),
+(6, 8, 'ITM-20220123212121', 6, '2022-02-16', 8000, 'uploads/orders/NQEIoijrYurrmxD5oixsoNQ9QxBnS7MRNVAvc1um.png', NULL, NULL, 'Cancelled', 'M', 6, '2022-01-23 23:38:21', NULL, '2022-02-05 14:31:21'),
 (7, 8, 'ITM-20220123515151', 6, NULL, NULL, NULL, NULL, NULL, 'Cancelled', 'S', 6, '2022-01-23 23:39:51', NULL, '2022-01-29 01:58:44'),
 (8, 6, 'ITM-20220123121212', 2, NULL, NULL, NULL, NULL, NULL, 'Pending', 'XL', 2, '2022-01-23 23:57:12', NULL, NULL),
 (9, 6, 'ITM-20220123262626', 6, NULL, NULL, NULL, NULL, NULL, 'Cancelled', 'M', 2, '2022-01-23 23:59:26', NULL, '2022-01-29 02:01:24'),
 (10, 8, 'ITM-20220123484848', 6, NULL, NULL, NULL, NULL, NULL, 'Cancelled', 'XL', 2, '2022-01-23 23:59:48', NULL, '2022-02-01 10:41:03'),
 (11, 6, 'ITM-20220123303030', 6, NULL, NULL, NULL, NULL, NULL, 'Cancelled', 'S', 6, '2022-01-24 00:02:30', NULL, '2022-02-01 10:41:26'),
-(12, 8, 'ITM-20220128000000', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'XL', 6, '2022-01-29 00:14:00', NULL, NULL),
+(12, 8, 'ITM-20220128000000', 6, NULL, NULL, NULL, NULL, NULL, 'Cancelled', 'XL', 6, '2022-01-29 00:14:00', NULL, '2022-02-20 18:00:19'),
 (15, 6, 'ITM-20220201020202', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'L', 6, '2022-02-01 10:16:02', NULL, NULL),
 (16, 6, 'ITM-20220201111111', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'M', 6, '2022-02-01 10:25:11', NULL, NULL),
 (17, 6, 'ITM-20220201353535', 6, NULL, NULL, NULL, NULL, NULL, 'Pending', 'XL', 2, '2022-02-01 11:10:35', NULL, NULL);
@@ -376,7 +391,7 @@ CREATE TABLE `product_sales` (
   `product_id` bigint(20) NOT NULL,
   `product_code` varchar(50) NOT NULL,
   `product_name` varchar(100) NOT NULL,
-  `description` text,
+  `description` text DEFAULT 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
   `amount` varchar(50) NOT NULL,
   `quantity` varchar(50) NOT NULL,
   `image` text NOT NULL,
@@ -393,11 +408,11 @@ CREATE TABLE `product_sales` (
 --
 
 INSERT INTO `product_sales` (`product_id`, `product_code`, `product_name`, `description`, `amount`, `quantity`, `image`, `status`, `type`, `create_by`, `created_at`, `modified_by`, `modified_at`) VALUES
-(1, 'asd', 'asdasd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1000', '12', 'uploads/products/LON7sfUBUFCx5V4LtM3B7Sdhwd5HuNFX5pEkEZSQ.jpg', 'Active', 'Rent', 2, '2021-12-03 17:29:52', NULL, '2021-12-10 22:07:16'),
+(1, 'asd', 'asdasd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1000', '12', 'uploads/products/LON7sfUBUFCx5V4LtM3B7Sdhwd5HuNFX5pEkEZSQ.jpg', 'Inactive', 'Rent', 2, '2021-12-03 17:29:52', NULL, '2022-02-05 14:50:40'),
 (2, 'test', 'test', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1500', '1', 'uploads/products/LTNxJpiBeXeKtUnxPGlMPyOZOdetkaQZXv6vZKDW.jpg', 'Active', 'Rent', 2, '2021-11-03 17:50:54', NULL, '2021-12-15 13:06:57'),
 (5, 'sample', 'sample', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '800', '1', 'uploads/products/DySeNVhVu2ik43qSEhw8lZ7vM8TTiBB4pu7GGkDm.jpg', 'Active', 'Sale', 2, '2021-12-03 23:02:14', NULL, '2021-12-10 22:07:23'),
 (6, 'new', 'Random product generator ', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1120', '121', 'uploads/products/gbJ7nQaQBoi8ko4y4MHxZQju96zo0P2yx8JIgove.jpg', 'Active', 'Sale', 2, '2021-12-04 00:23:19', NULL, '2021-12-22 22:33:39'),
-(7, 'asdasda', 'asdasd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '3200', '32', 'uploads/products/1BLaoZm680KHL4GTLeqMWSVXIOpDkbJFVM0IXrrk.jpg', 'Active', 'Sale', 2, '2021-12-04 00:25:19', NULL, '2021-12-10 22:07:28'),
+(7, 'asdasda', 'asdasd', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '3200', '32', 'uploads/products/1BLaoZm680KHL4GTLeqMWSVXIOpDkbJFVM0IXrrk.jpg', 'Inactive', 'Sale', 2, '2021-12-04 00:25:19', NULL, '2022-02-05 14:48:24'),
 (8, 'rent', 'rent', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1500', '1', 'uploads/products/s5KMGA4LPACIulowXcSUDHzm26vY6mZa9R3jMESd.jpg', 'Active', 'Rent', 2, '2021-12-04 00:37:04', NULL, '2021-12-10 22:07:32');
 
 -- --------------------------------------------------------
@@ -482,7 +497,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `status`, `first_name`, `middle_name`, `last_name`, `user_type`, `contact_no`, `birthday`, `email`, `salary`, `email_verified_at`, `password`, `password_changed`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Active', 'John Michael', 'Espina', 'Panganiban', 1, '09123457', '2021-01-01', 'admin@gmail.com', NULL, NULL, '$2y$10$setuzxK8n3bN.INosfsM.uTZ/V14wMf5PnCeE66NLtISsGtmejyFu', 1, NULL, '2021-12-02 00:18:07', '2021-12-02 00:18:07'),
+(1, 'Inactive', 'John Michael', 'Espina', 'Panganiban', 1, '09123457', '2021-01-01', 'admin@gmail.com', NULL, NULL, '$2y$10$setuzxK8n3bN.INosfsM.uTZ/V14wMf5PnCeE66NLtISsGtmejyFu', 1, NULL, '2021-12-02 00:18:07', '2022-02-05 07:01:58'),
 (2, 'Active', 'John Michael', 'Espina', 'Panganiban', 2, '0912345671', '2021-03-03', 'admin2@gmail.com', NULL, NULL, '$2y$10$pDsd1obpihRMd3Nc/BJ/p.ogJKVqHnMwvclrhRX9/u2IWqP/Ii3bq', 1, NULL, '2021-12-02 07:20:36', '2021-12-03 11:11:01'),
 (6, 'Active', 'customer', NULL, 'customer', 0, '09071181516', '2021-01-01', 'johnmichaelpanganiban.its@gmail.com', NULL, NULL, '$2y$10$E.EL6Sfb1AG/RHJLc6W5deoRdkifqUhKr4N/ZUGh4JFHUPDYiBNfy', 1, NULL, '2021-12-08 17:48:35', '2021-12-08 17:48:35'),
 (7, 'Active', 'John', 'E', 'Doe', 0, '12345678', '2021-01-01', 'johnmichaelpanganiban.its1@gmail.com', NULL, NULL, '$2y$10$nqz2B34bhxuh3TA5Rdq0PeNVa9CKxKPHzb2RWnHQ4cR4WyA1SQr8u', 1, NULL, '2021-12-09 18:47:16', '2021-12-09 18:47:16');
@@ -635,7 +650,7 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `customization`
 --
 ALTER TABLE `customization`
-  MODIFY `custom_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `custom_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `employee_schedule`
@@ -659,7 +674,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `measurement`
 --
 ALTER TABLE `measurement`
-  MODIFY `measurement_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `measurement_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -671,7 +686,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `notification_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `notification_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `orders`

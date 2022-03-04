@@ -20,9 +20,9 @@ class Customization extends Controller
     public function index(){
         $user_id = Auth::id();
         if(Auth::user()->user_type === 0)
-            $data = DB::select("SELECT c.custom_id, c.status as c_status, c.reference_id, c.garment_type, c.details,c.user_id, c.pickup_date,c.fullpayment,c.price, c.proof_of_payment, c.downpayment, u.*, m.shoulder_length, m.sleeve_length, m.bust_chest, m.waist, m.skirt_length, m.slack_length, m.slack_front_rise, m.slack_fit_seat, m.slack_fit_thigh, m.measurement_id FROM customization c LEFT JOIN users u ON c.user_id = u.id LEFT JOIN measurement m ON c.custom_id = m.custom_id WHERE c.user_id = '$user_id'");
+            $data = DB::select("SELECT c.custom_id, c.status as c_status, c.reference_id, c.garment_type, c.details,c.user_id, c.pickup_date,c.fullpayment,c.price, c.proof_of_payment, c.downpayment, u.*, m.shoulder_length, m.sleeve_length, m.bust_chest, m.waist, m.skirt_length, m.slack_length, m.slack_front_rise, m.slack_fit_seat, m.slack_fit_thigh, m.measurement_id, c.design FROM customization c LEFT JOIN users u ON c.user_id = u.id LEFT JOIN measurement m ON c.custom_id = m.custom_id WHERE c.user_id = '$user_id'");
         else
-        $data = DB::select("SELECT c.custom_id, c.status as c_status, c.reference_id, c.garment_type, c.details,c.user_id, c.pickup_date,c.fullpayment,c.price, c.proof_of_payment, c.downpayment, u.*, m.shoulder_length, m.sleeve_length, m.bust_chest, m.waist, m.skirt_length, m.slack_length, m.slack_front_rise, m.slack_fit_seat, m.slack_fit_thigh, m.measurement_id FROM customization c LEFT JOIN users u ON c.user_id = u.id LEFT JOIN measurement m ON c.custom_id = m.custom_id");
+        $data = DB::select("SELECT c.custom_id, c.status as c_status, c.reference_id, c.garment_type, c.details,c.user_id, c.pickup_date,c.fullpayment,c.price, c.proof_of_payment, c.downpayment, u.*, m.shoulder_length, m.sleeve_length, m.bust_chest, m.waist, m.skirt_length, m.slack_length, m.slack_front_rise, m.slack_fit_seat, m.slack_fit_thigh, m.measurement_id, c.design FROM customization c LEFT JOIN users u ON c.user_id = u.id LEFT JOIN measurement m ON c.custom_id = m.custom_id");
         return view('customization', compact('data'));
     }
 
@@ -75,6 +75,10 @@ class Customization extends Controller
             if(Auth::user()->user_type === 0){
                 if (\request()->hasFile('design')) {
                     $path = request()->file('design')->store('uploads/customization', 'public');
+                    $data += ['design' => $path];
+                }
+                if (\request()->hasFile('proof')) {
+                    $path = request()->file('proof')->store('uploads/customization/proof-of-payment', 'public');
                     $data += ['proof_of_payment' => $path];
                 }
                 if($data['garment_type'] !== 'Jersey') {

@@ -215,7 +215,13 @@
                                                         <input type="number" required class="form-control" id="custom-downpayment-edit" placeholder="Downpayment Amount" {{Auth::user()->user_type === 0 ? '' : 'disabled' }}>
                                                     </div>
                                                     <div class="col-md-6" {{Auth::user()->user_type === 0 ? '' : 'hidden' }}>
-                                                        <label for="image">Upload Design</label>
+                                                        <label for="image">Upload Payment</label>
+                                                        <input type="file" class="form-control" id="proof-edit" >
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-12" {{Auth::user()->user_type === 0 ? '' : 'hidden' }}>
+                                                        <label>Upload Design</label>
                                                         <input type="file" class="form-control" id="design-edit" >
                                                     </div>
                                                 </div>

@@ -63,7 +63,7 @@ $(".garment-type-cls").change(function(e){
 $(".view-custom").click(function(e){
     const details = $(this).data('details')
     const user_type = $(this).data('usertype')
-    $("#custom-image").attr('src', '../storage/'+details.proof_of_payment)
+    $("#custom-image").attr('src', '../storage/'+details.design)
     $("#ref-no").html(details.reference_id)
     $("#garment-type-edit").val(details.garment_type)
     $("#garment-type-edit").data('pk', details.custom_id)
@@ -144,6 +144,7 @@ $("#submit-custom-edit").submit(function(e){
     formData.append("data", JSON.stringify(data))
     formData.append("measurement", JSON.stringify(measurement))
     formData.append('design', document.getElementById('design-edit').files[0])
+    formData.append('proof', document.getElementById('proof-edit').files[0])
     formData.append("id", id)
     formData.append("pick_date", $("#custom-pickup-date-edit").val())
     formData.append("measurement_id", measurement_id)
