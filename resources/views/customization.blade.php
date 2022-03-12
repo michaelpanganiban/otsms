@@ -63,7 +63,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Customize Order</h3>
                         </div>
-                        <form method="post" id="submit-custom">
+                        <form method="post" id="submit-custom" style="background-color: #d3d3d3">
                             <div class="card-body">
                                 <div class="form-group row">
                                     <div class="col-md-6">
@@ -93,13 +93,13 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">
-                                        <input type="radio" name="classification" value="Upper Cloth" class="classification"> Upper Cloth
+                                        <input type="radio" name="classification" value="Upper Cloth" class="classification"> &nbsp;&nbsp;<b>Upper Cloth</b>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="radio" name="classification" value="Lower Cloth" class="classification"> Lower Cloth
+                                        <input type="radio" name="classification" value="Lower Cloth" class="classification"> &nbsp;&nbsp;<b>Lower Cloth</b>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="radio" name="classification" value="Both" class="classification"> Both
+                                        <input type="radio" name="classification" value="Both" class="classification"> &nbsp;&nbsp;<b>Both</b>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -189,7 +189,7 @@
             top: -2px;
             left: -1px;
             position: relative;
-            background-color: #ffffff;
+            background-color: #fffdfd;
             content: '';
             display: inline-block;
             visibility: visible;
