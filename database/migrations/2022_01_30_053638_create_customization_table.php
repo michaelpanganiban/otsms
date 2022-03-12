@@ -26,6 +26,7 @@ class CreateCustomizationTable extends Migration
             $table->double('price')->nullable();
             $table->text('proof_of_payment');
             $table->text('design');
+            $table->text('classification');
             $table->dateTime('created_at')->useCurrent();
         });
     }

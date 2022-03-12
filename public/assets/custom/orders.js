@@ -60,7 +60,7 @@ $(".view-order").click(function(e){
 
 $("#submit-order-edit").submit(function(e){
     e.preventDefault()
-    waitingDialog.show('Processing data...', {dialogSize: 'md', progressType: 'info'});
+    waitingDialog.show('Please wait...', {dialogSize: 'md', progressType: 'info'});
     $("#submit-order-edit").attr('disabled', 'disabled')
     const type = $(this).data('type')
     const product_type = $(this).data('product-type')

@@ -46,9 +46,9 @@ foreach($all_rating as $row){
                         <div class="form-grow row">
                             <div class="col-md-5">
                                 @if(Auth::check())
-                                    <input id="input-21d" value="{{$rating ? $rating->rating : 0}}" type="text" class="rating" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="sm" title="">
+                                    <input id="input-21d" value="{{$rating ? $rating->rating : 0}}" type="text" class="rating" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="m" title="">
                                 @else
-                                    <input id="input-21d" value="{{$total_rating  ? $total_rating : 0}}" type="text" class="rating" data-theme="krajee-fas" data-min=0 data-max=5 data-step=.1 data-size="sm" title="">
+                                    <input id="input-21d" value="{{$total_rating  ? $total_rating : 0}}" type="text" class="rating" data-theme="krajee-fas" data-min=0 data-max=5 data-step=.1 data-size="m" title="">
                                 @endif
                             </div>
                             <div class="col-md-7">
@@ -79,31 +79,31 @@ foreach($all_rating as $row){
                     </div>
                     <div class="col-md-4 row" style="max-height: 100px;">
                         <div class="col-md-7">
-                            <input disabled value="5" type="text" class="rating input-21d" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="sm" title="">
+                            <input disabled value="5" type="text" class="rating input-21d" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="m" title="">
                         </div>
                         <div class="col-md-5" style=" margin-top: 8px !important;">
                             <b style="font-size: 22px; color: green">{{$fives}}</b>
                         </div>
                         <div class="col-md-7">
-                            <input disabled value="4" type="text" class="rating input-21d" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="sm" title="">
+                            <input disabled value="4" type="text" class="rating input-21d" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="m" title="">
                         </div>
                         <div class="col-md-5" style=" margin-top: 8px !important;">
                             <b style="font-size: 22px; color: blue">{{$fours}}</b>
                         </div>
                         <div class="col-md-7">
-                            <input disabled value="3" type="text" class="rating input-21d" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="sm" title="">
+                            <input disabled value="3" type="text" class="rating input-21d" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="m" title="">
                         </div>
                         <div class="col-md-5" style=" margin-top: 8px !important;">
                             <b style="font-size: 22px; color: teal">{{$threes}}</b>
                         </div>
                         <div class="col-md-7">
-                            <input disabled value="2" type="text" class="rating input-21d" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="sm" title="">
+                            <input disabled value="2" type="text" class="rating input-21d" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="m" title="">
                         </div>
                         <div class="col-md-5" style=" margin-top: 8px !important;">
                             <b style="font-size: 22px; color: orange">{{$twos}}</b>
                         </div>
                         <div class="col-md-7">
-                            <input disabled value="1" type="text" class="rating input-21d" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="sm" title="">
+                            <input disabled value="1" type="text" class="rating input-21d" data-theme="krajee-fas" data-min=0 data-max=5 data-step=1 data-size="m" title="">
                         </div>
                         <div class="col-md-5" style=" margin-top: 8px !important;">
                             <b style="font-size: 22px; color: red">{{$ones}}</b>

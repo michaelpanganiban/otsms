@@ -16,16 +16,26 @@ $(function () {
   var $salesChart = $('#sales-chart')
   // eslint-disable-next-line no-unused-vars
   $.post('/fetchDashboard', function(r){
+    console.log(r);
     let total_this_year = 0
     let total_last_year = 0
     r.this_year.map(x => {
       this_year[x.month_date-1] = x.amount
       total_this_year = parseFloat(total_this_year) + parseFloat(x.amount)
     })
+    r.this_year_custom.map(x => {
+      this_year[x.month_date-1] = x.price
+      total_this_year += parseFloat(total_this_year) + parseFloat(x.price)
+    })
     $(".total").html(total_this_year.toFixed(2))
+
     r.last_year.map(x => {
       last_year[x.month_date-1] = x.amount
       total_last_year = parseFloat(total_last_year) + parseFloat(x.amount)
+    })
+    r.last_year_custom.map(x => {
+      last_year[x.month_date-1] = x.price
+      total_last_year = parseFloat(total_last_year) + parseFloat(x.price)
     })
     $(".total-last").html(total_last_year.toFixed(2))
     var salesChart = new Chart($salesChart, {
@@ -91,6 +101,8 @@ $(function () {
         }
       }
     })
+
+    //--------------------------------
     const type = [0, 0, 0]
     r.type.map(x => {
       if(x.type == 'Sale')

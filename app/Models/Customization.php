@@ -55,7 +55,8 @@ class Customization extends Model
 		'proof_of_payment',
 		'design',
 		'reference_id',
-		'price'
+		'price',
+		'classification'
 	];
 
 	public function user()

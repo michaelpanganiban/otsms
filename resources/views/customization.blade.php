@@ -91,8 +91,16 @@
                                     <input type="file" required class="form-control" id="design">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <input type="radio" name="classification" value="Upper Cloth" class="classification"> Upper Cloth
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="radio" name="classification" value="Lower Cloth" class="classification"> Lower Cloth
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="radio" name="classification" value="Both" class="classification"> Both
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="for-jersey" hidden>
@@ -118,45 +126,45 @@
                                         <hr>
                                         <div class="form-group row">
                                             <div class="col-md-3">
-                                                <label for="item-name">Shoulder Length</label>
+                                                <label for="item-name">Shoulder Length (in)</label>
                                                 <input type="number"  class="form-control" id="shoulder" placeholder="Shoulder Length">
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="item-name">Sleeve Length</label>
+                                                <label for="item-name">Sleeve Length (in)</label>
                                                 <input type="number" class="form-control" id="sleeve" placeholder="Sleeve Length">
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="item-name">Bust/Chest</label>
+                                                <label for="item-name">Bust/Chest (in)</label>
                                                 <input type="number" class="form-control" id="bust-chest" placeholder="Bust/Chest">
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="item-name">Waist</label>
+                                                <label for="item-name">Waist (in)</label>
                                                 <input type="number" class="form-control" id="waist" placeholder="Waist">
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="form-group row">
                                             <div class="col-md-6">
-                                                <label for="amount">Skirt Length</label>
+                                                <label for="amount">Skirt Length (in)</label>
                                                 <input type="number"  class="form-control" id="skirt" placeholder="Skirt Length">
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="form-group row">
                                             <div class="col-md-3">
-                                                <label for="amount">Slacks Length</label>
+                                                <label for="amount">Slacks Length (in)</label>
                                                 <input type="number"  class="form-control" id="slacks-length" placeholder="Slacks Length">
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="amount">Slacks Front Rise</label>
+                                                <label for="amount">Slacks Front Rise (in)</label>
                                                 <input type="number"  class="form-control" id="slacks-front-rise" placeholder="Slacks Front Rise">
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="amount">Fit (Seat)</label>
+                                                <label for="amount">Fit (Seat) (in)</label>
                                                 <input type="number" class="form-control"  id="fit-seat" placeholder="Fit (Seat)">
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="amount">Fit (Thigh)</label>
+                                                <label for="amount">Fit (Thigh) (in)</label>
                                                 <input type="number" class="form-control"  id="fit-thigh" placeholder="Fit (Thigh)">
                                             </div>
                                         </div>
@@ -173,7 +181,35 @@
             </div>
         </div>
     </div>
+    <style>
+         input[type='radio']:after {
+            width: 15px;
+            height: 15px;
+            border-radius: 15px;
+            top: -2px;
+            left: -1px;
+            position: relative;
+            background-color: #ffffff;
+            content: '';
+            display: inline-block;
+            visibility: visible;
+            border: 2px solid white;
+        }
 
+        input[type='radio']:checked:after {
+            width: 15px;
+            height: 15px;
+            border-radius: 15px;
+            top: -2px;
+            left: -1px;
+            position: relative;
+            background-color: #ffa500;
+            content: '';
+            display: inline-block;
+            visibility: visible;
+            border: 2px solid white;
+        }
+    </style>
     <!-- edit modal -->
     <div class="modal fade" id="view-custom">
         <div class="modal-dialog modal-xl">
@@ -226,6 +262,17 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
+                                                    <div class="col-md-4">
+                                                        <input type="radio" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} name="classification-edit"  value="Upper Cloth" id="upper"> <b>Upper Cloth</b>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="radio" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} name="classification-edit" value="Lower Cloth" id="lower"> <b> Lower Cloth </b>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="radio" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} name="classification-edit" value="Both" id="both"> <b> Both </b>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
                                                     <div class="col-md-6">
                                                         <label for="product-code">Status</label>
                                                         <select required id="status-edit" class="form-control" {{Auth::user()->user_type === 0 ? 'disabled' : '' }}>
@@ -259,45 +306,45 @@
                                                     <hr>
                                                     <div class="form-group row">
                                                         <div class="col-md-3">
-                                                            <label for="item-name">Shoulder Length</label>
+                                                            <label for="item-name">Shoulder Length (in)</label>
                                                             <input type="number"  class="form-control" id="edit-shoulder" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Shoulder Length">
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <label for="item-name">Sleeve Length</label>
+                                                            <label for="item-name">Sleeve Length (in)</label>
                                                             <input type="number" class="form-control" id="edit-sleeve" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Sleeve Length">
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <label for="item-name">Bust/Chest</label>
+                                                            <label for="item-name">Bust/Chest (in)</label>
                                                             <input type="number" class="form-control" id="edit-bust-chest" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Bust/Chest">
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <label for="item-name">Waist</label>
+                                                            <label for="item-name">Waist (in)</label>
                                                             <input type="number" class="form-control" id="edit-waist" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Waist">
                                                         </div>
                                                     </div>
                                                     <hr>
                                                     <div class="form-group row">
                                                         <div class="col-md-6">
-                                                            <label for="amount">Skirt Length</label>
+                                                            <label for="amount">Skirt Length (in)</label>
                                                             <input type="number"  class="form-control" id="edit-skirt" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Skirt Length">
                                                         </div>
                                                     </div>
                                                     <hr>
                                                     <div class="form-group row">
                                                         <div class="col-md-3">
-                                                            <label for="amount">Slacks Length</label>
+                                                            <label for="amount">Slacks Length (in)</label>
                                                             <input type="number"  class="form-control" id="edit-slacks-length" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Slacks Length">
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <label for="amount">Slacks Front Rise</label>
+                                                            <label for="amount">Slacks Front Rise (in)</label>
                                                             <input type="number"  class="form-control" id="edit-slacks-front-rise" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Slacks Front Rise">
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <label for="amount">Fit (Seat)</label>
+                                                            <label for="amount">Fit (Seat) (in)</label>
                                                             <input type="number" class="form-control"  id="edit-fit-seat" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Fit (Seat)">
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <label for="amount">Fit (Thigh)</label>
+                                                            <label for="amount">Fit (Thigh) (in)</label>
                                                             <input type="number" class="form-control"  id="edit-fit-thigh" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Fit (Thigh)">
                                                         </div>
                                                     </div>

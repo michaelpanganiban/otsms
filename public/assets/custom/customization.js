@@ -1,13 +1,14 @@
 $("#submit-custom").submit(function(e){
     e.preventDefault()
     var formData = new FormData();
+    const classification = $('input[name="classification"]:checked').val();
     const data = {
         garment_type : $("#garment-type").val(),
         pickup_date : $("#custom-pickup-date").val(),
         downpayment: 0,
-        details: $(".summernote").val().trim()
+        details: $(".summernote").val().trim(),
+        classification
     }
-
     const measurement = {
         shoulder_length : $("#shoulder").val(),
         sleeve_length : $("#sleeve").val(),
@@ -62,6 +63,7 @@ $(".garment-type-cls").change(function(e){
 
 $(".view-custom").click(function(e){
     const details = $(this).data('details')
+    
     const user_type = $(this).data('usertype')
     $("#custom-image").attr('src', '../storage/'+details.design)
     $("#ref-no").html(details.reference_id)
@@ -90,7 +92,17 @@ $(".view-custom").click(function(e){
     $("#submit-custom-edit").data('customer_id', details.user_id)
     $("#submit-custom-edit").data('first_name', details.first_name)
     $("#submit-custom-edit").data('contact_no', details.contact_no)
-
+    if(details.classification == 'Both')
+        $("#both").attr('checked', 'checked');
+    else if(details.classification == 'Upper Cloth')
+        $("#upper").attr('checked', 'checked');
+    else if(details.classification == 'Lower Cloth')
+        $("#lower").attr('checked', 'checked');
+    else {
+        $("#both").removeAttr('checked');
+        $("#upper").removeAttr('checked');
+        $("#lower").removeAttr('checked');
+    }
     console.log(details);
     if(details.garment_type === 'Jersey'){
         $(".for-jersey").removeAttr('hidden')
@@ -113,6 +125,7 @@ $("#submit-custom-edit").submit(function(e){
     const id = $("#garment-type-edit").data('pk')
     const measurement_id = $("#garment-type-edit").data('m_id')
     const user_type = $(".view-custom").data('usertype')
+    const classification = $('input[name="classification-edit"]:checked').val();
     let data = {}
     let measurement = {}
     if(user_type == 0){
@@ -120,7 +133,8 @@ $("#submit-custom-edit").submit(function(e){
             garment_type : $("#garment-type-edit").val(),
             pickup_date : $("#custom-pickup-date-edit").val(),
             downpayment: $("#custom-downpayment-edit").val(),
-            details: $(".desc-edit").val().trim()
+            details: $(".desc-edit").val().trim(),
+            classification
         }
         measurement = {
             shoulder_length : $("#edit-shoulder").val(),

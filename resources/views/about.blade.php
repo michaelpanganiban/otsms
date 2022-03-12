@@ -19,7 +19,7 @@
                         <h3>Our History</h3>
                         <hr>
                         <p>
-                            &nbsp;&nbsp;&nbsp;Daneil and Janine Tailoring Shop starting with a small shop at South Sentro Sipocot Camarines Sur year 2016. It is a family business managed by the Pucol family. By then, the business grow and able to have another shop at Gaongan. Both shop was being managed by Pucol siblings. The shop was 5 years and still making good quality of garments to satisfy customer's styles.<br>
+                            &nbsp;&nbsp;&nbsp;Daniel and Janine Tailoring Shop starting with a small shop at South Sentro Sipocot Camarines Sur year 2016. It is a family business managed by the Pucol family. By then, the business grow and able to have another shop at Gaongan. Both shop was being managed by Pucol siblings. The shop was 5 years and still making good quality of garments to satisfy customer's styles.<br>
 
                             &nbsp;&nbsp;&nbsp;Daniel and Janine Tailoring Shop made garments the style you are comfortable with. We make sure you feel as good as you look wearing custom-tailored clothing true to your unique fit. Don’t let your clothing decide who you are; decide it for yourself.
                             You choose what you deserve.

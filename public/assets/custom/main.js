@@ -139,3 +139,9 @@ $(".add-to-order").click(function(e){
 //         alert(r)
 //     })
 // })
+
+$("#search-btn").click(function(e){
+    const filter = $("#filter").val()
+    const search = $("#search").val()
+    window.location = `/?filter=${filter}&search=${search}`;
+});

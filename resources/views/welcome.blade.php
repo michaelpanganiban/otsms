@@ -13,6 +13,27 @@
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Filter:</label>
+                            <select id="filter" class="form-control">
+                                <option value="">--Select Category--</option>
+                                <option value="Sale" {{ ( isset($_GET["filter"]) == "Sale" ) ? 'selected' : ''}}>Sale</option>
+                                <option value="Rent" {{ ( isset($_GET["filter"]) == "Rent" ) ? 'selected' : ''}}>Rent</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Search: </label>
+                            <input type="text" class="form-control" id="search" value={{ isset($_GET["search"]) }}>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">&nbsp;</label><br>
+                            <button class="btn btn-sm btn-primary" id="search-btn">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-right">
                     @foreach($data as $row)
                         <div class="col mb-5">

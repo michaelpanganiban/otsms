@@ -283,12 +283,9 @@
         </aside>
         @yield('content')
         <!-- /.content-wrapper -->
-        <footer class="main-footer" {{ Request::segment(1) == 'dashboard' || Request::segment(1) == 'home' ? 'hidden' : '' }}>
-            <strong>Copyright &copy; 2014-2021 <a href="/">Online Tailoring Shop Management System</a>.</strong>
+        <footer class="main-footer" {{ Request::segment(1) == 'dashboard' || Request::segment(1) == 'home'  || Request::segment(1) == 'view-product-details' ? 'hidden' : '' }}>
+            <strong>Copyright &copy; <a href="/">Online Tailoring Shop Management System</a>.</strong>
             All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.1.0
-            </div>
         </footer>
     </div>
 <!-- ./wrapper -->
