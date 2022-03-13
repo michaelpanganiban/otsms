@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     DB::statement("SET SQL_MODE=''");
     $where='';
-    if(isset($_GET['filter']) != '')
+    if(isset($_GET['filter']) && $_GET['filter'] != '')
         $where .= " AND p.type = '".$_GET['filter']."'"; 
 
-    if(isset($_GET['search']) != '')
+    if(isset($_GET['search']) && $_GET['search'] != '')
         $where .= " AND p.product_name LIKE '%".$_GET['search']."%'"; 
     $data = DB::select("SELECT p.*, COUNT(o.order_id) as ordered_count FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN ('Pending', 'Disapproved') WHERE p.status = 'Active' $where GROUP BY p.product_id");
     return view('welcome', compact('data'));

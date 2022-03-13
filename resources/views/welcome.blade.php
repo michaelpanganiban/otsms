@@ -19,8 +19,8 @@
                             <label>Filter:</label>
                             <select id="filter" class="form-control">
                                 <option value="">--Select Category--</option>
-                                <option value="Sale" {{ ( isset($_GET["filter"]) == "Sale" ) ? 'selected' : ''}}>Sale</option>
-                                <option value="Rent" {{ ( isset($_GET["filter"]) == "Rent" ) ? 'selected' : ''}}>Rent</option>
+                                <option value="Sale" {{ ( isset($_GET["filter"]) && $_GET["filter"] == "Sale" ) ? 'selected' : ''}}>Sale</option>
+                                <option value="Rent" {{ ( isset($_GET["filter"]) && $_GET["filter"] == "Rent" ) ? 'selected' : ''}}>Rent</option>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -36,12 +36,12 @@
                 <hr>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-right">
                     @foreach($data as $row)
-                        <div class="col mb-5">
+                        <div class="col mb-5" style="margin-bottom: 10% !important;">
                             <div class="card h-100">
-                                <img class="card-img-top" src="../storage/{{$row->image}}" alt="..." style="min-height: 50%; max-height: 50%;"/>
+                                <img class="card-img-top" src="../storage/{{$row->image}}" alt="{{$row->product_name}}" style="min-height: 50%; max-height: 50%;"/>
                                 <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <h5 class="fw-bolder">{{$row->product_name}}</h5>
+                                    <div class="text-center"  title={{$row->product_name}}>
+                                        <h5 class="fw-bolder">{{ (strlen($row->product_name) > 6) ? substr($row->product_name, 0, 6)."..." : $row->product_name }}</h5>
                                         For: <label class="badge {{$row->type == 'Sale' ? 'bg-primary' : 'bg-success'}}">{{$row->type}}</label><br>
                                         ₱ &nbsp; {{number_format($row->amount, 2)}}
                                         <br>
@@ -51,7 +51,7 @@
                                             Stocks: <b>{{($row->quantity - $row->ordered_count)}}</b>
                                         @endif
                                     </div>
-                                </div><hr>
+                                </div>
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                     <div class="text-center">
                                         @if (($row->quantity - $row->ordered_count) <= 0)
@@ -60,6 +60,7 @@
                                             <a href="/view-product-details/{{$row->product_id}}?id={{request()->query('id')}}" class="btn btn-outline-dark mt-auto" target="_blank">View Details</a>
                                         @endif
                                     </div>
+                                    <br>
                                 </div>
                             </div>
                         </div>
