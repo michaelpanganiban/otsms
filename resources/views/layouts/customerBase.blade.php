@@ -110,7 +110,7 @@
         </nav>
             @yield('content')
         <!-- Footer-->
-        <footer class="py-5 bg-dark" {{ Request::segment(1) == 'dashboard' || Request::segment(1) == 'home'  || Request::segment(1) == 'view-product-details' ? 'hidden' : '' }}>
+        <footer class="py-5 bg-dark" {{ Request::segment(1) == 'dashboard' || Request::segment(1) == '/' || Request::segment(1) == 'home'  || Request::segment(1) == 'view-product-details' ? 'hidden' : '' }}>
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Daneil & Janine Tailoring Shop</p></div>
         </footer>
         <!-- Bootstrap core JS-->

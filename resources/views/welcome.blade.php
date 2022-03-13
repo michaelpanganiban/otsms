@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-md-4">
                             <label>Search: </label>
-                            <input type="text" class="form-control" id="search" value={{ isset($_GET["search"]) }}>
+                            <input type="text" class="form-control" id="search" value={{ isset($_GET["search"]) ? $_GET["search"] : '' }}>
                         </div>
                         <div class="col-md-4">
                             <label for="">&nbsp;</label><br>

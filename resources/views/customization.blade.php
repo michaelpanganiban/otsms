@@ -438,6 +438,7 @@
                     <section class="invoice" style="padding: 5% !important;">
                         <div class="row">
                             <div class="col-xs-12">
+                                <p style="color: rgb(219, 6, 6)">Note! Do not share this receipt with others! This will serve as your proof of payment.</p>
                                 <h2 class="page-header">
                                     <i class="fa fa-globe"></i> D&J Tailoring Shop
                                 </h2>
