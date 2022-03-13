@@ -87,6 +87,7 @@
                             Orders
                         </a> &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
                         <a  href="{{ route('logout') }}"
+                            class="btn btn-sm btn-primary"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
