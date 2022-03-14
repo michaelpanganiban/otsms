@@ -127,10 +127,11 @@ $("#submit-order-edit").submit(function(e){
         },
         error: function(e){
             $("#submit-order-edit").removeAttr('disabled')
+            console.log('error: ', e);
             waitingDialog.hide();
             Toast.fire({
                 icon: 'error',
-                title: e.message.errorInfo[3]
+                title: 'An error occured. Please try again.'
             })
         }
     })

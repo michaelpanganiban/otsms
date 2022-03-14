@@ -45,6 +45,7 @@ $("#submit-product").submit(function(e){
 
 $(".edit-product").click(function(){
     const details = $(this).data('details')
+    console.log(details);
     $("#edit-product-code").val(details.product_code),
     $("#edit-product-code").data('id', details.product_id),
     $("#edit-product-name").val(details.product_name),
@@ -58,13 +59,14 @@ $(".edit-product").click(function(){
 $("#edit-product").submit(function(e){
     e.preventDefault();
     const data = {
-        "product_code" : $("#edit-product-code").val(),
+        // "product_code" : $("#edit-product-code").val(),
         "product_name" : $("#edit-product-name").val(),
         "description"   : $("#edit-description").val(),
         "amount" : $("#edit-amount").val(),
         "quantity" : $("#edit-quantity").val(),
     }
     const id = $("#edit-product-code").data('id')
+    console.log(id);
     var formData = new FormData();
     formData.append('image', document.getElementById('edit-image').files[0])
     formData.append("data", JSON.stringify(data))

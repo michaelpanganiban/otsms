@@ -31,7 +31,8 @@ class Customization extends Controller
         try {
             $data = json_decode(\request()->data, true);
             $path = request()->file('design')->store('uploads/customization', 'public');
-            $data += ['proof_of_payment' => $path];
+            $data += ['design' => $path];
+            $data += ['proof_of_payment' => ''];
             $data += ['user_id' => Auth::id()];
             $data += ['reference_id' => 'C-'.Date('Ymdss')];
             $custom = ModelsCustomization::create($data);
@@ -78,8 +79,8 @@ class Customization extends Controller
                     $data += ['design' => $path];
                 }
                 if (\request()->hasFile('proof')) {
-                    $path = request()->file('proof')->store('uploads/customization/proof-of-payment', 'public');
-                    $data += ['proof_of_payment' => $path];
+                    $path_payment = request()->file('proof')->store('uploads/customization/proof-of-payment', 'public');
+                    $data += ['proof_of_payment' => $path_payment];
                 }
                 if($data['garment_type'] !== 'Jersey') {
                     $measurement = json_decode(request()->measurement, true);

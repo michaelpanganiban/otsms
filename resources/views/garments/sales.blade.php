@@ -36,7 +36,7 @@
                                 <td>{{ number_format($row->amount, 2) }}</td>
                                 <td>{{$row->quantity}}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-primary edit-product" data-details='<?php echo $row; ?>'><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
+                                    <button class="btn btn-sm btn-primary edit-product" data-details='<?php echo json_encode($row); ?>'><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
                                     <button class="btn btn-sm btn-danger delete-product" data-id='<?php echo $row->product_id; ?>'><i class="fa fa-times"></i>&nbsp;&nbsp;Deactivate</button>
                                 </td>
                             </tr>

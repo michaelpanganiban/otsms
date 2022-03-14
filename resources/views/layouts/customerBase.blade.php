@@ -112,7 +112,7 @@
             @yield('content')
         <!-- Footer-->
         <footer class="py-5 bg-dark" {{ Request::segment(1) == 'dashboard' || Request::segment(1) == '/' || Request::segment(1) == 'home'  || Request::segment(1) == 'view-product-details' ? 'hidden' : '' }}>
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Daneil & Janine Tailoring Shop</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Daniel & Janine Tailoring Shop</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

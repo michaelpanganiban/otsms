@@ -38,8 +38,8 @@ class Sales extends Controller
             $data = json_decode(\request()->data, true);
             $id = \request()->id;
             if (\request()->hasFile('image')) {
-                $old_path = ProductSale::find($id)->pluck('image')->first();
-                File::delete(public_path('storage/' . $old_path));
+                // $old_path = ProductSale::find($id)->pluck('image')->first();
+                // File::delete(public_path('storage/' . $old_path));
                 $path = request()->file('image')->store('uploads/products', 'public');
                 $data += ['image' => $path];
             }
