@@ -95,8 +95,8 @@ class Orders extends Controller
                 $itexmo = array(
                                     '1' => $contact_no, 
                                     '2' => 'Your order w/ ref # '.$ref.' has been '.$data['status'].''.$pickup_date, 
-                                    '3' => 'TR-D&AMP153567_MJHVB', 
-                                    'passwd' => '1en])(r8yj'
+                                    '3' => 'TR-D&AMP281546_GYZ3K', 
+                                    'passwd' => '{qmy[6b}16'
                                 );
                 curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
                 curl_setopt($ch, CURLOPT_POST, 1);
