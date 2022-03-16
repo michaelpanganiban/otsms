@@ -18,16 +18,20 @@ $(function () {
   $.post('/fetchDashboard', function(r){
     console.log(r);
     let total_this_year = 0
+    let this_year_order = 0;
+    let this_year_custom = 0;
     let total_last_year = 0
     r.this_year.map(x => {
       this_year[x.month_date-1] = x.amount
-      total_this_year = parseFloat(total_this_year) + parseFloat(x.amount)
+      this_year_order = parseFloat(this_year_order) + parseFloat(x.amount)
     })
     r.this_year_custom.map(x => {
       this_year[x.month_date-1] += x.price
-      total_this_year = parseFloat(total_this_year) + parseFloat(x.price)
+      this_year_custom = parseFloat(this_year_custom) + parseFloat(x.price)
     })
-    
+    total_this_year = parseFloat(this_year_order) + parseFloat(this_year_custom)
+    console.log("order: ", this_year_order)
+    console.log("custom: ", this_year_custom)
     console.log("total: ", total_this_year);
     $(".total").html(total_this_year.toFixed(2))
 
