@@ -46,8 +46,8 @@ class Main extends Controller
         DB::statement("SET SQL_MODE=''");
         $data = DB::select("SELECT SUM(p.amount) as amount FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id WHERE MONTH(o.created_at) IS NOT NULL AND MONTH(o.created_at) = MONTH(CURRENT_DATE()) AND o.status NOT IN('Pending', 'Disapproved')");
         $custom = DB::select("SELECT (SUM(p.downpayment) + SUM(p.fullpayment)) as amount FROM customization p WHERE p.status NOT IN('Pending', 'Disapproved') AND MONTH(p.created_at) IS NOT NULL AND MONTH(p.created_at) = MONTH(CURRENT_DATE())");
-        print_r($data);
-        print_r($custom);
+        // print_r($data);
+        // print_r($custom);
         return view('home', compact('custom', 'data'));
     }
 
