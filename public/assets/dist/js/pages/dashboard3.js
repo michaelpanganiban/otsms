@@ -28,6 +28,7 @@ $(function () {
       total_this_year = parseFloat(total_this_year) + parseFloat(x.price)
     })
     
+    console.log("total: ", total_this_year);
     $(".total").html(total_this_year.toFixed(2))
 
     r.last_year.map(x => {
