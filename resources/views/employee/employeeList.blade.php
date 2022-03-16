@@ -35,7 +35,7 @@
                                 <td>{{$row->last_name}}, {{$row->first_name}} {{$row->middle_name}}</td>
                                 <td>{{$row->email}}</td>
                                 <td>{{ $row->contact_no }}</td>
-                                <td>{{$row->birthday}}</td>
+                                <td>{{date_format(date_create($row->birthday), 'M d, Y')}}</td>
                                 <td>{{number_format($row->salary)}}</td>
                                 <td><label>{{$row->status}}</label></td>
                                 <td>{{ $row->user_type == '1' ? 'Admin' : 'Tailor' }}</td>
