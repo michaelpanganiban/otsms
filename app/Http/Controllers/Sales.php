@@ -21,6 +21,8 @@ class Sales extends Controller
         try{
             $path = \request()->file('image')->store('uploads/products', 'public');
             $data = json_decode(\request()->data, true);
+            $data['product_name'] = preg_replace("/'/", '', $data['product_name']); 
+            // $data['product_name'] = preg_replace('/[^A-Za-z0-9\-]/', '', $data['product_name']); 
             $data += ["image" => $path];
             $data += ['create_by' => Auth::id()];
             ProductSale::create($data); //add data to database
