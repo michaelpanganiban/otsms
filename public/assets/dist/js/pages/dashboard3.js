@@ -24,9 +24,10 @@ $(function () {
       total_this_year = parseFloat(total_this_year) + parseFloat(x.amount)
     })
     r.this_year_custom.map(x => {
-      this_year[x.month_date-1] = x.price
-      total_this_year += parseFloat(total_this_year) + parseFloat(x.price)
+      this_year[x.month_date-1] += x.price
+      total_this_year = parseFloat(total_this_year) + parseFloat(x.price)
     })
+    
     $(".total").html(total_this_year.toFixed(2))
 
     r.last_year.map(x => {

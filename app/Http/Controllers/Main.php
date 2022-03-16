@@ -44,14 +44,14 @@ class Main extends Controller
 
     public function dashboard(){
         DB::statement("SET SQL_MODE=''");
-        $data = DB::select("SELECT SUM(p.amount) as amount FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Pending', 'Disapproved') WHERE MONTH(o.created_at) IS NOT NULL AND MONTH(o.created_at) = MONTH(CURRENT_DATE())");
+        $data = DB::select("SELECT SUM(p.amount) as amount FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id WHERE MONTH(o.created_at) IS NOT NULL AND MONTH(o.created_at) = MONTH(CURRENT_DATE()) AND o.status NOT IN('Pending', 'Disapproved')");
         $custom = DB::select("SELECT (SUM(p.downpayment) + SUM(p.fullpayment)) as amount FROM customization p WHERE p.status NOT IN('Pending', 'Disapproved') AND MONTH(p.created_at) IS NOT NULL AND MONTH(p.created_at) = MONTH(CURRENT_DATE())");
         return view('home', compact('data', 'custom'));
     }
 
     public function fetchDashboard(){
         //sales per month this year
-        $this_year = DB::select("SELECT SUM(p.amount) as amount, MONTH(o.created_at) as month_date FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Pending', 'Disapproved') WHERE MONTH(o.created_at) IS NOT NULL and YEAR(o.created_at) = YEAR(CURRENT_DATE()) GROUP BY MONTH(o.created_at)");
+        $this_year = DB::select("SELECT SUM(p.amount) as amount, MONTH(o.created_at) as month_date FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id WHERE MONTH(o.created_at) IS NOT NULL and YEAR(o.created_at) = YEAR(CURRENT_DATE()) AND o.status NOT IN('Pending', 'Disapproved') GROUP BY MONTH(o.created_at)");
         //last year
         $last_year = DB::select("SELECT SUM(p.amount) as amount, MONTH(o.created_at) as month_date FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id AND o.status NOT IN('Pending', 'Disapproved') WHERE MONTH(o.created_at) IS NOT NULL and YEAR(o.created_at) = (YEAR(CURRENT_DATE()) -1) GROUP BY MONTH(o.created_at)");
 

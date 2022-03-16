@@ -248,7 +248,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-md-6">
                                                         <label for="amount">Downpayment Amount</label>
-                                                        <input type="number" required class="form-control" id="custom-downpayment-edit" placeholder="Downpayment Amount" {{Auth::user()->user_type === 0 ? '' : 'disabled' }}>
+                                                        <input type="number" class="form-control" id="custom-downpayment-edit" placeholder="Downpayment Amount" {{Auth::user()->user_type === 0 ? '' : 'disabled' }}>
                                                     </div>
                                                     <div class="col-md-6" {{Auth::user()->user_type === 0 ? '' : 'hidden' }}>
                                                         <label for="image">Upload Payment</label>
@@ -285,7 +285,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="product-code">Full Payment</label>
-                                                        <input type="text" class="form-control" id="fullpayment-edit" {{Auth::user()->user_type === 0 ? 'disabled' : '' }}>
+                                                        <input type="text" class="form-control" id="fullpayment-edit" {{Auth::user()->user_type === 0 ? 'disabled' : '' }} value="0">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
