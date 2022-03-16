@@ -66,7 +66,8 @@ class Main extends Controller
         $custom = DB::SELECT("SELECT COUNT(custom_id) as custom_count FROM customization WHERE status <> 'Pending'");
 
         $data_order = DB::select("SELECT SUM(p.amount) as amount FROM product_sales p LEFT JOIN orders o ON p.product_id = o.product_id WHERE MONTH(o.created_at) IS NOT NULL AND MONTH(o.created_at) = MONTH(CURRENT_DATE()) AND o.status NOT IN('Pending', 'Disapproved')");
-        $data_custom = DB::select("SELECT (SUM(p.downpayment) + SUM(p.fullpayment)) as amount FROM customization p WHERE p.status NOT IN('Pending', 'Disapproved') AND MONTH(p.created_at) IS NOT NULL AND MONTH(p.created_at) = MONTH(CURRENT_DATE())");
+
+        $data_custom = DB::select("SELECT SUM(p.price) as amount FROM customization p WHERE p.status NOT IN('Pending', 'Disapproved') AND MONTH(p.created_at) IS NOT NULL AND MONTH(p.created_at) = MONTH(CURRENT_DATE())");
 
         return response()->json(['this_year' => $this_year, 'last_year' => $last_year, 'type' => $type, 'custom' => $custom, 'last_year_custom' => $last_year_custom, 'this_year_custom' => $this_year_custom, 'data_order'=>$data_order, 'data_custom' => $data_custom]);
     }
