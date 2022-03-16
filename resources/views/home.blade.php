@@ -4,7 +4,7 @@
 @php $order_amount = 0; @endphp
 @php $custom_amount = 0; @endphp
 @php $total = 0; @endphp
-@php print_r(data); print_r(custom); @endphp
+@php print_r($data); print_r($custom); @endphp
 @if(!empty($data))
     @php $order_amount = $data[0]->amount; @endphp
 @endif
