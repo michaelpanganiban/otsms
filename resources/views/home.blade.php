@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title', 'Dashboard')
 @section('content')
-@php $order_amount = 0; @endphp
+{{-- @php $order_amount = 0; @endphp
 @php $custom_amount = 0; @endphp
 @php $total = 0; @endphp
 
@@ -11,7 +11,7 @@
 @if(!empty($custom))
     @php $custom_amount = $custom[0]->amount; @endphp
 @endif
-@php $total = $order_amount + $custom_amount; @endphp
+@php $total = $order_amount + $custom_amount; @endphp --}}
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
@@ -61,7 +61,7 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>₱{{ number_format($total) }}</h3>
+                            <h3 id="month-sale"></h3>
                             <p>Sales of the Month</p>
                         </div>
                         <div class="icon">
