@@ -4,9 +4,9 @@
 @php $order_amount = 0; @endphp
 @php $custom_amount = 0; @endphp
 @php $total = 0; @endphp
-@php print_r($data); print_r($custom); @endphp
-@if(!empty($data))
-    @php $order_amount = $data[0]->amount; @endphp
+@php print_r($data_orders); print_r($custom); @endphp
+@if(!empty($data_orders))
+    @php $order_amount = $data_orders[0]->amount; @endphp
 @endif
 @if(!empty($custom))
     @php $custom_amount = $custom[0]->amount; @endphp
