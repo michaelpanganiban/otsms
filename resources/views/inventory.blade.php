@@ -40,8 +40,8 @@
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-primary edit-item" data-details='<?php echo $row; ?>'><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
                                     <button class="btn btn-sm btn-danger delete-item" data-id='<?php echo $row->item_id; ?>'><i class="fa fa-times"></i>&nbsp;&nbsp;Deactivate</button>
-                                    <button class="btn btn-sm btn-warning stock-in" data-quantity="<?php echo $row->quantity; ?>" data-id='<?php echo $row->item_id; ?>'><i class="fa fa-arrow-alt-circle-left"></i>&nbsp;&nbsp;Stock In</button>
-                                    <button class="btn btn-sm btn-info stock-out" data-quantity="<?php echo $row->quantity; ?>" data-id='<?php echo $row->item_id; ?>'><i class="fa fa-arrow-alt-circle-right"></i>&nbsp;&nbsp;Stock Out</button>
+                                    <button class="btn btn-sm btn-warning stock-in" {{$row->status == 'Inactive' ? 'disabled' : ''}} data-quantity="<?php echo $row->quantity; ?>" data-id='<?php echo $row->item_id; ?>'><i class="fa fa-arrow-alt-circle-left"></i>&nbsp;&nbsp;Stock In</button>
+                                    <button class="btn btn-sm btn-info stock-out" {{$row->status == 'Inactive' ? 'disabled' : ''}}  data-quantity="<?php echo $row->quantity; ?>" data-id='<?php echo $row->item_id; ?>'><i class="fa fa-arrow-alt-circle-right"></i>&nbsp;&nbsp;Stock Out</button>
                                 </td>
                             </tr>
                         @endforeach
