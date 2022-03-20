@@ -65,7 +65,7 @@ $(".view-custom").click(function(e){
     const details = $(this).data('details')
     
     const user_type = $(this).data('usertype')
-    $("#custom-image").attr('src', '../storage/'+details.design)
+    $("#custom-image").attr('src', '../uploads/'+details.design)
     $("#ref-no").html(details.reference_id)
     $("#garment-type-edit").val(details.garment_type)
     $("#garment-type-edit").data('pk', details.custom_id)
@@ -86,7 +86,8 @@ $(".view-custom").click(function(e){
     $("#edit-fit-seat").val(details.slack_fit_seat)
     $("#edit-fit-thigh").val(details.slack_fit_thigh)
     $("#garment-type-edit").data('m_id', details.measurement_id)
-
+    $("#tailor").val(details.tailor_id)
+    console.log(details)
     $("#submit-custom-edit").data('ref', details.reference_id)
     $("#submit-custom-edit").data('email', details.email)
     $("#submit-custom-edit").data('customer_id', details.user_id)
@@ -103,7 +104,7 @@ $(".view-custom").click(function(e){
         $("#upper").removeAttr('checked');
         $("#lower").removeAttr('checked');
     }
-    console.log(details);
+    console.log(details.proof_of_payment);
     if(details.garment_type === 'Jersey'){
         $(".for-jersey").removeAttr('hidden')
         $(".not-jersey").attr('hidden', 'true')
@@ -116,6 +117,14 @@ $(".view-custom").click(function(e){
         $('.desc-edit').next().find(".note-editable").attr("contenteditable", false);
     else
         $('.desc-edit').next().find(".note-editable").attr("contenteditable", true);
+    if(details.proof_of_payment != '' && details.proof_of_payment != null)
+        $("#download-file-custom").html(`<a href='../uploads/${details.proof_of_payment}' download style='color: white;' ><u>Download Receipt</u></a>`)
+    else
+        $("#download-file-custom").html('')
+    if(details.downpayment == 0 || details.downpayment == null)
+        $("#custom-downpayment-edit").removeAttr('disabled')
+    else
+        $("#custom-downpayment-edit").attr('disabled', true)
     $("#view-custom").modal('show')
 })
 
@@ -149,10 +158,12 @@ $("#submit-custom-edit").submit(function(e){
         }
     }
     else{
+        $('input[name="classification-edit"]').attr('disabled', 'disabled')
         data = {
             status : $("#status-edit").val(),
             fullpayment : $("#fullpayment-edit").val(),
-            price: $("#custom-price-edit").val()
+            price: $("#custom-price-edit").val(),
+            tailor_id: $("#tailor").val()
         }
     }
     formData.append("data", JSON.stringify(data))
@@ -272,9 +283,10 @@ $(".pay-custom").click(function(e){
             });
         },
         onApprove: function(data, actions) {
-            return actions.order.capture().then(function(payment_details) {
+            return actions.order.capture().then(async function(payment_details) {
                 console.log('payment_details: ', payment_details)
-                
+                const amount = {downpayment:$("#amount-to-pay-custom").val()}
+                await $.post('/customize/update-payment', {id: details.custom_id, amount }, function(r){})
                 $("#payer-id").html(payment_details.payer.payer_id)
                 $("#merchant-id").html(payment_details.purchase_units[0].payee.merchant_id)
                 $("#transaction-id").html(payment_details.id)

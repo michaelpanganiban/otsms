@@ -48,7 +48,7 @@
                                         @if($row->status === 'Pending')
                                             <button class="btn btn-sm btn-danger delete-order" data-ref='<?php echo $row->reference_id; ?>' data-id='<?php echo $row->order_id; ?>'><i class="fa fa-times"></i>&nbsp;&nbsp;Cancel</button>
                                         @endif
-                                        @if(($row->status === 'Pending' || $row->status === 'Active') && Auth::user()->user_type === 0)
+                                        @if(($row->status === 'Pending' || $row->status === 'Active') && Auth::user()->user_type === 0  && ($row->downpayment_amount == 0 || $row->downpayment_amount == NULL))
                                             <button class="btn btn-sm btn-success pay-order" data-details='<?php echo $row; ?>'><i class="fa fa-credit-card"></i>&nbsp;&nbsp;Pay Now</button>
                                         @endif
                                     </td>

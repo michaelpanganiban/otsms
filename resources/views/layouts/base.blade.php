@@ -236,13 +236,13 @@
                                 <li>
                                     <a href="/sales" class="nav-link {{ (request()->is('sales')) ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Sales</p>
+                                        <p>For Sale</p>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="/rent" class="nav-link {{ (request()->is('rent')) ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
-                                        <p>Rent</p>
+                                        <p>For Rent</p>
                                     </a>
                                 </li>
                             </ul>

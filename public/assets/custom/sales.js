@@ -52,7 +52,7 @@ $(".edit-product").click(function(){
     $("#edit-description").val(details.description),
     $("#edit-amount").val(details.amount),
     $("#edit-quantity").val(details.quantity),
-    $("#attach-image").html(`<img src="storage/${details.image}" alt="no available image" id="product-image" width="25%"><hr>`)
+    $("#attach-image").html(`<img src="uploads/${details.image}" alt="no available image" id="product-image" width="25%"><hr>`)
     $("#edit-product").modal('show')
 })
 

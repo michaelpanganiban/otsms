@@ -43,6 +43,7 @@
                                     <button class="btn btn-sm btn-primary edit-employee" data-details='<?php echo $row; ?>'><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
                                     <button class="btn btn-sm btn-danger delete-employee" data-id='<?php echo $row->id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Deactivate</button>
                                     <button class="btn btn-sm btn-warning schedule-employee" data-id='<?php echo $row->id; ?>'><i class="fa fa-calendar"></i>&nbsp;&nbsp;Schedule</button>
+                                    <button class="btn btn-sm btn-success workload-employee" data-id='<?php echo $row->id; ?>'><i class="fa fa-cog"></i>&nbsp;&nbsp;Workload</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -417,6 +418,38 @@
                             </div>
                         </form>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Workload --}}
+    <div class="modal fade" id="workload-employee">
+        <div class="modal-dialog modal-lg" style="max-width: 99% !important;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Employee Workload</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"  style="overflow: auto !important;">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead class="header-color">
+                            <tr>
+                                <th>Reference ID</th>
+                                <th>Garment Type</th>
+                                <th>Pickup Date</th>
+                                <th>Classification</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="attach-work-load">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmployeeSchedule;
+use App\Models\Customization;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -82,5 +83,10 @@ class Employee extends Controller
     public function getSchedule(){
         $id = request()->id;
         return response()->json(EmployeeSchedule::where('user_id', $id)->get());
+    }
+
+    public function workload(){
+        $id = request()->id;
+        return response()->json(Customization::where('tailor_id', $id)->get());
     }
 }

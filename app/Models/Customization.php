@@ -56,7 +56,8 @@ class Customization extends Model
 		'design',
 		'reference_id',
 		'price',
-		'classification'
+		'classification',
+		'tailor_id'
 	];
 
 	public function user()

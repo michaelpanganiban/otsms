@@ -43,7 +43,7 @@
                                     @if($row->c_status === 'Pending')
                                         <button class="btn btn-sm btn-danger delete-custom" data-ref='<?php echo $row->reference_id; ?>' data-id='<?php echo $row->custom_id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Cancel</button>
                                     @endif    
-                                    @if(($row->c_status === 'Active') && Auth::user()->user_type === 0)
+                                    @if(($row->c_status === 'Active') && Auth::user()->user_type === 0 && ($row->downpayment == 0 || $row->downpayment == NULL))
                                         <button class="btn btn-sm btn-success pay-custom" data-details='<?php echo json_encode($row); ?>'><i class="fa fa-credit-card"></i>&nbsp;&nbsp;Pay Now</button>
                                     @endif
                                 </td>
@@ -127,45 +127,45 @@
                                         <div class="form-group row">
                                             <div class="col-md-3">
                                                 <label for="item-name">Shoulder Length (in)</label>
-                                                <input type="number"  class="form-control" id="shoulder" placeholder="Shoulder Length">
+                                                <input type="number" step=".01"  class="form-control" id="shoulder" placeholder="Shoulder Length">
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="item-name">Sleeve Length (in)</label>
-                                                <input type="number" class="form-control" id="sleeve" placeholder="Sleeve Length">
+                                                <input type="number" step=".01" class="form-control" id="sleeve" placeholder="Sleeve Length">
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="item-name">Bust/Chest (in)</label>
-                                                <input type="number" class="form-control" id="bust-chest" placeholder="Bust/Chest">
+                                                <input type="number" step=".01" class="form-control" id="bust-chest" placeholder="Bust/Chest">
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="item-name">Waist (in)</label>
-                                                <input type="number" class="form-control" id="waist" placeholder="Waist">
+                                                <input type="number" step=".01" class="form-control" id="waist" placeholder="Waist">
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="form-group row">
                                             <div class="col-md-6">
                                                 <label for="amount">Skirt Length (in)</label>
-                                                <input type="number"  class="form-control" id="skirt" placeholder="Skirt Length">
+                                                <input type="number" step=".01"  class="form-control" id="skirt" placeholder="Skirt Length">
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="form-group row">
                                             <div class="col-md-3">
                                                 <label for="amount">Slacks Length (in)</label>
-                                                <input type="number"  class="form-control" id="slacks-length" placeholder="Slacks Length">
+                                                <input type="number" step=".01"  class="form-control" id="slacks-length" placeholder="Slacks Length">
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="amount">Slacks Front Rise (in)</label>
-                                                <input type="number"  class="form-control" id="slacks-front-rise" placeholder="Slacks Front Rise">
+                                                <input type="number" step=".01"  class="form-control" id="slacks-front-rise" placeholder="Slacks Front Rise">
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="amount">Fit (Seat) (in)</label>
-                                                <input type="number" class="form-control"  id="fit-seat" placeholder="Fit (Seat)">
+                                                <input type="number" step=".01" class="form-control"  id="fit-seat" placeholder="Fit (Seat)">
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="amount">Fit (Thigh) (in)</label>
-                                                <input type="number" class="form-control"  id="fit-thigh" placeholder="Fit (Thigh)">
+                                                <input type="number" step=".01" class="form-control"  id="fit-thigh" placeholder="Fit (Thigh)">
                                             </div>
                                         </div>
                                     </div>
@@ -293,6 +293,20 @@
                                                         <label for="amount">Price</label>
                                                         <input type="number" required class="form-control" id="custom-price-edit" placeholder="Price" {{Auth::user()->user_type === 0 ? 'disabled' : '' }}>
                                                     </div>
+                                                    <div class="col-md-6">
+                                                        <label for="image">Proof of Payment &nbsp;&nbsp; | &nbsp;&nbsp; <i id="download-file-custom"></i></label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row" {{Auth::user()->user_type === 0 ? 'hidden' : '' }}>
+                                                    <div class="col-md-6">
+                                                        <label for="amount">Tailor</label>
+                                                        <select id="tailor" class="form-control">
+                                                            <option value="1000">--Select Tailor--</option>
+                                                            @foreach(App\Models\User::where('user_type', 2)->where('status', 'Active')->get() as $row)
+                                                                <option value="{{$row->id}}">{{$row->first_name}} {{$row->last_name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <div class="for-jersey" hidden>
                                                     <div class="form-group">
@@ -307,45 +321,45 @@
                                                     <div class="form-group row">
                                                         <div class="col-md-3">
                                                             <label for="item-name">Shoulder Length (in)</label>
-                                                            <input type="number"  class="form-control" id="edit-shoulder" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Shoulder Length">
+                                                            <input type="number" step=".01"  class="form-control" id="edit-shoulder" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Shoulder Length">
                                                         </div>
                                                         <div class="col-md-3">
                                                             <label for="item-name">Sleeve Length (in)</label>
-                                                            <input type="number" class="form-control" id="edit-sleeve" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Sleeve Length">
+                                                            <input type="number" step=".01" class="form-control" id="edit-sleeve" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Sleeve Length">
                                                         </div>
                                                         <div class="col-md-3">
                                                             <label for="item-name">Bust/Chest (in)</label>
-                                                            <input type="number" class="form-control" id="edit-bust-chest" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Bust/Chest">
+                                                            <input type="number" step=".01" class="form-control" id="edit-bust-chest" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Bust/Chest">
                                                         </div>
                                                         <div class="col-md-3">
                                                             <label for="item-name">Waist (in)</label>
-                                                            <input type="number" class="form-control" id="edit-waist" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Waist">
+                                                            <input type="number" step=".01" class="form-control" id="edit-waist" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Waist">
                                                         </div>
                                                     </div>
                                                     <hr>
                                                     <div class="form-group row">
                                                         <div class="col-md-6">
                                                             <label for="amount">Skirt Length (in)</label>
-                                                            <input type="number"  class="form-control" id="edit-skirt" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Skirt Length">
+                                                            <input type="number" step=".01"  class="form-control" id="edit-skirt" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Skirt Length">
                                                         </div>
                                                     </div>
                                                     <hr>
                                                     <div class="form-group row">
                                                         <div class="col-md-3">
                                                             <label for="amount">Slacks Length (in)</label>
-                                                            <input type="number"  class="form-control" id="edit-slacks-length" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Slacks Length">
+                                                            <input type="number" step=".01"  class="form-control" id="edit-slacks-length" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Slacks Length">
                                                         </div>
                                                         <div class="col-md-3">
                                                             <label for="amount">Slacks Front Rise (in)</label>
-                                                            <input type="number"  class="form-control" id="edit-slacks-front-rise" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Slacks Front Rise">
+                                                            <input type="number" step=".01"  class="form-control" id="edit-slacks-front-rise" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Slacks Front Rise">
                                                         </div>
                                                         <div class="col-md-3">
                                                             <label for="amount">Fit (Seat) (in)</label>
-                                                            <input type="number" class="form-control"  id="edit-fit-seat" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Fit (Seat)">
+                                                            <input type="number" step=".01" class="form-control"  id="edit-fit-seat" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Fit (Seat)">
                                                         </div>
                                                         <div class="col-md-3">
                                                             <label for="amount">Fit (Thigh) (in)</label>
-                                                            <input type="number" class="form-control"  id="edit-fit-thigh" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Fit (Thigh)">
+                                                            <input type="number" step=".01" class="form-control"  id="edit-fit-thigh" {{Auth::user()->user_type === 0 ? '' : 'disabled' }} placeholder="Fit (Thigh)">
                                                         </div>
                                                     </div>
                                                 </div>

@@ -61,6 +61,8 @@ Route::post('/employee/edit', [App\Http\Controllers\Employee::class, 'edit'])->n
 Route::post('/employee/delete', [App\Http\Controllers\Employee::class, 'delete'])->name('delete');
 Route::post('/schedule/add', [App\Http\Controllers\Employee::class, 'addSchedule'])->name('addSchedule');
 Route::post('/schedule/get', [App\Http\Controllers\Employee::class, 'getSchedule'])->name('getSchedule');
+Route::get('/employee/workload', [App\Http\Controllers\Employee::class, 'workload'])->name('workload');
+
 
 // Measurement
 Route::get('/measurement', [App\Http\Controllers\Measurement::class, 'index'])->name('measurement');
@@ -73,6 +75,7 @@ Route::post('/orders/add', [App\Http\Controllers\Orders::class, 'add'])->name('a
 Route::post('/orders/edit', [App\Http\Controllers\Orders::class, 'edit'])->name('edit');
 Route::post('/orders/delete', [App\Http\Controllers\Orders::class, 'delete'])->name('delete');
 Route::post('/orders/cancel', [App\Http\Controllers\Orders::class, 'cancel'])->name('cancel');
+Route::post('/orders/update-payment', [App\Http\Controllers\Orders::class, 'updatePayment'])->name('updatePayment');
 
 //customization
 Route::get('/customization', [App\Http\Controllers\Customization::class, 'index'])->name('index');
@@ -81,6 +84,8 @@ Route::post('/customize/edit', [App\Http\Controllers\Customization::class, 'edit
 Route::post('/customize/delete', [App\Http\Controllers\Customization::class, 'delete'])->name('delete');
 Route::post('/customize/cancel', [App\Http\Controllers\Customization::class, 'cancel'])->name('cancel');
 Route::get('/view-measurement-guide', [App\Http\Controllers\Customization::class, 'guide'])->name('guide');
+Route::get('/view-more-details/{id}', [App\Http\Controllers\Customization::class, 'viewMoreDetails'])->name('viewMoreDetails');
+Route::post('/customize/update-payment', [App\Http\Controllers\Customization::class, 'updatePayment'])->name('updatePayment');
 
 //payment method
 Route::get('/paymentMethods', [App\Http\Controllers\PaymentMethod::class, 'index'])->name('index');

@@ -7,7 +7,7 @@ $(".view-order").click(function(e){
     $("#return-date").val(details.return_date)
     $("#additional_fee").val(details.addtional_fee)
     $("#downpayment").val(details.downpayment_amount)
-    $("#product-image").attr('src', `/storage/${details.product_sale.image}`)
+    $("#product-image").attr('src', `/uploads/${details.product_sale.image}`)
     $("#product-description").html(details.product_sale.description)
     $("#code").html(`<b>Product Code: </b>${details.product_sale.product_code}`)
     $("#price").html(`<b>Price: </b>${parseFloat(details.product_sale.amount).toFixed(2)}`)
@@ -53,6 +53,11 @@ $(".view-order").click(function(e){
     else{
         $(".hideUs").removeAttr('hidden')
     }
+
+    if(details.downpayment_amount == 0 || details.downpayment_amount == null)
+        $("#downpayment").removeAttr('disabled')
+    else
+    $("#downpayment").attr('disabled', true)
     
     $(".view-measurement").attr('href', `/measurement?id=${details.user_id}`)
     $("#view-order").modal('show')
@@ -247,9 +252,12 @@ $(".pay-order").click(function(e){
             });
         },
         onApprove: function(data, actions) {
-            return actions.order.capture().then(function(payment_details) {
+            return actions.order.capture().then(async function(payment_details) {
                 console.log('payment_details: ', payment_details)
-                
+                const amount = {downpayment_amount: $("#amount-to-pay").val()}
+                await $.post('/orders/update-payment', {id: details.order_id, amount }, function(r){
+
+                })
                 $("#payer-id").html(payment_details.payer.payer_id)
                 $("#merchant-id").html(payment_details.purchase_units[0].payee.merchant_id)
                 $("#transaction-id").html(payment_details.id)

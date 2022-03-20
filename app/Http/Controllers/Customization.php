@@ -22,7 +22,7 @@ class Customization extends Controller
         if(Auth::user()->user_type === 0)
             $data = DB::select("SELECT c.custom_id, c.classification, c.status as c_status, c.reference_id, c.garment_type, c.details,c.user_id, c.pickup_date,c.fullpayment,c.price, c.proof_of_payment, c.downpayment, u.*, m.shoulder_length, m.sleeve_length, m.bust_chest, m.waist, m.skirt_length, m.slack_length, m.slack_front_rise, m.slack_fit_seat, m.slack_fit_thigh, m.measurement_id, c.design FROM customization c LEFT JOIN users u ON c.user_id = u.id LEFT JOIN measurement m ON c.custom_id = m.custom_id WHERE c.user_id = '$user_id'");
         else
-        $data = DB::select("SELECT c.custom_id, c.classification, c.status as c_status, c.reference_id, c.garment_type, c.details,c.user_id, c.pickup_date,c.fullpayment,c.price, c.proof_of_payment, c.downpayment, u.*, m.shoulder_length, m.sleeve_length, m.bust_chest, m.waist, m.skirt_length, m.slack_length, m.slack_front_rise, m.slack_fit_seat, m.slack_fit_thigh, m.measurement_id, c.design FROM customization c LEFT JOIN users u ON c.user_id = u.id LEFT JOIN measurement m ON c.custom_id = m.custom_id");
+        $data = DB::select("SELECT c.custom_id,c.tailor_id,c.classification, c.status as c_status, c.reference_id, c.garment_type, c.details,c.user_id, c.pickup_date,c.fullpayment,c.price, c.proof_of_payment, c.downpayment, u.*, m.shoulder_length, m.sleeve_length, m.bust_chest, m.waist, m.skirt_length, m.slack_length, m.slack_front_rise, m.slack_fit_seat, m.slack_fit_thigh, m.measurement_id, c.design FROM customization c LEFT JOIN users u ON c.user_id = u.id LEFT JOIN measurement m ON c.custom_id = m.custom_id");
         return view('customization', compact('data'));
     }
 
@@ -30,7 +30,8 @@ class Customization extends Controller
         DB::beginTransaction();
         try {
             $data = json_decode(\request()->data, true);
-            $path = request()->file('design')->store('uploads/customization', 'public');
+            // $path = request()->file('design')->store('uploads/customization', 'public');
+            $path = \Storage::disk('public_uploads')->put('customization', \request()->file('design'));
             $data += ['design' => $path];
             $data += ['proof_of_payment' => ''];
             $data += ['user_id' => Auth::id()];
@@ -75,11 +76,13 @@ class Customization extends Controller
             $customer_id = request()->customer_id;
             if(Auth::user()->user_type === 0){
                 if (\request()->hasFile('design')) {
-                    $path = request()->file('design')->store('uploads/customization', 'public');
+                    // $path = request()->file('design')->store('uploads/customization', 'public');
+                    $path = \Storage::disk('public_uploads')->put('customization', \request()->file('design'));
                     $data += ['design' => $path];
                 }
                 if (\request()->hasFile('proof')) {
-                    $path_payment = request()->file('proof')->store('uploads/customization/proof-of-payment', 'public');
+                    // $path_payment = request()->file('proof')->store('uploads/customization/proof-of-payment', 'public');
+                    $path_payment = \Storage::disk('public_uploads')->put('customization/proof-of-payment', \request()->file('proof'));
                     $data += ['proof_of_payment' => $path_payment];
                 }
                 if($data['garment_type'] !== 'Jersey') {
@@ -173,6 +176,26 @@ class Customization extends Controller
             // Notification ----------------------------------------------------------
             DB::commit();
             return response()->json(['message' => 'Successfully cancelled the order.'], 200);
+        } catch (\Exception $e){
+            DB::rollBack();
+            return response()->json(['message' => $e], 500);
+        }
+    }
+
+    public function viewMoreDetails(){
+        $id = request()->route('id');
+        $data = DB::select("SELECT c.custom_id, c.tailor_id,c.classification, c.status as c_status, c.reference_id, c.garment_type, c.details,c.user_id, c.pickup_date,c.fullpayment,c.price, c.proof_of_payment, c.downpayment, u.*, m.shoulder_length, m.sleeve_length, m.bust_chest, m.waist, m.skirt_length, m.slack_length, m.slack_front_rise, m.slack_fit_seat, m.slack_fit_thigh, m.measurement_id, c.design FROM customization c LEFT JOIN users u ON c.user_id = u.id LEFT JOIN measurement m ON c.custom_id = m.custom_id WHERE c.custom_id = '$id'");
+        return view('view-more-details-custom', compact('data'));
+    }
+
+    public function updatePayment() {
+        DB::beginTransaction();
+        try {
+            $id = request()->id;
+            $data = request()->amount;
+            ModelsCustomization::find($id)->update($data);
+            DB::commit();
+            return response()->json(['message' => 'Saved'], 200);
         } catch (\Exception $e){
             DB::rollBack();
             return response()->json(['message' => $e], 500);

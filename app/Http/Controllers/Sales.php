@@ -19,7 +19,9 @@ class Sales extends Controller
     public function add(){
         DB::beginTransaction();
         try{
-            $path = \request()->file('image')->store('uploads/products', 'public');
+            // $path = \request()->file('image')->store('uploads/products', 'public');
+            $path = \Storage::disk('public_uploads')->put('products', \request()->file('image'));
+            
             $data = json_decode(\request()->data, true);
             $data['product_name'] = preg_replace("/'/", '', $data['product_name']); 
             // $data['product_name'] = preg_replace('/[^A-Za-z0-9\-]/', '', $data['product_name']); 
@@ -42,7 +44,8 @@ class Sales extends Controller
             if (\request()->hasFile('image')) {
                 // $old_path = ProductSale::find($id)->pluck('image')->first();
                 // File::delete(public_path('storage/' . $old_path));
-                $path = request()->file('image')->store('uploads/products', 'public');
+                // $path = request()->file('image')->store('uploads/products', 'public');
+                $path = \Storage::disk('public_uploads')->put('products', \request()->file('image'));
                 $data += ['image' => $path];
             }
             ProductSale::find($id)->update($data);

@@ -28,6 +28,7 @@ class CreateCustomizationTable extends Migration
             $table->text('design');
             $table->text('classification');
             $table->dateTime('created_at')->useCurrent();
+            $table->bigInteger('tailor_id');
         });
     }
 

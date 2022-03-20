@@ -381,3 +381,25 @@ $("#submit-schedule").click(function(e){
         })
     });
 })
+
+// workload
+
+$(document).on('click', '.workload-employee', function(e){
+    const id = $(this).data('id')
+    $.get('/employee/workload', {id}, function(r){
+        let html= ''
+        r.map(x=> {
+            html+= `
+                <tr>
+                    <td>${x.reference_id}</td>
+                    <td>${x.garment_type}</td>
+                    <td>${x.pickup_date}</td>
+                    <td>${x.classification}</td>
+                    <td><a href="view-more-details/${x.custom_id}" target="_blank">View More</a></td>
+                </tr>
+            `
+        })
+        $("#attach-work-load").html(html)
+    })
+    $("#workload-employee").modal('show')
+})
