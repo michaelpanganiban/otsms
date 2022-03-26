@@ -85,12 +85,12 @@ class Orders extends Controller
             else{
                 if(trim($data['status']) == 'Approved')
                     $pickup_date = '. Pickup date: '. date_format(date_create($pick_date), 'M d, Y');
-                $details = [
-                    'customer' => $customer,
-                    'title' => 'Mail from D&J Tailoring Shop',
-                    'body' => 'This is to inform you that your order '.$product.' with reference # '.$ref.' has been '.$data['status'].''.$pickup_date,
-                ];
-                Mail::to($email)->send(new \App\Mail\Mailing($details));
+                // $details = [
+                //     'customer' => $customer,
+                //     'title' => 'Mail from D&J Tailoring Shop',
+                //     'body' => 'This is to inform you that your order '.$product.' with reference # '.$ref.' has been '.$data['status'].''.$pickup_date,
+                // ];
+                // Mail::to($email)->send(new \App\Mail\Mailing($details));
                 $ch = curl_init();
                 $itexmo = array(
                                     '1' => $contact_no, 
