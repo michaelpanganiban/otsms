@@ -53,11 +53,12 @@ $(".view-order").click(function(e){
     else{
         $(".hideUs").removeAttr('hidden')
     }
-
-    if(details.downpayment_amount == 0 || details.downpayment_amount == null)
+    if($("#downpayment").data('usertype') != 0)
+        $("#downpayment").attr('disabled', true)
+    else if(details.downpayment_amount == 0 || details.downpayment_amount == null)
         $("#downpayment").removeAttr('disabled')
     else
-    $("#downpayment").attr('disabled', true)
+        $("#downpayment").attr('disabled', true)
     
     $(".view-measurement").attr('href', `/measurement?id=${details.user_id}`)
     $("#view-order").modal('show')

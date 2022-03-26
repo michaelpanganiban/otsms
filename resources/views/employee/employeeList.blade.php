@@ -42,7 +42,7 @@
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-primary edit-employee" data-details='<?php echo $row; ?>'><i class="fa fa-edit"></i>&nbsp;&nbsp;Edit</button>
                                     <button class="btn btn-sm btn-danger delete-employee" data-id='<?php echo $row->id; ?>'><i class="fa fa-trash"></i>&nbsp;&nbsp;Deactivate</button>
-                                    <button class="btn btn-sm btn-warning schedule-employee" data-id='<?php echo $row->id; ?>'><i class="fa fa-calendar"></i>&nbsp;&nbsp;Schedule</button>
+                                    {{-- <button class="btn btn-sm btn-warning schedule-employee" data-id='<?php echo $row->id; ?>'><i class="fa fa-calendar"></i>&nbsp;&nbsp;Schedule</button> --}}
                                     <button class="btn btn-sm btn-success workload-employee" data-id='<?php echo $row->id; ?>'><i class="fa fa-cog"></i>&nbsp;&nbsp;Workload</button>
                                 </td>
                             </tr>

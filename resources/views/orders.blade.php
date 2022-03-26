@@ -151,7 +151,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="product-name-desc">Downpayment Amount</label>
-                                                        <input type="number" required class="form-control" id="downpayment" placeholder="Downpayment" {{Auth::user()->user_type === 1 || Auth::user()->user_type === 2 ? 'disabled' : '' }}>
+                                                        <input type="number" required class="form-control" id="downpayment" data-usertype= "{{Auth::user()->user_type}}" placeholder="Downpayment" {{Auth::user()->user_type === 1 || Auth::user()->user_type === 2 ? 'disabled' : '' }}>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row" {{Auth::user()->user_type === 0 ? 'hidden' : '' }}>

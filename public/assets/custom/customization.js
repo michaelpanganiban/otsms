@@ -121,7 +121,9 @@ $(".view-custom").click(function(e){
         $("#download-file-custom").html(`<a href='../uploads/${details.proof_of_payment}' download style='color: white;' ><u>Download Receipt</u></a>`)
     else
         $("#download-file-custom").html('')
-    if(details.downpayment == 0 || details.downpayment == null)
+    if($("#custom-downpayment-edit").data('usertype') != 0)
+        $("#custom-downpayment-edit").attr('disabled', true)
+    else if(details.downpayment == 0 || details.downpayment == null)
         $("#custom-downpayment-edit").removeAttr('disabled')
     else
         $("#custom-downpayment-edit").attr('disabled', true)
