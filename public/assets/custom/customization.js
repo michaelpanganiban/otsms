@@ -93,12 +93,29 @@ $(".view-custom").click(function(e){
     $("#submit-custom-edit").data('customer_id', details.user_id)
     $("#submit-custom-edit").data('first_name', details.first_name)
     $("#submit-custom-edit").data('contact_no', details.contact_no)
-    if(details.classification == 'Both')
+    if(details.price > 0){
+        $("#proof-edit").removeAttr('disabled')
+        $("#custom-downpayment-edit").removeAttr('disabled')
+    }
+    else{
+        $("#proof-edit").attr('disabled', true)
+        $("#custom-downpayment-edit").attr('disabled', true)
+    }
+    if(details.classification == 'Both'){
         $("#both").attr('checked', 'checked');
-    else if(details.classification == 'Upper Cloth')
+        $(".upper").removeAttr('hidden')
+        $(".upper").removeAttr('hidden')
+    }
+    else if(details.classification == 'Upper Cloth'){
         $("#upper").attr('checked', 'checked');
-    else if(details.classification == 'Lower Cloth')
+        $(".upper").removeAttr('hidden')
+        $(".lower").attr('hidden', true)
+    }
+    else if(details.classification == 'Lower Cloth'){
         $("#lower").attr('checked', 'checked');
+        $(".lower").removeAttr('hidden')
+        $(".upper").attr('hidden', true)
+    }
     else {
         $("#both").removeAttr('checked');
         $("#upper").removeAttr('checked');
@@ -123,7 +140,7 @@ $(".view-custom").click(function(e){
         $("#download-file-custom").html('')
     if($("#custom-downpayment-edit").data('usertype') != 0)
         $("#custom-downpayment-edit").attr('disabled', true)
-    else if(details.downpayment == 0 || details.downpayment == null)
+    else if((details.downpayment == 0 || details.downpayment == null) && details.price > 0)
         $("#custom-downpayment-edit").removeAttr('disabled')
     else
         $("#custom-downpayment-edit").attr('disabled', true)
@@ -333,5 +350,21 @@ $("#amount-to-pay-custom").keyup(function(e){
     else {
         $("#paypal-button-container").removeAttr('hidden')
         $("#show-error").attr('hidden', 'true')
+    }
+})
+
+$(".classification").click(function(e){
+    const value = $(this).val()
+    if(value == 'Upper Cloth'){
+        $(".upper").removeAttr('hidden')
+        $(".lower").attr('hidden', true)
+    }
+    else if(value == 'Both'){
+        $(".upper").removeAttr('hidden')
+        $(".lower").removeAttr('hidden')
+    }
+    else {
+        $(".lower").removeAttr('hidden')
+        $(".upper").attr('hidden', true)
     }
 })
