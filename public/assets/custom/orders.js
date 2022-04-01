@@ -7,7 +7,7 @@ $(".view-order").click(function(e){
     $("#return-date").val(details.return_date)
     $("#additional_fee").val(details.addtional_fee)
     $("#downpayment").val(details.downpayment_amount)
-    $("#product-image").attr('src', `/uploads/${details.product_sale.image}`)
+    $("#product-image").attr('src', `../assets/uploads/${details.product_sale.image}`)
     $("#product-description").html(details.product_sale.description)
     $("#code").html(`<b>Product Code: </b>${details.product_sale.product_code}`)
     $("#price").html(`<b>Price: </b>${parseFloat(details.product_sale.amount).toFixed(2)}`)
@@ -22,7 +22,7 @@ $(".view-order").click(function(e){
     $("#submit-order-edit").data('product', details.product_sale.product_name)
     $("#submit-order-edit").data('product-type', details.product_sale.type)
     if(details.receipt != '' && details.receipt != null)
-        $("#download-file").html(`<a href='../storage/${details.receipt}' download style='color: white;' ><u>Download Receipt</u></a>`)
+        $("#download-file").html(`<a href='../assets/uploads/${details.receipt}' download style='color: white;' ><u>Download Receipt</u></a>`)
     else
         $("#download-file").html('')
     if(details.status === 'Cancelled'){

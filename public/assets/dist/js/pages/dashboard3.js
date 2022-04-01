@@ -17,7 +17,6 @@ $(function () {
   // eslint-disable-next-line no-unused-vars
   $.post('/fetchDashboard', function(r){
     console.log(r);
-
     $("#month-sale").text(`₱ ${parseFloat(r.data_custom[0].amount) + parseFloat(r.data_order[0].amount)}`)
 
     let total_this_year = 0

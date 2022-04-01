@@ -38,7 +38,7 @@
                     @foreach($data as $row)
                         <div class="col mb-5" style="margin-bottom: 10% !important;">
                             <div class="card h-100">
-                                <img class="card-img-top" src="../uploads/{{$row->image}}" alt="{{$row->product_name}}" style="min-height: 50%; max-height: 50%;"/>
+                                <img class="card-img-top" src="../assets/uploads/{{$row->image}}" alt="{{$row->product_name}}" style="min-height: 50%; max-height: 50%;"/>
                                 <div class="card-body p-4">
                                     <div class="text-center"  title={{$row->product_name}}>
                                         <h5 class="fw-bolder">{{ (strlen($row->product_name) > 6) ? substr($row->product_name, 0, 6)."..." : $row->product_name }}</h5>

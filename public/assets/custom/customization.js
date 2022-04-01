@@ -65,7 +65,7 @@ $(".view-custom").click(function(e){
     const details = $(this).data('details')
     
     const user_type = $(this).data('usertype')
-    $("#custom-image").attr('src', '../uploads/'+details.design)
+    $("#custom-image").attr('src', '../assets/uploads/'+details.design)
     $("#ref-no").html(details.reference_id)
     $("#garment-type-edit").val(details.garment_type)
     $("#garment-type-edit").data('pk', details.custom_id)
@@ -135,7 +135,7 @@ $(".view-custom").click(function(e){
     else
         $('.desc-edit').next().find(".note-editable").attr("contenteditable", true);
     if(details.proof_of_payment != '' && details.proof_of_payment != null)
-        $("#download-file-custom").html(`<a href='../uploads/${details.proof_of_payment}' download style='color: white;' ><u>Download Receipt</u></a>`)
+        $("#download-file-custom").html(`<a href='../assets/uploads/${details.proof_of_payment}' download style='color: white;' ><u>Download Receipt</u></a>`)
     else
         $("#download-file-custom").html('')
     if($("#custom-downpayment-edit").data('usertype') != 0)
