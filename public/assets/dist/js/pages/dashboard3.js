@@ -17,7 +17,10 @@ $(function () {
   // eslint-disable-next-line no-unused-vars
   $.post('/fetchDashboard', function(r){
     console.log(r);
-    $("#month-sale").text(`₱ ${parseFloat(r.data_custom[0].amount) + parseFloat(r.data_order[0].amount)}`)
+    const month_custom = r.data_custom[0].amount == null ? 0 : parseFloat(r.data_custom[0].amount)
+    const month_order = r.data_order[0].amount == null ? 0 : parseFloat(r.data_order[0].amount)
+    const month_sale = month_custom + month_order
+    $("#month-sale").text(`₱ ${month_sale}`)
 
     let total_this_year = 0
     let this_year_order = 0;
