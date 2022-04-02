@@ -31,7 +31,14 @@ class Customization extends Controller
         try {
             $data = json_decode(\request()->data, true);
             // $path = request()->file('design')->store('uploads/customization', 'public');
-            $path = \Storage::disk('public_uploads')->put('customization', \request()->file('design'));
+            // $path = \Storage::disk('public_uploads')->put('customization', \request()->file('design'));
+            $path = '';
+            if (\request()->hasFile('design')) {
+                $filename = Date('Hmis').$_FILES["design"]["name"];
+                $path = 'customization/'.$filename;
+                $dir = 'assets/uploads/'.$path;
+                move_uploaded_file($_FILES["design"]["tmp_name"], $dir);
+            }
             $data += ['design' => $path];
             $data += ['proof_of_payment' => ''];
             $data += ['user_id' => Auth::id()];
@@ -77,12 +84,26 @@ class Customization extends Controller
             if(Auth::user()->user_type === 0){
                 if (\request()->hasFile('design')) {
                     // $path = request()->file('design')->store('uploads/customization', 'public');
-                    $path = \Storage::disk('public_uploads')->put('customization', \request()->file('design'));
+                    // $path = \Storage::disk('public_uploads')->put('customization', \request()->file('design'));
+                    $path = '';
+                    if (\request()->hasFile('design')) {
+                        $filename = Date('Hmis').$_FILES["design"]["name"];
+                        $path = 'customization/'.$filename;
+                        $dir = 'assets/uploads/'.$path;
+                        move_uploaded_file($_FILES["design"]["tmp_name"], $dir);
+                    }
                     $data += ['design' => $path];
                 }
                 if (\request()->hasFile('proof')) {
                     // $path_payment = request()->file('proof')->store('uploads/customization/proof-of-payment', 'public');
-                    $path_payment = \Storage::disk('public_uploads')->put('customization/proof-of-payment', \request()->file('proof'));
+                    // $path_payment = \Storage::disk('public_uploads')->put('customization/proof-of-payment', \request()->file('proof'));
+                    $path_payment = '';
+                    if (\request()->hasFile('proof')) {
+                        $filename = Date('Hmis').$_FILES["proof"]["name"];
+                        $path_payment = 'customization/proof-of-payment/'.$filename;
+                        $dir = 'assets/uploads/'.$path_payment;
+                        move_uploaded_file($_FILES["proof"]["tmp_name"], $dir);
+                    }
                     $data += ['proof_of_payment' => $path_payment];
                 }
                 if($data['garment_type'] !== 'Jersey') {

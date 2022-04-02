@@ -83,6 +83,7 @@ $("#edit-product").submit(function(e){
                 icon: 'success',
                 title: response.message
             })
+            console.log(response)
             setTimeout(() => {
                 location.reload()
             }, 1500)

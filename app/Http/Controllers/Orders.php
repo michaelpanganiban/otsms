@@ -70,7 +70,11 @@ class Orders extends Controller
             $pick_date = request()->pick_date;
             if(Auth::user()->user_type === 0){
                 if (\request()->hasFile('payment')) {
-                    $path = request()->file('payment')->store('uploads/orders', 'public');
+                    // $path = request()->file('payment')->store('uploads/orders', 'public');
+                    $filename = Date('Hmis').$_FILES["payment"]["name"];
+                    $path = 'orders/'.$filename;
+                    $dir = 'assets/uploads/'.$path;
+                    move_uploaded_file($_FILES["payment"]["tmp_name"], $dir);
                     $data += ['receipt' => $path];
                 }
                 // Notification ----------------------------------------------------------
@@ -119,7 +123,7 @@ class Orders extends Controller
             return response()->json(['message' => 'Successfully updated the order.'], 200);
         } catch (\Exception $e){
             DB::rollBack();
-            return response()->json(['message' => $e], 500);
+            return response()->json(['message' => $e->getMessage()], 500);
         }
     }
 
