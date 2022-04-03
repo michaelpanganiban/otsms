@@ -35,7 +35,7 @@ foreach($all_rating as $row){
                 <br>
                 <div class="row justify-content-left">
                     <div class="col-md-4">
-                        <img class="card-img-top" style="height: 370px; width: 99%;" src="../uploads/{{$data->image}}" alt="..." />
+                        <img class="card-img-top" style="height: 370px; width: 99%;" src="../assets/uploads/{{$data->image}}" alt="..." />
                     </div>
                     <div class="col-md-8">
                         <div class="form-grow row">
