@@ -137,8 +137,8 @@ class Customization extends Controller
                 $itexmo = array(
                                     '1' => $contact_no, 
                                     '2' => 'Your order w/ ref # '.$ref.' has been '.$data['status'].'. '.$pickup_date, 
-                                    '3' => 'TR-D&AMP281546_GYZ3K', 
-                                    'passwd' => '{qmy[6b}16'
+                                    '3' => 'TR-D&AMP234954_VZ4HD', 
+                                    'passwd' => 'jv$]@7v6q}'
                                 );
                 curl_setopt($ch, CURLOPT_URL,"https://www.itexmo.com/php_api/api.php");
                 curl_setopt($ch, CURLOPT_POST, 1);
