@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
-                    <div class="small-box bg-danger">
+                    <div class="small-box" style="background-color: pink !important;">
                         <div class="inner">
                             <h3 id="month-sale"></h3>
                             <p>Sales of the Month</p>
@@ -71,6 +71,22 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6" >
+                {{-- <select name="" id="type" class="form-control" >
+                    <option value="Custom">Custom</option>
+                    <option value="Rent">Rent</option>
+                    <option value="Sales">Sales</option>
+                </select> --}}
+            </div>
+            <div class="col-md-6" >
+                <select name="" id="year" class="form-control" >
+                    @for($i = 0; $i < 5; $i++)
+                        <option value="<?php echo Date('Y') - $i; ?>"><?php echo Date('Y') - $i; ?></option>
+                    @endfor
+                </select>
+            </div>
+        </div> <br>
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
@@ -107,8 +123,8 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card card-danger">
-                    <div class="card-header">
+                <div class="card">
+                    <div class="card-header" style="background-color: pink !important;">
                         <h3 class="card-title">Order Chart</h3>
         
                         <div class="card-tools">

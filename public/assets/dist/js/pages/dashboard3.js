@@ -1,8 +1,9 @@
 /* global Chart:false */
-let this_year = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-let last_year = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-$(function () {
-  'use strict'
+
+
+const graph = (year = 2022) => {
+  let this_year = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  let last_year = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   var ticksStyle = {
     fontColor: '#495057',
     fontStyle: 'bold'
@@ -15,7 +16,7 @@ $(function () {
 
   var $salesChart = $('#sales-chart')
   // eslint-disable-next-line no-unused-vars
-  $.post('/fetchDashboard', function(r){
+  $.post('/fetchDashboard', {year}, function(r){
     console.log(r);
     const month_custom = r.data_custom[0].amount == null ? 0 : parseFloat(r.data_custom[0].amount)
     const month_order = r.data_order[0].amount == null ? 0 : parseFloat(r.data_order[0].amount)
@@ -112,7 +113,7 @@ $(function () {
         }
       }
     })
-
+    
     //--------------------------------
     const type = [0, 0, 0]
     r.type.map(x => {
@@ -150,4 +151,14 @@ $(function () {
       options: donutOptions
     })
   })
+}
+
+$(function () {
+  'use strict'
+  graph()
+})
+
+$(document).on('change', '#year', function(){
+  const year = $(this).val()
+  graph(year)
 })

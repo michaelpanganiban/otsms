@@ -93,6 +93,11 @@ $(".view-custom").click(function(e){
     $("#submit-custom-edit").data('customer_id', details.user_id)
     $("#submit-custom-edit").data('first_name', details.first_name)
     $("#submit-custom-edit").data('contact_no', details.contact_no)
+    const bal = parseFloat(details.price ? details.price : 0) - parseFloat(details.downpayment? details.downpayment : 0)
+    if( bal == 0)
+        $("#balance-custom").html("<h3>Payment: Fully Paid </h3>")
+    else
+        $("#balance-custom").html(`<h3>Balance: ${bal} </h3>`)
     if(details.price > 0){
         $("#proof-edit").removeAttr('disabled')
         $("#custom-downpayment-edit").removeAttr('disabled')

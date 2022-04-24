@@ -229,6 +229,11 @@
                                     <div class="card card-primary" style="background-color: #00adad;">
                                         <form method="post" id="submit-custom-edit">
                                             <div class="card-body">
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                        <label class="label label-primary" id="balance-custom"></label >
+                                                    </div>
+                                                </div>
                                                 <div class="form-group row">
                                                     <div class="col-md-6">
                                                         <label for="product-code">Garment Type</label>

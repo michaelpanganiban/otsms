@@ -21,6 +21,11 @@ $(".view-order").click(function(e){
     $("#submit-order-edit").data('contact_no', details.user.contact_no)
     $("#submit-order-edit").data('product', details.product_sale.product_name)
     $("#submit-order-edit").data('product-type', details.product_sale.type)
+    const bal = parseFloat(details.product_sale.amount) - parseFloat(details.downpayment_amount? details.downpayment_amount : 0)
+    if( bal == 0)
+        $("#balance").html("<b>Payment:</b> Fully Paid")
+    else
+        $("#balance").html(`<b>Balance:</b> ${bal}`)
     if(details.receipt != '' && details.receipt != null)
         $("#download-file").html(`<a href='../assets/uploads/${details.receipt}' download style='color: white;' ><u>Download Receipt</u></a>`)
     else
