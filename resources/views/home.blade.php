@@ -142,7 +142,37 @@
                     <!-- /.card-body -->
                 </div>
             </div>
-           
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="card-title">TOP 5 <label style="color: blue;" >Orders</label></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped">
+                            <thead class="header-color">
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>No. of orders</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($top_five as $row)
+                                    <tr>
+                                        <td>{{$row->product_name}}</td>
+                                        <td>{{$row->P_COUNT}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>
