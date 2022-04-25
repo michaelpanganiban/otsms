@@ -39,7 +39,7 @@ class HomeController extends Controller
         if(Auth::user()->user_type === 0)
             return view('welcome', compact('data'));
         else{
-            return view('home', compact('data', 'custom'));
+            return view('home', compact('data', 'custom', 'top_five'));
         }
     }
 }
