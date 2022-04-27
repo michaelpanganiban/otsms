@@ -72,14 +72,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6" >
+            {{-- <div class="col-md-6" > --}}
                 {{-- <select name="" id="type" class="form-control" >
                     <option value="Custom">Custom</option>
                     <option value="Rent">Rent</option>
                     <option value="Sales">Sales</option>
                 </select> --}}
-            </div>
-            <div class="col-md-6" >
+            {{-- </div> --}}
+            <div class="col-md-3" >
                 <select name="" id="year" class="form-control" >
                     @for($i = 0; $i < 5; $i++)
                         <option value="<?php echo Date('Y') - $i; ?>"><?php echo Date('Y') - $i; ?></option>

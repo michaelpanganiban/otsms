@@ -259,6 +259,7 @@
                             </div>
                         </form>
                         <hr>
+                        <center><h3 text-align="center">WORKLOAD</h3></center>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead class="header-color">
                                 <tr>
